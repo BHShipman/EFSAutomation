@@ -1,0 +1,20 @@
+package com.imc.efs.automation.dao;
+
+import java.util.List;
+
+import com.imc.efs.automation.entities.Requests;
+
+public interface RequestDAO {
+
+	void add(Requests request);
+	void update(Requests request);
+	Requests getRequestsById(int requestId);
+	boolean checkIfQualifiedVendor(int vendorId);
+	boolean checkIfFirstTimeVendor(int vendorId);
+	boolean checkIfDuplicateRequest(String poWoNumber);
+	Requests addAndReturnRequestWithReferences(Requests request);
+	Requests returnRequestWithReference(Requests request);
+	Requests updateAndReturnRequestWithReference(Requests request);
+	List<Requests> getRequestsOfStatusIssued();
+	
+}

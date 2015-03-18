@@ -1,0 +1,10 @@
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\bo\ChassisDetailsBO.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\bo\impl\ChassisDetailsBOImpl.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\dao\ChassisDetailsDAO.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\dao\impl\ChassisDetailsDAOImpl.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\entities\ChassisOwnerCache.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\entities\ChassisPoolEquipmentPK.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\exception\InvalidChassisException.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\helper\ChassisDataHelper.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\entities\ChassisPoolEquipment.java
+C:\Users\bshipman\Documents\EFS Automation\Java Template\imc-efs-automation-service\imc-efs-automation-service-core\src\main\java\com\imc\cxf\sample\exception\DuplicateChassisException.java
