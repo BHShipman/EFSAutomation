@@ -1,5 +1,8 @@
-package com.imc.efs.automation.model;
+package com.imc.efs.automation.data;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="FileUpload")
 public class FileUpload {
 
 	public FileUpload() {

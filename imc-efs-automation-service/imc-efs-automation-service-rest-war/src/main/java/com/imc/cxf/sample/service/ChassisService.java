@@ -1,7 +1,7 @@
 package com.imc.cxf.sample.service;
 
-import com.imc.cxf.sample.data.Chassis;
-import com.imc.cxf.sample.data.ChassisResponse;
+import com.imc.efs.automation.data.Chassis;
+import com.imc.efs.automation.data.ChassisResponse;
 
 public interface ChassisService {
 

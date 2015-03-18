@@ -1,7 +1,7 @@
 package com.imc.efs.automation.bo;
 
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
-import com.imc.efs.automation.model.EfsMoneyCode;
+import com.imc.efs.automation.data.EfsMoneyCode;
 
 public interface IEfsIntegrator {
 

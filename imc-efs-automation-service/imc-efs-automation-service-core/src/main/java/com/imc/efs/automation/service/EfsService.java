@@ -1,10 +1,8 @@
 package com.imc.efs.automation.service;
 
-import java.math.BigDecimal;
-
 import com.imc.efs.automation.bo.IEfsIntegrator;
+import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
-import com.imc.efs.automation.model.EfsMoneyCode;
 
 public class EfsService {
 

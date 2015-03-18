@@ -15,10 +15,10 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.imc.cxf.sample.data.Chassis;
-import com.imc.cxf.sample.data.ChassisResponse;
 import com.imc.cxf.sample.service.ChassisService;
 import com.imc.efs.automation.bo.ChassisDetailsBO;
+import com.imc.efs.automation.data.Chassis;
+import com.imc.efs.automation.data.ChassisResponse;
 
 @Path("/chassisservice/")
 public class ChassisServiceImpl implements ChassisService {
