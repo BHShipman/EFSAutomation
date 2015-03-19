@@ -5,6 +5,7 @@ package com.imc.efs.automation.entities;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "RequestTypes", schema = "dbo", catalog = "EfsAutomation")
-public class RequestTypes implements java.io.Serializable {
+public class RequestTypes implements Serializable {
 
 	private int requestTypeId;
 	private boolean isOpsPortalType;
@@ -28,11 +29,11 @@ public class RequestTypes implements java.io.Serializable {
 	private boolean requiresInvoice;
 	private boolean preventDuplicates;
 	private long dexProjectId;
-	private Serializable issuanceDebit;
-	private Serializable issuanceCredit;
-	private Serializable expenseDebit;
-	private Serializable expenseCredit;
-	private Serializable name;
+	private String issuanceDebit;
+	private String issuanceCredit;
+	private String expenseDebit;
+	private String expenseCredit;
+	private String name;
 	private RequestTypeConfigs requestTypeConfigs;
 	private Set<Requesters> requesterses = new HashSet<Requesters>(0);
 	private Set<Requests> requestses = new HashSet<Requests>(0);
@@ -46,8 +47,8 @@ public class RequestTypes implements java.io.Serializable {
 			boolean isDriverPay, boolean requiresManagementApproval,
 			boolean requiresAuthorizedVendor, boolean requiresInvoice,
 			boolean preventDuplicates, long dexProjectId,
-			Serializable issuanceDebit, Serializable issuanceCredit,
-			Serializable name) {
+			String issuanceDebit, String issuanceCredit,
+			String name) {
 		this.requestTypeId = requestTypeId;
 		this.isOpsPortalType = isOpsPortalType;
 		this.isDriverPay = isDriverPay;
@@ -65,9 +66,9 @@ public class RequestTypes implements java.io.Serializable {
 			boolean isDriverPay, boolean requiresManagementApproval,
 			boolean requiresAuthorizedVendor, boolean requiresInvoice,
 			boolean preventDuplicates, long dexProjectId,
-			Serializable issuanceDebit, Serializable issuanceCredit,
-			Serializable expenseDebit, Serializable expenseCredit,
-			Serializable name, RequestTypeConfigs requestTypeConfigs,
+			String issuanceDebit, String issuanceCredit,
+			String expenseDebit, String expenseCredit,
+			String name, RequestTypeConfigs requestTypeConfigs,
 			Set<Requesters> requesterses, Set<Requests> requestses,
 			Set<RequestTypeComments> requestTypeCommentses) {
 		this.requestTypeId = requestTypeId;
@@ -163,47 +164,47 @@ public class RequestTypes implements java.io.Serializable {
 	}
 
 	@Column(name = "IssuanceDebit", nullable = false)
-	public Serializable getIssuanceDebit() {
+	public String getIssuanceDebit() {
 		return this.issuanceDebit;
 	}
 
-	public void setIssuanceDebit(Serializable issuanceDebit) {
+	public void setIssuanceDebit(String issuanceDebit) {
 		this.issuanceDebit = issuanceDebit;
 	}
 
 	@Column(name = "IssuanceCredit", nullable = false)
-	public Serializable getIssuanceCredit() {
+	public String getIssuanceCredit() {
 		return this.issuanceCredit;
 	}
 
-	public void setIssuanceCredit(Serializable issuanceCredit) {
+	public void setIssuanceCredit(String issuanceCredit) {
 		this.issuanceCredit = issuanceCredit;
 	}
 
 	@Column(name = "ExpenseDebit")
-	public Serializable getExpenseDebit() {
+	public String getExpenseDebit() {
 		return this.expenseDebit;
 	}
 
-	public void setExpenseDebit(Serializable expenseDebit) {
+	public void setExpenseDebit(String expenseDebit) {
 		this.expenseDebit = expenseDebit;
 	}
 
 	@Column(name = "ExpenseCredit")
-	public Serializable getExpenseCredit() {
+	public String getExpenseCredit() {
 		return this.expenseCredit;
 	}
 
-	public void setExpenseCredit(Serializable expenseCredit) {
+	public void setExpenseCredit(String expenseCredit) {
 		this.expenseCredit = expenseCredit;
 	}
 
 	@Column(name = "Name", nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

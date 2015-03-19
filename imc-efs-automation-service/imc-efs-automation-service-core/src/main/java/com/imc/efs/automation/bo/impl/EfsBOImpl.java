@@ -1,5 +1,7 @@
 package com.imc.efs.automation.bo.impl;
 
+import java.math.BigDecimal;
+
 import com.imc.efs.automation.bo.EfsBO;
 import com.imc.efs.automation.dao.EfsDAO;
 import com.imc.efs.automation.data.EfsMoneyCode;
@@ -21,7 +23,7 @@ public class EfsBOImpl implements EfsBO {
 	 * @see com.imc.efs.automation.bo.impl.EfsBO#IssueMoneyCode(double, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public EfsMoneyCode IssueMoneyCode(double efsAmount, String issueTo, String description, String company){
+	public EfsMoneyCode IssueMoneyCode(BigDecimal efsAmount, String issueTo, String description, String company){
 		EfsMoneyCode moneyCode;
 		
 		moneyCode = _efs.getMoneyCode(efsAmount, issueTo, description, company);

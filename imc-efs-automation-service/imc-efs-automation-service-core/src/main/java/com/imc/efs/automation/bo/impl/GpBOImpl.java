@@ -27,7 +27,7 @@ public class GpBOImpl implements GpBO {
 	@Override
 	public void createIssuanceTransaction(String debitGlAccount,
 			String creditGlAcount, String company, int requestId,
-			int moneyCodeReferenceNumber, double efsAmount, Date issueDate,
+			int moneyCodeReferenceNumber, BigDecimal efsAmount, Date issueDate,
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber) {
 
@@ -45,7 +45,7 @@ public class GpBOImpl implements GpBO {
 			}
 		}
 
-		double efsAmountPlusEfsFee = efsAmount + 1;
+		double efsAmountPlusEfsFee = efsAmount.doubleValue() + 1;
 		String moneyCodeReferenceNumberString = String
 				.valueOf(moneyCodeReferenceNumber);
 

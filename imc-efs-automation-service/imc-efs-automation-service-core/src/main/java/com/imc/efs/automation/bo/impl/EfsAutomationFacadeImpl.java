@@ -6,11 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.imc.efs.automation.bo.EfsAutomationFacade;
-import com.imc.efs.automation.dao.RequestDAO;
-import com.imc.efs.automation.dao.impl.RequestDAOImpl;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
@@ -80,71 +78,123 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					// an invoice is required for this type of request
 					throw new NotImplementedException();
 				}
-				
+
 				request.setRequestId(requestBOImpl.saveRequest(request));
 				long efsDexProjId = 129;
-				docBOImpl.storeDocuments(newRequest.getFileUploads(), request.getRequestId(), request.getRequester(), efsDexProjId);
-			} else
-			{
+				docBOImpl.storeDocuments(newRequest.getFileUploads(),
+						request.getRequestId(), request.getRequester(),
+						efsDexProjId);
+			} else {
 				Pattern pattern = Pattern.compile("@\\d+");
 				Matcher matcher = pattern.matcher(request.getPoWoNumber());
-				docBOImpl.validateHasInvoice(request.getRequestTypes().getRequestTypeConfigs().getDexProjectId(), matcher.group(1));
-				
+				docBOImpl.validateHasInvoice(request.getRequestTypes()
+						.getRequestTypeConfigs().getDexProjectId(),
+						matcher.group(1));
+
 			}
 		}
-		
-		return processRequest(request, true);
+
+		return processRequest(request, false);
 	}
 
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId) {
 		Requests request = requestBOImpl.getRequest(requestId);
 		return processRequest(request, true);
 	}
-	
-	private EfsMoneyCode processRequest(Requests request, boolean resumed){
-		
-		if(request.getStatus().getStatusId() <= RequestStatuses.PendingApproval.index()){
-			if(request.getRequestTypes().isRequiresManagementApproval()){
-				request.getStatus().setStatusId(RequestStatuses.PendingApproval.index());
+
+	private EfsMoneyCode processRequest(Requests request, boolean resumed) {
+
+		if (request.getStatus().getStatusId() <= RequestStatuses.PendingApproval
+				.index()) {
+			if (request.getRequestTypes().isRequiresManagementApproval()) {
+				request.getStatus().setStatusId(
+						RequestStatuses.PendingApproval.index());
 				requestBOImpl.saveRequest(request);
-				String recipient = notificationBOImpl.sendApprovalRequestEmail(request);
-				
+				String recipient = notificationBOImpl
+						.sendApprovalRequestEmail(request);
+
 				EfsMoneyCode moneyCode = new EfsMoneyCode();
 				moneyCode.setIssued(false);
-				moneyCode.setMessage("A request for approval has been sent to " + recipient + ". You will be notified when he/she responds.");
+				moneyCode.setMessage("A request for approval has been sent to "
+						+ recipient
+						+ ". You will be notified when he/she responds.");
 				return moneyCode;
-			}
-			else
-			{
-				BigDecimal requestersLimit = requestBOImpl.getUsersEfsCheckLimit(request.getRequester(), request.getRequestTypes().getRequestTypeId());
-				if(request.getEfsAmount().subtract(requestersLimit).intValue() > 0){
-					request.getStatus().setStatusId(RequestStatuses.PendingApproval.index());
+			} else {
+				BigDecimal requestersLimit = requestBOImpl
+						.getUsersEfsCheckLimit(request.getRequester(), request
+								.getRequestTypes().getRequestTypeId());
+				if (request.getEfsAmount().subtract(requestersLimit).intValue() > 0) {
+					request.getStatus().setStatusId(
+							RequestStatuses.PendingApproval.index());
 					requestBOImpl.saveRequest(request);
-					String recipient = notificationBOImpl.sendApprovalRequestEmail(request);
+					String recipient = notificationBOImpl
+							.sendApprovalRequestEmail(request);
 					EfsMoneyCode moneyCode = new EfsMoneyCode();
 					moneyCode.setIssued(false);
-					moneyCode.setMessage("A request for approval has been sent to " + recipient + ". You will be notified when he/she responds.");
+					moneyCode
+							.setMessage("A request for approval has been sent to "
+									+ recipient
+									+ ". You will be notified when he/she responds.");
 				}
 			}
 		}
-		
-		if(request.getRequestTypes().isIsOpsPortalType() && request.getStatus().getStatusId() <= RequestStatuses.PendingDsAudit.index()){
-			request.getStatus().setStatusId(RequestStatuses.PendingDsAudit.index());
+
+		if (request.getRequestTypes().isIsOpsPortalType()
+				&& request.getStatus().getStatusId() <= RequestStatuses.PendingDsAudit
+						.index()) {
+			request.getStatus().setStatusId(
+					RequestStatuses.PendingDsAudit.index());
 			requestBOImpl.saveRequest(request);
 			EfsMoneyCode moneyCode = new EfsMoneyCode();
 			moneyCode.setIssued(false);
-			moneyCode.setMessage("Your request is now awaiting Driver Services Audit. You will be notified when your request is approved or rejected.");
+			moneyCode
+					.setMessage("Your request is now awaiting Driver Services Audit. You will be notified when your request is approved or rejected.");
 		}
-		
+
 		return issueEfsCheck(request, resumed);
 	}
-	
-	private EfsMoneyCode issueEfsCheck(Requests request, boolean resumed){
-		
-		
-		return null;
+
+	private EfsMoneyCode issueEfsCheck(Requests request, boolean resumed) {
+		// If requestType is driver pay, use the driver for "Issue to." Else,
+		// use vendor name
+		String issueTo = request.getRequestTypes().isIsDriverPay() ? request
+				.getDriverId() + " " + request.getDriverName() : request
+				.getVendorName();
+
+		EfsMoneyCode moneyCode = efsBOImpl.IssueMoneyCode(
+				request.getEfsAmount(), issueTo, request.getDescription(),
+				request.getCompany());
+
+		request.getStatus().setStatusId(RequestStatuses.Issued.index());
+		request.setMoneyCodeReferenceNumber(moneyCode.getReferenceNumber());
+		request.setIssueDate(new Date());
+		if (!resumed)
+			request.setIssuer(request.getRequester());
+
+		requestBOImpl.saveRequest(request);
+
+		gpBOImpl.createIssuanceTransaction(request.getRequestTypes()
+				.getIssuanceDebit(), request.getRequestTypes()
+				.getIssuanceCredit(), request.getCompany(), request
+				.getRequestId(), moneyCode.getReferenceNumber(), request
+				.getEfsAmount(), new Date(), request.getProNumber(), request
+				.getContainerNumber(), request.getChassisNumber(), request
+				.getDriverId(), request.getPoWoNumber());
+
+		// should send issuance email if IsOpsPortalType
+		if (request.getRequestTypes().isIsOpsPortalType()) {
+			docBOImpl.createIssueDoc(request, 129);
+			notificationBOImpl.sendIssuanceEmail(request,
+					moneyCode.getMoneyCode());
+		} else {
+			docBOImpl.createIssueDoc(request, request.getRequestTypes()
+					.getDexProjectId());
+			if (resumed)
+				notificationBOImpl.sendIssuanceEmail(request,
+						moneyCode.getMoneyCode());
+		}
+
+		return moneyCode;
 	}
-	
-	
 
 }
