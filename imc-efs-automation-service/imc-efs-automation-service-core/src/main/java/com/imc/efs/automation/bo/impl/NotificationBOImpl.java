@@ -8,19 +8,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.parser.RegexFTPFileEntryParserImpl;
 
 import com.imc.efs.automation.bo.NotificationBO;
-import com.imc.efs.automation.dao.DexIntegratorDAO;
+import com.imc.efs.automation.dao.DexDAO;
 import com.imc.efs.automation.dao.MailerDAO;
 import com.imc.efs.automation.entities.Requests;
 
 public class NotificationBOImpl implements NotificationBO {
 
 	private MailerDAO _mailer;
-	private DexIntegratorDAO _dex;
+	private DexDAO _dex;
 
 	public NotificationBOImpl() {
 	}
 
-	public NotificationBOImpl(MailerDAO mailer, DexIntegratorDAO dex) {
+	public NotificationBOImpl(MailerDAO mailer, DexDAO dex) {
 		this._dex = dex;
 		this._mailer = mailer;
 	}

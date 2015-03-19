@@ -1,17 +1,17 @@
 package com.imc.efs.automation.bo.impl;
 
 import com.imc.efs.automation.bo.DocBO;
-import com.imc.efs.automation.dao.DexIntegratorDAO;
+import com.imc.efs.automation.dao.DexDAO;
 import com.imc.efs.automation.entities.Requests;
 
 public class DocBOImpl implements DocBO {
 
-	private DexIntegratorDAO _dex;
+	private DexDAO _dex;
 	
 	public DocBOImpl() {
 	}
 	
-	public DocBOImpl(DexIntegratorDAO _dex){
+	public DocBOImpl(DexDAO _dex){
 		this._dex = _dex;
 	}
 	

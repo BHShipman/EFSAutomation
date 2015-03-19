@@ -2,7 +2,7 @@ package com.imc.efs.automation.dao;
 
 import com.imc.efs.automation.dto.GpIntegrationDTO;
 
-public interface GpIntegratorDAO {
+public interface GpDAO {
 
 	void integrateIssuance(GpIntegrationDTO gpDto);
 	void executeRecievedIntegrations(String company, String batchId);
