@@ -1,20 +1,21 @@
-package com.imc.efs.automation.service;
+package com.imc.efs.automation.bo.impl;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.imc.efs.automation.bo.ICredentialsValidator;
+import com.imc.efs.automation.bo.CheckLimitBO;
+import com.imc.efs.automation.dao.CredentialsDAO;
 import com.imc.efs.automation.dto.CredentialsDTO;
 
-public class CredentialsService {
+public class CredentialsBOImpl implements CheckLimitBO {
 
-	private ICredentialsValidator _credsValidator;
+	private CredentialsDAO _credsValidator;
 
-	public CredentialsService() {
+	public CredentialsBOImpl() {
 	}
 
-	public CredentialsService(ICredentialsValidator credsValidator) {
+	public CredentialsBOImpl(CredentialsDAO credsValidator) {
 		_credsValidator = credsValidator;
 	}
 

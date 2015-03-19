@@ -1,9 +1,9 @@
-package com.imc.efs.automation.bo;
+package com.imc.efs.automation.dao;
 
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.automation.data.EfsMoneyCode;
 
-public interface IEfsIntegrator {
+public interface EfsIntegratorDAO {
 
 	EfsMoneyCode getMoneyCode(double efsAmount, String issueTo, String description, String company);
 	EfsMoneyCode GetMoneyCode_TEST(double efsAmount, String issueTo, String description, String company);

@@ -1,8 +1,8 @@
-package com.imc.efs.automation.bo;
+package com.imc.efs.automation.dao;
 
 import java.util.List;
 
-public interface IDexIntegrator {
+public interface DexIntegratorDAO {
 
 	void saveDocument(long dexProjectId, String username, String password, String requestId, String docType, String filePath);
 	boolean checkIfHasInvoice(long dexProjectId, String field1);

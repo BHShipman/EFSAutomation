@@ -1,18 +1,19 @@
-package com.imc.efs.automation.service;
+package com.imc.efs.automation.bo.impl;
 
-import com.imc.efs.automation.bo.IEfsIntegrator;
+import com.imc.efs.automation.bo.EfsBO;
+import com.imc.efs.automation.dao.EfsIntegratorDAO;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 
-public class EfsService {
+public class EfsBOImpl implements EfsBO {
 
-	private IEfsIntegrator _efs;
+	private EfsIntegratorDAO _efs;
 	
-	public EfsService() {
+	public EfsBOImpl() {
 
 	}
 
-	public EfsService(IEfsIntegrator efs){
+	public EfsBOImpl(EfsIntegratorDAO efs){
 		this._efs = efs;
 	}
 	

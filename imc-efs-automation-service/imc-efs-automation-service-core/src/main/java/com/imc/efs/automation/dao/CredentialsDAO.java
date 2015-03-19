@@ -1,8 +1,8 @@
-package com.imc.efs.automation.bo;
+package com.imc.efs.automation.dao;
 
 import com.imc.efs.automation.dto.CredentialsDTO;
 
-public interface ICredentialsValidator {
+public interface CredentialsDAO {
 
 	CredentialsDTO GetEncryptedCredentials(String username);
 }

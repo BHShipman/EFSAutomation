@@ -1,6 +1,6 @@
-package com.imc.efs.automation.bo;
+package com.imc.efs.automation.dao;
 
-public interface IMailer {
+public interface MailerDAO {
 
 	void sendEmail(String to, String subject, String body);
 	void sendEmail(String to, String subject, String body, String cc);

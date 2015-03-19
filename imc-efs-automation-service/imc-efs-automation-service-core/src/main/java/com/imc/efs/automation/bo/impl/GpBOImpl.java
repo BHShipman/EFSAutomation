@@ -1,4 +1,4 @@
-package com.imc.efs.automation.service;
+package com.imc.efs.automation.bo.impl;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -6,17 +6,18 @@ import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.imc.efs.automation.bo.IGpIntegrator;
+import com.imc.efs.automation.bo.GpBO;
+import com.imc.efs.automation.dao.GpIntegratorDAO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
 
-public class GpService {
+public class GpBOImpl implements GpBO {
 
-	private IGpIntegrator _gp;
+	private GpIntegratorDAO _gp;
 
-	public GpService() {
+	public GpBOImpl() {
 	}
 
-	public GpService(IGpIntegrator gp) {
+	public GpBOImpl(GpIntegratorDAO gp) {
 		this._gp = gp;
 	}
 

@@ -1,4 +1,4 @@
-package com.imc.efs.automation.service;
+package com.imc.efs.automation.bo.impl;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -7,19 +7,20 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.parser.RegexFTPFileEntryParserImpl;
 
-import com.imc.efs.automation.bo.IDexIntegrator;
-import com.imc.efs.automation.bo.IMailer;
+import com.imc.efs.automation.bo.NotificationBO;
+import com.imc.efs.automation.dao.DexIntegratorDAO;
+import com.imc.efs.automation.dao.MailerDAO;
 import com.imc.efs.automation.entities.Requests;
 
-public class NotificationService {
+public class NotificationBOImpl implements NotificationBO {
 
-	private IMailer _mailer;
-	private IDexIntegrator _dex;
+	private MailerDAO _mailer;
+	private DexIntegratorDAO _dex;
 
-	public NotificationService() {
+	public NotificationBOImpl() {
 	}
 
-	public NotificationService(IMailer mailer, IDexIntegrator dex) {
+	public NotificationBOImpl(MailerDAO mailer, DexIntegratorDAO dex) {
 		this._dex = dex;
 		this._mailer = mailer;
 	}

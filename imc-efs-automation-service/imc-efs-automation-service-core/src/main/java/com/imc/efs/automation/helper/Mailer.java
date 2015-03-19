@@ -1,8 +1,8 @@
 package com.imc.efs.automation.helper;
 
-import com.imc.efs.automation.bo.IMailer;
+import com.imc.efs.automation.dao.MailerDAO;
 
-public class Mailer implements IMailer{
+public class Mailer implements MailerDAO{
 
 	//TODO find alternative Email provider
 	

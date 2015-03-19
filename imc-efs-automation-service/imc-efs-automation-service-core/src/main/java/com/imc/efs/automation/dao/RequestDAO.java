@@ -6,8 +6,8 @@ import com.imc.efs.automation.entities.Requests;
 
 public interface RequestDAO {
 
-	void add(Requests request);
-	void update(Requests request);
+	int addRequest(Requests request);
+	int updateRequest(Requests request);
 	Requests getRequestsById(int requestId);
 	boolean checkIfQualifiedVendor(int vendorId);
 	boolean checkIfFirstTimeVendor(int vendorId);
@@ -16,5 +16,4 @@ public interface RequestDAO {
 	Requests returnRequestWithReference(Requests request);
 	Requests updateAndReturnRequestWithReference(Requests request);
 	List<Requests> getRequestsOfStatusIssued();
-	
 }
