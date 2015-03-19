@@ -21,6 +21,10 @@ public class GpBOImpl implements GpBO {
 		this._gp = gp;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.imc.efs.automation.bo.impl.GpBO#createIssuanceTransaction(java.lang.String, java.lang.String, java.lang.String, int, int, double, java.util.Date, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void createIssuanceTransaction(String debitGlAccount,
 			String creditGlAcount, String company, int requestId,
 			int moneyCodeReferenceNumber, double efsAmount, Date issueDate,

@@ -4,11 +4,11 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.imc.efs.automation.bo.CheckLimitBO;
+import com.imc.efs.automation.bo.CredentialsBO;
 import com.imc.efs.automation.dao.CredentialsDAO;
 import com.imc.efs.automation.dto.CredentialsDTO;
 
-public class CredentialsBOImpl implements CheckLimitBO {
+public class CredentialsBOImpl implements CredentialsBO {
 
 	private CredentialsDAO _credsValidator;
 
@@ -19,6 +19,10 @@ public class CredentialsBOImpl implements CheckLimitBO {
 		_credsValidator = credsValidator;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.imc.efs.automation.bo.impl.CredentialsBO#validateCredentials(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public boolean validateCredentials(String username, String password) {
 		CredentialsDTO credentials = _credsValidator
 				.GetEncryptedCredentials(username);

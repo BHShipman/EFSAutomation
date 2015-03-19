@@ -25,6 +25,10 @@ public class NotificationBOImpl implements NotificationBO {
 		this._mailer = mailer;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.imc.efs.automation.bo.impl.NotificationBO#sendIssuanceEmail(com.imc.efs.automation.entities.Requests, java.lang.String)
+	 */
+	@Override
 	public String sendIssuanceEmail(Requests request, String moneyCode) {
 		String to = "mcoolican@iils.comRBrower@iilogistics.com";
 
@@ -59,6 +63,10 @@ public class NotificationBOImpl implements NotificationBO {
 		return to;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.imc.efs.automation.bo.impl.NotificationBO#sendApprovalRequestEmail(com.imc.efs.automation.entities.Requests)
+	 */
+	@Override
 	public String sendApprovalRequestEmail(Requests request) {
 		Pattern pattern = Pattern.compile("@\\d+");
 		Matcher matcher = pattern.matcher(request.getPoWoNumber());

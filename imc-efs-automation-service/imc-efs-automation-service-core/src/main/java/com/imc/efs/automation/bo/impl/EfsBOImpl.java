@@ -17,6 +17,10 @@ public class EfsBOImpl implements EfsBO {
 		this._efs = efs;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.imc.efs.automation.bo.impl.EfsBO#IssueMoneyCode(double, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	public EfsMoneyCode IssueMoneyCode(double efsAmount, String issueTo, String description, String company){
 		EfsMoneyCode moneyCode;
 		
@@ -25,6 +29,10 @@ public class EfsBOImpl implements EfsBO {
 		return moneyCode;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.imc.efs.automation.bo.impl.EfsBO#GetMoneyCodeDetails(java.lang.String, int)
+	 */
+	@Override
 	public MoneyCodeDetailsDTO GetMoneyCodeDetails(String company, int referenceNumber){
 		MoneyCodeDetailsDTO moneyCodeDetails;
 		
