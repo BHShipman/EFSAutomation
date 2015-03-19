@@ -32,19 +32,19 @@ public class Mailer implements MailerDAO{
 	}
 	
 	private void sendEmailFull(String to, String subject, String body){
-		//TODO 
+		 
 	}
 	
 	private void sendEmailFull(String to, String subject, String body, String cc){
-		//TODO
+		
 	}
 
 	private void sendEmailFull(String to, String subject, String body, String cc, Iterable<String> filePaths){
-		//TODO
+		
 	}
 	
 	private void sendEmailFull(String to, String subject, String body, Iterable<String> filePaths){
-		//TODO
+		
 	}
 	
 	
