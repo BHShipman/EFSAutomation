@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.net.ftp.parser.RegexFTPFileEntryParserImpl;
 
 import com.imc.efs.automation.bo.NotificationBO;
 import com.imc.efs.automation.dao.DexDAO;

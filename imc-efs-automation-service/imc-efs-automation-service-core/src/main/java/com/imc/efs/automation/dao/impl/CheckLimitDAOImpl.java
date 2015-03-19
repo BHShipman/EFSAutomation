@@ -15,10 +15,8 @@ public class CheckLimitDAOImpl implements CheckLimitDAO {
 	EntityManager em;
 	
 	
-	@Override
+	
 	public BigDecimal getEfsCheckLimitByUser(String requester, int requestTypeId) {
-
-		double limit = 0.0;
 		
 		Query query = em.createQuery("Select r FROM Requesters r WHERE r.name = :name AND r.requestTypeId = :requestTypeId");
 		query.setParameter("name", requester.toUpperCase());

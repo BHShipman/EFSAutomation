@@ -5,18 +5,18 @@ import java.util.List;
 import org.apache.commons.lang.NotImplementedException;
 
 import com.imc.efs.automation.bo.DocBO;
-import com.imc.efs.automation.dao.DexDAO;
+import com.imc.efs.automation.dao.impl.DexDAOImpl;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
 
 public class DocBOImpl implements DocBO {
 
-	private DexDAO _dex;
+	private DexDAOImpl _dex;
 
 	public DocBOImpl() {
 	}
 
-	public DocBOImpl(DexDAO _dex) {
+	public DocBOImpl(DexDAOImpl _dex) {
 		this._dex = _dex;
 	}
 

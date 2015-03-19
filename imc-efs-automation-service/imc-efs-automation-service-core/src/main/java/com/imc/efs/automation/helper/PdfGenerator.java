@@ -1,8 +1,5 @@
 package com.imc.efs.automation.helper;
 
-import java.util.Date;
-
-import com.imc.efs.automation.entities.Requests;
 
 public class PdfGenerator {
 

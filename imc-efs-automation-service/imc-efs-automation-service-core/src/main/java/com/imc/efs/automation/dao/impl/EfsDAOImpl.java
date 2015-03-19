@@ -2,15 +2,18 @@ package com.imc.efs.automation.dao.impl;
 
 import java.math.BigDecimal;
 
+import service.cards.tch.com.CardManagementEP;
+import service.cards.tch.com.CardManagementEP_TEST;
+import service.cards.tch.com.CardManagementWS;
+import service.cards.tch.com.CardManagementWS_TEST;
+import service.cards.tch.com.types.WSMoneyCode;
+import service.cards.tch.com.types.WSMoneyCodeHistRec;
+
 import com.imc.efs.automation.dao.EfsDAO;
 import com.imc.efs.automation.data.EfsClient;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.automation.enums.Companies;
-
-import service.cards.tch.com.*;
-import service.cards.tch.com.types.WSMoneyCode;
-import service.cards.tch.com.types.WSMoneyCodeHistRec;
 
 public class EfsDAOImpl implements EfsDAO {
 
@@ -66,7 +69,7 @@ public class EfsDAOImpl implements EfsDAO {
 		EfsClient efsClient = new EfsClient((Companies) Enum.valueOf(
 				Companies.class, company));
 		// TODO add configuration
-		String userId = client.login(System.getProperty("wsUser"),
+		String userId = client.login(System.getProperty("wsUser") + efsClient.carrierId,
 				System.getProperty("wsPassword"));
 		WSMoneyCodeHistRec wsMoneyCode = client.getMoneyCode(userId, String.valueOf(referenceNumber));
 		MoneyCodeDetailsDTO moneyCodeDetails = new MoneyCodeDetailsDTO();
@@ -90,7 +93,7 @@ public class EfsDAOImpl implements EfsDAO {
 		EfsClient efsClient = new EfsClient((Companies) Enum.valueOf(
 				Companies.class, company));
 		// TODO add configuration
-		String userId = client.login(System.getProperty("wsUser"),
+		String userId = client.login(System.getProperty("wsUser") + efsClient.carrierId,
 				System.getProperty("wsPassword"));
 		WSMoneyCodeHistRec wsMoneyCode = client.getMoneyCode(userId, String.valueOf(referenceNumber));
 		MoneyCodeDetailsDTO moneyCodeDetails = new MoneyCodeDetailsDTO();

@@ -3,8 +3,6 @@ package com.imc.efs.automation.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import com.imc.efs.automation.dao.RequestDAO;
@@ -57,9 +55,9 @@ public class RequestDAOImpl implements RequestDAO {
 
 	public boolean checkIfFirstTimeVendor(int vendorId) {
 
-		boolean isFirstTimeVendor;
+//		boolean isFirstTimeVendor;
 		try {
-			// isFirstTimeVendor
+			// TODO isFirstTimeVendor
 		} catch (RuntimeException re) {
 			throw re;
 		}
