@@ -31,7 +31,12 @@ public class GpBOImpl implements GpBO {
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber) {
 
-		String vendorId = _gp.getEfsGpVendorIdByCompany(company);
+		String vendorId = null;
+		try {
+			vendorId = _gp.getEfsGpVendorIdByCompany(company);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
