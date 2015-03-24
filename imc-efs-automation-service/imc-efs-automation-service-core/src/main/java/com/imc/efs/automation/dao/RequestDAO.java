@@ -14,6 +14,6 @@ public interface RequestDAO {
 	boolean checkIfDuplicateRequest(String poWoNumber);
 	Requests addAndReturnRequestWithReferences(Requests request);
 	Requests returnRequestWithReference(Requests request);
-	Requests updateAndReturnRequestWithReference(Requests request);
-	List<Requests> getRequestsOfStatusIssued();
+	Requests updateAndReturnRequestWithReference(Requests request) throws Exception;
+	List<Requests> getRequestsOfStatusIssued() throws Exception;
 }

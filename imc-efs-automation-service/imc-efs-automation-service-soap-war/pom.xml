@@ -10,6 +10,11 @@
 	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
+			<groupId>com.imc.templates.jpa.web.service</groupId>
+			 <artifactId>imc-efs-automation-service-data</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis</artifactId>
 			<version>1.4</version>

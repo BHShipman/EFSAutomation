@@ -5,17 +5,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.imc.efs.automation.bo.CredentialsBO;
-import com.imc.efs.automation.dao.CredentialsDAO;
+import com.imc.efs.automation.dao.impl.CredentialsDAOImpl;
 import com.imc.efs.automation.dto.CredentialsDTO;
 
 public class CredentialsBOImpl implements CredentialsBO {
 
-	private CredentialsDAO _credsValidator;
+	private CredentialsDAOImpl _credsValidator;
 
 	public CredentialsBOImpl() {
 	}
 
-	public CredentialsBOImpl(CredentialsDAO credsValidator) {
+	public CredentialsBOImpl(CredentialsDAOImpl credsValidator) {
 		_credsValidator = credsValidator;
 	}
 
@@ -39,7 +39,7 @@ public class CredentialsBOImpl implements CredentialsBO {
 		} else
 			return false;
 	}
-	//TODO make sure this is correct
+
 	private String HashSHA1(String value) throws NoSuchAlgorithmException{
 		
 		MessageDigest sha1 = MessageDigest.getInstance("SHA-1");

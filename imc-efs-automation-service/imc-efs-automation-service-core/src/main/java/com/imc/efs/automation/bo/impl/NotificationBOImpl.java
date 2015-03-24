@@ -7,19 +7,19 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.NotificationBO;
-import com.imc.efs.automation.dao.DexDAO;
-import com.imc.efs.automation.dao.MailerDAO;
+import com.imc.efs.automation.dao.impl.DexDAOImpl;
+import com.imc.efs.automation.dao.impl.MailerDAOImpl;
 import com.imc.efs.automation.entities.Requests;
 
 public class NotificationBOImpl implements NotificationBO {
 
-	private MailerDAO _mailer;
-	private DexDAO _dex;
+	private MailerDAOImpl _mailer;
+	private DexDAOImpl _dex;
 
 	public NotificationBOImpl() {
 	}
 
-	public NotificationBOImpl(MailerDAO mailer, DexDAO dex) {
+	public NotificationBOImpl(MailerDAOImpl mailer, DexDAOImpl dex) {
 		this._dex = dex;
 		this._mailer = mailer;
 	}

@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 public class Requests implements Serializable {
 
 	private int requestId;
+	private int requestTypeId;
 	private Status status;
 	private RequestTypes requestTypes;
 	private String company;
@@ -423,6 +424,15 @@ public class Requests implements Serializable {
 
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
+	}
+	
+	@Transient
+	public int getRequestTypeId() {
+		return requestTypeId;
+	}
+
+	public void setRequestTypeId(int requestTypeId) {
+		this.requestTypeId = requestTypeId;
 	}
 
 }

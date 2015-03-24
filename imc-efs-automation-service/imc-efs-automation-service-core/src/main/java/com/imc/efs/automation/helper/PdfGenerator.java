@@ -21,5 +21,5 @@ public class PdfGenerator {
 //		
 //	}
 	
-	//TODO find alternative pdf document creator
+	//TODO use IMC Imaging Service, once implemented
 }

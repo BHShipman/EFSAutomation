@@ -46,8 +46,8 @@ public class EfsDAOImpl implements EfsDAO {
 		CardManagementEP_TEST client = service.getCardManagementEPPort();
 		EfsClient efsClient = new EfsClient(Companies.AIS);
 		// TODO add configuration
-		String userId = client.login(System.getProperty("wsUser"),
-				System.getProperty("wsPassword"));
+		String userId = client.login(System.getProperty("wsTESTUser"),
+				System.getProperty("wsTESTPassword"));
 		WSMoneyCode wsMoneyCode = client.issueMoneyCode(userId,
 				efsClient.contractId, 0, efsAmount.doubleValue(), false,
 				issueTo, description, "USD2");
@@ -93,8 +93,8 @@ public class EfsDAOImpl implements EfsDAO {
 		EfsClient efsClient = new EfsClient((Companies) Enum.valueOf(
 				Companies.class, company));
 		// TODO add configuration
-		String userId = client.login(System.getProperty("wsUser") + efsClient.carrierId,
-				System.getProperty("wsPassword"));
+		String userId = client.login(System.getProperty("wsTESTUser"),
+				System.getProperty("wsTESTPassword"));
 		WSMoneyCodeHistRec wsMoneyCode = client.getMoneyCode(userId, String.valueOf(referenceNumber));
 		MoneyCodeDetailsDTO moneyCodeDetails = new MoneyCodeDetailsDTO();
 		moneyCodeDetails.setAmount(wsMoneyCode.getAmount());

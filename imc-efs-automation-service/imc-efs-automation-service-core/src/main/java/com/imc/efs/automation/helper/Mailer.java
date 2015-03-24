@@ -32,19 +32,19 @@ public class Mailer implements MailerDAO{
 	}
 	
 	private void sendEmailFull(String to, String subject, String body){
-		 
+		 //TODO use existing IMC Email Service
 	}
 	
 	private void sendEmailFull(String to, String subject, String body, String cc){
-		
+		//TODO use existing IMC Email Service
 	}
 
 	private void sendEmailFull(String to, String subject, String body, String cc, Iterable<String> filePaths){
-		
+		//TODO use existing IMC Email Service
 	}
 	
 	private void sendEmailFull(String to, String subject, String body, Iterable<String> filePaths){
-		
+		//TODO use existing IMC Email Service
 	}
 	
 	

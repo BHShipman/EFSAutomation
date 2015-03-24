@@ -11,6 +11,6 @@ public interface DocBO {
 	
 	public void storeDocuments(List<FileUpload> fileUploads, int requestId, String user, long dexProjectId);
 	
-	public void validateHasInvoice(long dexProjectId, String poWoNumber);
+	public void validateHasInvoice(long dexProjectId, String poWoNumber) throws Exception;
 
 }

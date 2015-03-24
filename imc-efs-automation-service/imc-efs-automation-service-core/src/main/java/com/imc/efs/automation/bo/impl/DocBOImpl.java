@@ -2,8 +2,6 @@ package com.imc.efs.automation.bo.impl;
 
 import java.util.List;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import com.imc.efs.automation.bo.DocBO;
 import com.imc.efs.automation.dao.impl.DexDAOImpl;
 import com.imc.efs.automation.data.FileUpload;
@@ -43,10 +41,10 @@ public class DocBOImpl implements DocBO {
 	}
 
 	@Override
-	public void validateHasInvoice(long dexProjectId, String poWoNumber) {
+	public void validateHasInvoice(long dexProjectId, String poWoNumber) throws Exception {
 		boolean hasInvoice = _dex.checkIfHasInvoice(dexProjectId, poWoNumber);
 		if (!hasInvoice) {
-			throw new NotImplementedException();
+			throw new Exception("Not Implemented");
 		}
 	}
 

@@ -8,7 +8,7 @@ public class MyTruckRepairRequestDto extends AbstractRequestDTO {
 	public MyTruckRepairRequestDto() {
 	}
 
-	private int requestTypeId;
+	
 	private int vendorId;
 	private String vendorName;
 	private String driverId;
@@ -20,9 +20,7 @@ public class MyTruckRepairRequestDto extends AbstractRequestDTO {
 	public int getRequestTypeId() {
 		return REQUEST_TYPE_ID;
 	}
-	public void setRequestTypeId(int requestTypeId) {
-		this.requestTypeId = requestTypeId;
-	}
+	
 	public int getVendorId() {
 		return vendorId;
 	}

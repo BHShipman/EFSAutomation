@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import com.imc.efs.automation.dao.RequestDAO;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.RsaVendorsNetwork;
+import com.sun.org.apache.xml.internal.utils.UnImplNode;
 
 public class RequestDAOImpl implements RequestDAO {
 
@@ -55,7 +56,7 @@ public class RequestDAOImpl implements RequestDAO {
 
 	public boolean checkIfFirstTimeVendor(int vendorId) {
 
-//		boolean isFirstTimeVendor;
+		// boolean isFirstTimeVendor;
 		try {
 			// TODO isFirstTimeVendor
 		} catch (RuntimeException re) {
@@ -65,28 +66,38 @@ public class RequestDAOImpl implements RequestDAO {
 	}
 
 	public boolean checkIfDuplicateRequest(String poWoNumber) {
-		// TODO Finish
-		return false;
+		List<Requests> result = emEFS
+				.createQuery(
+						"select req from Requests req where req.poWoNumber = :poWoNumber")
+				.setParameter("poWoNumber", poWoNumber).getResultList();
+		if (result.size() > 0) {
+			return true;
+		} else
+			return false;
 	}
 
 	public Requests addAndReturnRequestWithReferences(Requests request) {
-		// TODO Finish
-		return null;
+		emEFS.persist(request);
+		return request;
 	}
 
 	public Requests returnRequestWithReference(Requests request) {
-		// TODO Finish
-		return null;
+
+		request = (Requests) emEFS
+				.createQuery(
+						"select req from Requests req where req.requestId = :requestId")
+				.setParameter("requestId", request.getRequestId())
+				.getSingleResult();
+
+		return request;
 	}
 
-	public Requests updateAndReturnRequestWithReference(Requests request) {
-		// TODO Finish
-		return null;
+	public Requests updateAndReturnRequestWithReference(Requests request) throws Exception {
+		throw new Exception("Not Implemented");
 	}
 
-	public List<Requests> getRequestsOfStatusIssued() {
-		// TODO Finish
-		return null;
+	public List<Requests> getRequestsOfStatusIssued() throws Exception {
+		throw new Exception("Not Implemented");
 	}
 
 }

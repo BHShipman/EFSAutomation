@@ -5,8 +5,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.EfsAutomationFacade;
 import com.imc.efs.automation.data.EfsCheckRequest;
@@ -41,7 +40,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		return credentialsBOImpl.validateCredentials(username, password);
 	}
 
-	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest) {
+	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest) throws Exception {
 		requestExtension = new EfsCheckRequestExtensions();
 		Requests request = requestExtension.ToRequest(newRequest);
 
@@ -54,13 +53,13 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		// Get request type in order to determine what validations should take
 		// place
 		request.setRequestTypes(requestBOImpl.getRequestType(request
-				.getRequestId()));
+				.getRequestTypeId()));
 
 		requestBOImpl.validateRequestInputAgainstConfig(request
 				.getRequestTypes().getRequestTypeConfigs(), request);
 
-		if (StringUtils.isEmpty(request.getPoWoNumber())
-				|| request.getPoWoNumber() == null) {
+		if (!StringUtils.isEmpty(request.getPoWoNumber())
+				|| request.getPoWoNumber() != null) {
 			requestBOImpl
 					.validateIsNotDuplicateRequest(request.getPoWoNumber());
 		}
@@ -76,7 +75,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					.isIsOpsPortalType()) {
 				if (newRequest.getFileUploads() == null || !hasInvoice) {
 					// an invoice is required for this type of request
-					throw new NotImplementedException();
+					throw new Exception("Not Implemented");
 				}
 
 				request.setRequestId(requestBOImpl.saveRequest(request));
@@ -109,7 +108,11 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			if (request.getRequestTypes().isRequiresManagementApproval()) {
 				request.getStatus().setStatusId(
 						RequestStatuses.PendingApproval.index());
-				requestBOImpl.saveRequest(request);
+				try {
+					requestBOImpl.saveRequest(request);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				String recipient = notificationBOImpl
 						.sendApprovalRequestEmail(request);
 
@@ -120,13 +123,24 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 						+ ". You will be notified when he/she responds.");
 				return moneyCode;
 			} else {
-				BigDecimal requestersLimit = requestBOImpl
-						.getUsersEfsCheckLimit(request.getRequester(), request
-								.getRequestTypes().getRequestTypeId());
+				BigDecimal requestersLimit = null;
+				try {
+					requestersLimit = requestBOImpl
+							.getUsersEfsCheckLimit(request.getRequester(), request
+									.getRequestTypes().getRequestTypeId());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if (request.getEfsAmount().subtract(requestersLimit).intValue() > 0) {
 					request.getStatus().setStatusId(
 							RequestStatuses.PendingApproval.index());
-					requestBOImpl.saveRequest(request);
+					try {
+						requestBOImpl.saveRequest(request);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					String recipient = notificationBOImpl
 							.sendApprovalRequestEmail(request);
 					EfsMoneyCode moneyCode = new EfsMoneyCode();
@@ -144,7 +158,12 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 						.index()) {
 			request.getStatus().setStatusId(
 					RequestStatuses.PendingDsAudit.index());
-			requestBOImpl.saveRequest(request);
+			try {
+				requestBOImpl.saveRequest(request);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			EfsMoneyCode moneyCode = new EfsMoneyCode();
 			moneyCode.setIssued(false);
 			moneyCode
@@ -171,7 +190,12 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		if (!resumed)
 			request.setIssuer(request.getRequester());
 
-		requestBOImpl.saveRequest(request);
+		try {
+			requestBOImpl.saveRequest(request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		gpBOImpl.createIssuanceTransaction(request.getRequestTypes()
 				.getIssuanceDebit(), request.getRequestTypes()

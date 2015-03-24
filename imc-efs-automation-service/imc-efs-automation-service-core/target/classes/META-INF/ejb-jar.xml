@@ -4,12 +4,8 @@
  	<display-name>my-test-jboss-ejb</display-name>
   	<enterprise-beans>
   		<session>
-  			<ejb-name>ChassisDetailBO</ejb-name>
-  			<business-remote>com.imc.cxf.sample.bo.ChassisDetailBO</business-remote>
-  		</session>
-  		<session>
-  			<ejb-name>ChassisDetailsDAO</ejb-name>
-  			<business-remote>com.imc.cxf.sample.dao.ChassisDetailsDAO</business-remote>
+  			<ejb-name>Main</ejb-name>
+  			<business-remote>com.imc.main.Main</business-remote>
   		</session>
   	</enterprise-beans>
 </ejb-jar>

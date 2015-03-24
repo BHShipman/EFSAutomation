@@ -7,17 +7,17 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.GpBO;
-import com.imc.efs.automation.dao.GpDAO;
+import com.imc.efs.automation.dao.impl.GpDAOImpl;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
 
 public class GpBOImpl implements GpBO {
 
-	private GpDAO _gp;
+	private GpDAOImpl _gp;
 
 	public GpBOImpl() {
 	}
 
-	public GpBOImpl(GpDAO gp) {
+	public GpBOImpl(GpDAOImpl gp) {
 		this._gp = gp;
 	}
 

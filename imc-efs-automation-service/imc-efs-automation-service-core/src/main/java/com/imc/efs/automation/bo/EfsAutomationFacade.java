@@ -7,7 +7,7 @@ public interface EfsAutomationFacade {
 
 	boolean validateCredentials(String username, String password);
 
-	EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest);
+	EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest) throws Exception;
 
 	EfsMoneyCode resumeEfsCheckIssuance(int requestId);
 }

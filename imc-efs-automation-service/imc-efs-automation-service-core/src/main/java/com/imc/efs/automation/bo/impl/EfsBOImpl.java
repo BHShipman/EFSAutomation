@@ -3,19 +3,19 @@ package com.imc.efs.automation.bo.impl;
 import java.math.BigDecimal;
 
 import com.imc.efs.automation.bo.EfsBO;
-import com.imc.efs.automation.dao.EfsDAO;
+import com.imc.efs.automation.dao.impl.EfsDAOImpl;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 
 public class EfsBOImpl implements EfsBO {
 
-	private EfsDAO _efs;
+	private EfsDAOImpl _efs;
 	
 	public EfsBOImpl() {
 
 	}
 
-	public EfsBOImpl(EfsDAO efs){
+	public EfsBOImpl(EfsDAOImpl efs){
 		this._efs = efs;
 	}
 	

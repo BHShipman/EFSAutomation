@@ -4,46 +4,10 @@
 	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
 http://www.springframework.org/schema/beans/spring-beans.xsd 
 http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
-	<bean id="chassisServiceClass" class="com.imc.cxf.sample.service.impl.ChassisServiceImpl"/>
-	<bean id="calculatorServiceClass" class="com.imc.cxf.sample.service.CalculatorService"/>
 	
-	<bean id="jasonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider"/>
 	
-	<!-- <bean id="authorizationInterceptor" class="org.apache.cxf.interceptor.security.SimpleAuthorizingInterceptor">
-	 -->
-	<bean id="authorizationInterceptor" class="com.imc.cxf.sample.security.BasicUserPasswordAuthorizingInterceptor">
 	
-   		<property name="methodRolesMap">
-      		<map>
-        		<!-- no wildcard support, names need to match exactly -->
-        		<entry key="addChassis" value="ROLE_ADD_ADMIN"/>
-        		<entry key="addChassisJson" value="ROLE_ADD_ADMIN"/>
-        		<entry key="getChassis" value="ROLE_SUB_ADMIN"/>
-      		</map>
-   		</property>
-   	 <!--
-   		<property name="userRolesMap">
-      		<map>
-        		<entry key="IMC_WEB1" value="ROLE_ADD_ADMIN"/>
-        		<entry key="IMC_WEB2" value="ROLE_SUB_ADMIN"/>
-      		</map>
-   		</property> -->
-   		
-   	
-   		<!-- its possible to define global roles that apply to all WSDL operations not listed above -->
-   		<property name="globalRoles" value="ROLE_ADMIN"/>
-	</bean>
 	
-	<jaxrs:server id="chassisservice" address="/">
-		<jaxrs:serviceBeans>
-			<ref bean="chassisServiceClass" />
-			<ref bean="calculatorServiceClass" />
-		</jaxrs:serviceBeans>
-      <jaxrs:inInterceptors>
-          <ref bean="authorizationInterceptor"/>
-      </jaxrs:inInterceptors>
-      <jaxrs:providers>
-          <ref bean="jasonProvider"/>
-      </jaxrs:providers>
-	</jaxrs:server>
+	
+	
 </beans>

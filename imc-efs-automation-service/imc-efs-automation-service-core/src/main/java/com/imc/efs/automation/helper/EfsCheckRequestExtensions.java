@@ -10,7 +10,7 @@ public class EfsCheckRequestExtensions {
 
 	public Requests ToRequest(EfsCheckRequest efsCheckRequest) {
 		Requests request = new Requests();
-		request.setRequestId(efsCheckRequest.getRequestTypeId());
+		request.setRequestTypeId(efsCheckRequest.getRequestTypeId());
 		request.setCompany(efsCheckRequest.getCompany());
 		request.setEfsAmount(efsCheckRequest.getEfsAmount());
 		request.setRequester(efsCheckRequest.getRequester());
