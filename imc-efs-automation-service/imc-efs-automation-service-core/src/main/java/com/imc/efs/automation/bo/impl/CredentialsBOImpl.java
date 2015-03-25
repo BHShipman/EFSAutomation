@@ -4,16 +4,16 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.ejb.EJB;
+
 import com.imc.efs.automation.bo.CredentialsBO;
 import com.imc.efs.automation.dao.impl.CredentialsDAOImpl;
 import com.imc.efs.automation.dto.CredentialsDTO;
 
+
 public class CredentialsBOImpl implements CredentialsBO {
 
 	private CredentialsDAOImpl _credsValidator;
-
-	public CredentialsBOImpl() {
-	}
 
 	public CredentialsBOImpl(CredentialsDAOImpl credsValidator) {
 		_credsValidator = credsValidator;

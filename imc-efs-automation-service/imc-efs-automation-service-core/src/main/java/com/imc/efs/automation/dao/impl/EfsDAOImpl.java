@@ -23,9 +23,8 @@ public class EfsDAOImpl implements EfsDAO {
 		CardManagementWS service = new CardManagementWS();
 		CardManagementEP client = service.getCardManagementEPPort();
 		EfsClient efsClient = new EfsClient(Companies.AIS);
-		// TODO add configuration
-		String userId = client.login(System.getProperty("wsUser"),
-				System.getProperty("wsPassword"));
+		String userId = client.login(System.getProperty("efs.ws.user") + efsClient.carrierId,
+				System.getProperty("efs.ws.password"));
 		WSMoneyCode wsMoneyCode = client.issueMoneyCode(userId,
 				efsClient.contractId, 0, efsAmount.doubleValue(), false,
 				issueTo, description, "USD2");
@@ -45,7 +44,6 @@ public class EfsDAOImpl implements EfsDAO {
 		CardManagementWS_TEST service = new CardManagementWS_TEST();
 		CardManagementEP_TEST client = service.getCardManagementEPPort();
 		EfsClient efsClient = new EfsClient(Companies.AIS);
-		// TODO add configuration
 		String userId = client.login(System.getProperty("wsTESTUser"),
 				System.getProperty("wsTESTPassword"));
 		WSMoneyCode wsMoneyCode = client.issueMoneyCode(userId,
@@ -68,9 +66,8 @@ public class EfsDAOImpl implements EfsDAO {
 		CardManagementEP client = service.getCardManagementEPPort();
 		EfsClient efsClient = new EfsClient((Companies) Enum.valueOf(
 				Companies.class, company));
-		// TODO add configuration
-		String userId = client.login(System.getProperty("wsUser") + efsClient.carrierId,
-				System.getProperty("wsPassword"));
+		String userId = client.login(System.getProperty("efs.ws.user") + efsClient.carrierId,
+				System.getProperty("efs.ws.password"));
 		WSMoneyCodeHistRec wsMoneyCode = client.getMoneyCode(userId, String.valueOf(referenceNumber));
 		MoneyCodeDetailsDTO moneyCodeDetails = new MoneyCodeDetailsDTO();
 		moneyCodeDetails.setAmount(wsMoneyCode.getAmount());
@@ -92,9 +89,8 @@ public class EfsDAOImpl implements EfsDAO {
 		CardManagementEP_TEST client = service.getCardManagementEPPort();
 		EfsClient efsClient = new EfsClient((Companies) Enum.valueOf(
 				Companies.class, company));
-		// TODO add configuration
-		String userId = client.login(System.getProperty("wsTESTUser"),
-				System.getProperty("wsTESTPassword"));
+		String userId = client.login(System.getProperty("efs.test.ws.user"),
+				System.getProperty("efs.test.ws.password"));
 		WSMoneyCodeHistRec wsMoneyCode = client.getMoneyCode(userId, String.valueOf(referenceNumber));
 		MoneyCodeDetailsDTO moneyCodeDetails = new MoneyCodeDetailsDTO();
 		moneyCodeDetails.setAmount(wsMoneyCode.getAmount());

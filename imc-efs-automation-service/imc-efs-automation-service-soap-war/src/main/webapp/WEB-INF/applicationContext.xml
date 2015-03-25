@@ -1,0 +1,43 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<!-- <beans xmlns="http://www.springframework.org/schema/beans" -->
+<!-- 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" -->
+<!-- 	xsi:schemaLocation="http://www.springframework.org/schema/beans  -->
+<!-- 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd"> -->
+
+<!-- 	<bean id="credentialsDAOImpl" class="com.imc.efs.automation.dao.impl.CredentialsDAOImpl"> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="credentialsBOImpl" class="com.imc.efs.automation.bo.impl.CredentialsBOImpl"> -->
+<!-- 		<property name="_credsValidator" ref="credentialsDAOImpl"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="dexDAOImpl" class="com.imc.efs.automation.dao.impl.DexDAOImpl"> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="docBOImpl" class="com.imc.efs.automation.bo.impl.DocBOImpl"> -->
+<!-- 		<property name="_dex" ref="dexDAOImpl"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="efsDAOImpl" class="com.imc.efs.automation.dao.impl.EfsDAOImpl"> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="efsBOImpl" class="com.imc.efs.automation.bo.impl.EfsBOImpl"> -->
+<!-- 		<property name="_efs" ref="efsDAOImpl"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="gpDAOImpl" class="com.imc.efs.automation.dao.impl.GpDAOImpl"> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="gpBOImpl" class="com.imc.efs.automation.bo.impl.GpBOImpl"> -->
+<!-- 		<property name="_gp" ref="gpDAOImpl"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="credentialsDAOImpl" class="com.imc.efs.automation.dao.impl.CredentialsDAOImpl"> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="credentialsDAOImpl" class="com.imc.efs.automation.dao.impl.CredentialsDAOImpl"> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="credentialsDAOImpl" class="com.imc.efs.automation.dao.impl.CredentialsDAOImpl"> -->
+<!-- 	</bean> -->
+<!-- </beans> -->

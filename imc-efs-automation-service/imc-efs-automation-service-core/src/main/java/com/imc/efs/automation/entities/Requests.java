@@ -435,4 +435,28 @@ public class Requests implements Serializable {
 		this.requestTypeId = requestTypeId;
 	}
 
+	@Override
+	public String toString() {
+		return "Requests [requestId=" + requestId + ", requestTypeId="
+				+ requestTypeId + ", status=" + status + ", requestTypes="
+				+ requestTypes + ", company=" + company + ", requester="
+				+ requester + ", approver=" + approver + ", issuer=" + issuer
+				+ ", contractId=" + contractId + ", requestDate=" + requestDate
+				+ ", issueDate=" + issueDate + ", postDate=" + postDate
+				+ ", vendorId=" + vendorId + ", vendorName=" + vendorName
+				+ ", driverId=" + driverId + ", efsAmount=" + efsAmount
+				+ ", serviceCharge=" + serviceCharge + ", glAccount="
+				+ glAccount + ", glDescription=" + glDescription
+				+ ", proNumber=" + proNumber + ", poWoNumber=" + poWoNumber
+				+ ", truckId=" + truckId + ", chassisNumber=" + chassisNumber
+				+ ", containerNumber=" + containerNumber + ", claimNumber="
+				+ claimNumber + ", claimType=" + claimType + ", tagEquipment="
+				+ tagEquipment + ", tagPurchType=" + tagPurchType
+				+ ", description=" + description
+				+ ", moneyCodeReferenceNumber=" + moneyCodeReferenceNumber
+				+ ", moneyCode=" + moneyCode + ", rejectionReason="
+				+ rejectionReason + ", isChargedToCustomer="
+				+ isChargedToCustomer + ", driverName=" + driverName + "]";
+	}
+
 }

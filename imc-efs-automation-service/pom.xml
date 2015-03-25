@@ -9,10 +9,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<modules>
-		<module>imc-efs-automation-service-data</module>
+		<module>imc-efs-automation-service-invokers</module>
 		<module>imc-efs-automation-service-core</module>
 		<module>imc-efs-automation-service-security</module>
-		<module>imc-efs-automation-service-rest-war</module>
 		<module>imc-efs-automation-service-soap-war</module>
 	</modules>
 	<dependencies>

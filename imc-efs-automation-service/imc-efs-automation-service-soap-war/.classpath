@@ -33,7 +33,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/imc-efs-automation-service-core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/imc-efs-automation-service-data"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

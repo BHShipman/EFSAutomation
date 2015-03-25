@@ -5,7 +5,12 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.PreDestroy;
+import javax.ejb.EJB;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.cxf.security.claims.authorization.Claim;
+import org.hibernate.annotations.OnDelete;
 
 import com.imc.efs.automation.bo.EfsAutomationFacade;
 import com.imc.efs.automation.data.EfsCheckRequest;
@@ -40,9 +45,11 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		return credentialsBOImpl.validateCredentials(username, password);
 	}
 
-	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest) throws Exception {
+	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
+			throws Exception {
 		requestExtension = new EfsCheckRequestExtensions();
 		Requests request = requestExtension.ToRequest(newRequest);
+		System.out.println(request.toString());
 
 		request.setRequestDate(new Date());
 		request.setCompany(request.getCompany().trim());
@@ -89,7 +96,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				docBOImpl.validateHasInvoice(request.getRequestTypes()
 						.getRequestTypeConfigs().getDexProjectId(),
 						matcher.group(1));
-
 			}
 		}
 
@@ -113,8 +119,13 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				String recipient = notificationBOImpl
-						.sendApprovalRequestEmail(request);
+				String recipient  = null;
+				try {
+					recipient = notificationBOImpl
+							.sendApprovalRequestEmail(request);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 				EfsMoneyCode moneyCode = new EfsMoneyCode();
 				moneyCode.setIssued(false);
@@ -125,11 +136,10 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			} else {
 				BigDecimal requestersLimit = null;
 				try {
-					requestersLimit = requestBOImpl
-							.getUsersEfsCheckLimit(request.getRequester(), request
-									.getRequestTypes().getRequestTypeId());
+					requestersLimit = requestBOImpl.getUsersEfsCheckLimit(
+							request.getRequester(), request.getRequestTypes()
+									.getRequestTypeId());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				if (request.getEfsAmount().subtract(requestersLimit).intValue() > 0) {
@@ -138,11 +148,15 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					try {
 						requestBOImpl.saveRequest(request);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					String recipient = notificationBOImpl
-							.sendApprovalRequestEmail(request);
+					String recipient = null;
+					try {
+						recipient = notificationBOImpl
+								.sendApprovalRequestEmail(request);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					EfsMoneyCode moneyCode = new EfsMoneyCode();
 					moneyCode.setIssued(false);
 					moneyCode
@@ -161,7 +175,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			try {
 				requestBOImpl.saveRequest(request);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			EfsMoneyCode moneyCode = new EfsMoneyCode();
@@ -193,7 +206,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		try {
 			requestBOImpl.saveRequest(request);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -208,14 +220,22 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		// should send issuance email if IsOpsPortalType
 		if (request.getRequestTypes().isIsOpsPortalType()) {
 			docBOImpl.createIssueDoc(request, 129);
-			notificationBOImpl.sendIssuanceEmail(request,
-					moneyCode.getMoneyCode());
+			try {
+				notificationBOImpl.sendIssuanceEmail(request,
+						moneyCode.getMoneyCode());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			docBOImpl.createIssueDoc(request, request.getRequestTypes()
 					.getDexProjectId());
 			if (resumed)
-				notificationBOImpl.sendIssuanceEmail(request,
-						moneyCode.getMoneyCode());
+				try {
+					notificationBOImpl.sendIssuanceEmail(request,
+							moneyCode.getMoneyCode());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
 
 		return moneyCode;

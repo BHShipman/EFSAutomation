@@ -1,5 +1,6 @@
 package com.imc.efs.automation.bo.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,18 +9,18 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.NotificationBO;
 import com.imc.efs.automation.dao.impl.DexDAOImpl;
-import com.imc.efs.automation.dao.impl.MailerDAOImpl;
+import com.imc.efs.automation.email.service.EmailServiceInvoker;
 import com.imc.efs.automation.entities.Requests;
 
 public class NotificationBOImpl implements NotificationBO {
 
-	private MailerDAOImpl _mailer;
+	private EmailServiceInvoker _mailer;
 	private DexDAOImpl _dex;
 
 	public NotificationBOImpl() {
 	}
 
-	public NotificationBOImpl(MailerDAOImpl mailer, DexDAOImpl dex) {
+	public NotificationBOImpl(EmailServiceInvoker mailer, DexDAOImpl dex) {
 		this._dex = dex;
 		this._mailer = mailer;
 	}
@@ -28,11 +29,14 @@ public class NotificationBOImpl implements NotificationBO {
 	 * @see com.imc.efs.automation.bo.impl.NotificationBO#sendIssuanceEmail(com.imc.efs.automation.entities.Requests, java.lang.String)
 	 */
 	@Override
-	public String sendIssuanceEmail(Requests request, String moneyCode) {
-		String to = "mcoolican@iils.comRBrower@iilogistics.com";
+	public void sendIssuanceEmail(Requests request, String moneyCode) throws Exception{
+		List<String> to = new ArrayList<String>();
+		to.add("mcoolican@iils.com");
+		to.add("RBrower@iilogistics.com");
+		to.add("bshipman@imccompanies.com");
 
-		String cc = null;
-		// cc = "driver_Services@IMCG.COM";
+		List<String>cc = null;
+		// cc.add("driver_Services@IMCG.COM");
 
 		String subject;
 		if ((StringUtils.isNotEmpty(request.getPoWoNumber()) || request
@@ -57,16 +61,15 @@ public class NotificationBOImpl implements NotificationBO {
 				+ "</b>, is ready to be issued to an appropriate driver/vendor.</p>"
 				+ "<p>The money code is: <b>" + moneyCode + "</b></p>";
 
-		_mailer.sendEmail(to, subject, body, cc);
+		_mailer.sendEmail(to, subject, body, cc, null);
 
-		return to;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.imc.efs.automation.bo.impl.NotificationBO#sendApprovalRequestEmail(com.imc.efs.automation.entities.Requests)
 	 */
 	@Override
-	public String sendApprovalRequestEmail(Requests request) {
+	public String sendApprovalRequestEmail(Requests request) throws Exception {
 		Pattern pattern = Pattern.compile("@\\d+");
 		Matcher matcher = pattern.matcher(request.getPoWoNumber());
 		int recordId = request.getRequestTypes().isIsOpsPortalType() ? request
@@ -74,10 +77,13 @@ public class NotificationBOImpl implements NotificationBO {
 		List<String> filePaths = _dex.getDocumentFilePathsByRequestId(recordId,
 				request.getRequestTypes().getDexProjectId());
 
-		String to = "mcoolican@iils.com;RBrower@iilogistics.com";
+		List<String> to = new ArrayList<String>();
+		to.add("mcoolican@iils.com");
+		to.add("RBrower@iilogistics.com");
+		to.add("bshipman@imccompanies.com");
 
-		String cc = null;
-		// cc = "Driver_Services@IMCG.COM
+		List<String>cc = null;
+		// cc.add("driver_Services@IMCG.COM");
 
 		String subject;
 		if (StringUtils.isNotEmpty(request.getPoWoNumber())
@@ -107,8 +113,13 @@ public class NotificationBOImpl implements NotificationBO {
 		String body = getCheckRequestEmailBody(request, hasAttachments);
 
 		_mailer.sendEmail(to, subject, body, cc, filePaths);
-
-		return to;
+		
+		String recipient = null;
+		for(String toString : to){
+			recipient = recipient + ";" + toString;
+		}
+		
+		return recipient;
 	}
 
 	public static String getCheckRequestEmailBody(Requests request,

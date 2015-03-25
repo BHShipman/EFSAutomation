@@ -4,8 +4,8 @@ import com.imc.efs.automation.entities.Requests;
 
 public interface NotificationBO {
 
-	public abstract String sendIssuanceEmail(Requests request, String moneyCode);
+	public abstract void sendIssuanceEmail(Requests request, String moneyCode) throws Exception;
 
-	public abstract String sendApprovalRequestEmail(Requests request);
+	public abstract String sendApprovalRequestEmail(Requests request) throws Exception;
 
 }
