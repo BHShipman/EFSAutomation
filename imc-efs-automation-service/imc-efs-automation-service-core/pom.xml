@@ -10,7 +10,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.imc.templates.jpa.web.service</groupId>
-			<artifactId>imc-efs-automation-service-data</artifactId>
+			<artifactId>imc-efs-automation-service-invokers</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
