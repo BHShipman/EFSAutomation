@@ -4,26 +4,36 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.RequestBO;
 import com.imc.efs.automation.dao.RequestDAO;
 import com.imc.efs.automation.dao.RequestTypeDAO;
-import com.imc.efs.automation.dao.impl.RequestDAOImpl;
-import com.imc.efs.automation.dao.impl.RequestTypeDAOImpl;
 import com.imc.efs.automation.entities.RequestTypeConfigs;
 import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.enums.RequirementTypes;
 
+@Remote(RequestBO.class)
+@Stateless(name="RequestBO")
 public class RequestBOImpl implements RequestBO {
 
-	private RequestDAOImpl requestDAO;
-	private RequestTypeDAOImpl requestTypeDAO;
+	@EJB(beanName="RequestDAO")
+	private RequestDAO requestDAO;
+	@EJB(beanName="RequestTypeDAO")
+	private RequestTypeDAO requestTypeDAO;
 
-	public RequestBOImpl(RequestDAOImpl requestDAO, RequestTypeDAOImpl requestTypeDAO) {
+	public RequestBOImpl(RequestDAO requestDAO, RequestTypeDAO requestTypeDAO) {
 		this.requestDAO = requestDAO;
 		this.requestTypeDAO = requestTypeDAO;
+	}
+	
+	public RequestBOImpl() {
+	
 	}
 	
 	/* (non-Javadoc)

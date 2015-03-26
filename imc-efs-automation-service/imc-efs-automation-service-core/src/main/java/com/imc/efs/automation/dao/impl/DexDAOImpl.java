@@ -2,12 +2,15 @@ package com.imc.efs.automation.dao.impl;
 
 import java.util.List;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import com.imc.efs.automation.dao.DexDAO;
 
+@Stateless(name = "DexDAO")
+@Remote(DexDAO.class)
 public class DexDAOImpl implements DexDAO {
 
-	
-	
 	@Override
 	public void saveDocument(long dexProjectId, String username,
 			String password, String requestId, String docType, String filePath) {

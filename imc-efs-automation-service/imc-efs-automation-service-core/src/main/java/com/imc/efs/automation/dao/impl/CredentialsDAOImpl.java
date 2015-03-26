@@ -1,15 +1,18 @@
 package com.imc.efs.automation.dao.impl;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.imc.efs.automation.dao.CredentialsDAO;
 import com.imc.efs.automation.dto.CredentialsDTO;
-
+@Stateless(name = "CredentialsDAO")
+@Remote(CredentialsDAO.class)
 public class CredentialsDAOImpl implements CredentialsDAO {
 
-	@PersistenceContext(name="EFS")
+	@PersistenceContext(name="EFS", unitName="EFS")
 	EntityManager em;
 	
 	//table / entity [Users] does not currently exist

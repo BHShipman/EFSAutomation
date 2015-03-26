@@ -2,6 +2,9 @@ package com.imc.efs.automation.dao.impl;
 
 import java.math.BigDecimal;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import service.cards.tch.com.CardManagementEP;
 import service.cards.tch.com.CardManagementEP_TEST;
 import service.cards.tch.com.CardManagementWS;
@@ -14,7 +17,8 @@ import com.imc.efs.automation.data.EfsClient;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.automation.enums.Companies;
-
+@Remote(EfsDAO.class)
+@Stateless(name="EfsDAO")
 public class EfsDAOImpl implements EfsDAO {
 
 	@Override

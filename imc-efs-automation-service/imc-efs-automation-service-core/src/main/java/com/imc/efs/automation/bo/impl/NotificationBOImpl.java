@@ -5,22 +5,29 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.NotificationBO;
-import com.imc.efs.automation.dao.impl.DexDAOImpl;
+import com.imc.efs.automation.dao.DexDAO;
 import com.imc.efs.automation.email.service.EmailServiceInvoker;
 import com.imc.efs.automation.entities.Requests;
 
+@Remote(NotificationBO.class)
+@Stateless(name="NotificationBO")
 public class NotificationBOImpl implements NotificationBO {
 
 	private EmailServiceInvoker _mailer;
-	private DexDAOImpl _dex;
+	@EJB(beanName="DexDAO")
+	private DexDAO _dex;
 
 	public NotificationBOImpl() {
 	}
 
-	public NotificationBOImpl(EmailServiceInvoker mailer, DexDAOImpl dex) {
+	public NotificationBOImpl(EmailServiceInvoker mailer, DexDAO dex) {
 		this._dex = dex;
 		this._mailer = mailer;
 	}

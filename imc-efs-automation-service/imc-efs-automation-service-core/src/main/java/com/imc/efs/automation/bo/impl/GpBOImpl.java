@@ -4,20 +4,27 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.GpBO;
-import com.imc.efs.automation.dao.impl.GpDAOImpl;
+import com.imc.efs.automation.dao.GpDAO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
 
+@Remote(GpBO.class)
+@Stateless(name="GpBO")
 public class GpBOImpl implements GpBO {
 
-	private GpDAOImpl _gp;
+	@EJB(beanName="GpDAO")
+	private GpDAO _gp;
 
 	public GpBOImpl() {
 	}
 
-	public GpBOImpl(GpDAOImpl gp) {
+	public GpBOImpl(GpDAO gp) {
 		this._gp = gp;
 	}
 

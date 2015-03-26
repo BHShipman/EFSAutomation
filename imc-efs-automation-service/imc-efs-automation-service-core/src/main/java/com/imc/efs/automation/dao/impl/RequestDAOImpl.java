@@ -2,14 +2,17 @@ package com.imc.efs.automation.dao.impl;
 
 import java.util.List;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.imc.efs.automation.dao.RequestDAO;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.RsaVendorsNetwork;
-import com.sun.org.apache.xml.internal.utils.UnImplNode;
 
+@Stateless(name="RequestDAO")
+@Remote(RequestDAO.class)
 public class RequestDAOImpl implements RequestDAO {
 
 	@PersistenceContext(unitName = "EFS")

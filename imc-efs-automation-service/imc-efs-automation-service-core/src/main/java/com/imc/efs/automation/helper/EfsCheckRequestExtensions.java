@@ -2,9 +2,11 @@ package com.imc.efs.automation.helper;
 
 import java.math.BigDecimal;
 
+import javax.ejb.Stateless;
+
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.entities.Requests;
-
+@Stateless(name="RequestExtensions")
 public class EfsCheckRequestExtensions {
 
 	public EfsCheckRequestExtensions() {

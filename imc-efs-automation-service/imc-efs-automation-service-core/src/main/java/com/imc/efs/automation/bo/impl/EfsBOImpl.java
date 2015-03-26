@@ -2,20 +2,27 @@ package com.imc.efs.automation.bo.impl;
 
 import java.math.BigDecimal;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import com.imc.efs.automation.bo.EfsBO;
+import com.imc.efs.automation.dao.EfsDAO;
 import com.imc.efs.automation.dao.impl.EfsDAOImpl;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
-
+@Remote(EfsBO.class)
+@Stateless(name="EfsBO")
 public class EfsBOImpl implements EfsBO {
 
-	private EfsDAOImpl _efs;
+	@EJB(beanName="EfsDAO")
+	private EfsDAO _efs;
 	
 	public EfsBOImpl() {
 
 	}
 
-	public EfsBOImpl(EfsDAOImpl efs){
+	public EfsBOImpl(EfsDAO efs){
 		this._efs = efs;
 	}
 	

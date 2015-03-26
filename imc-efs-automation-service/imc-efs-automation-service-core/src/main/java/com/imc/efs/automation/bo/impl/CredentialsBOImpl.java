@@ -5,18 +5,26 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 
 import com.imc.efs.automation.bo.CredentialsBO;
-import com.imc.efs.automation.dao.impl.CredentialsDAOImpl;
+import com.imc.efs.automation.dao.CredentialsDAO;
 import com.imc.efs.automation.dto.CredentialsDTO;
 
-
+@Stateless(name="CredentialsBO")
+@Remote(CredentialsBO.class)
 public class CredentialsBOImpl implements CredentialsBO {
 
-	private CredentialsDAOImpl _credsValidator;
+	@EJB(beanName="CredentialsDAO")
+	private CredentialsDAO _credsValidator;
 
-	public CredentialsBOImpl(CredentialsDAOImpl credsValidator) {
+	public CredentialsBOImpl(CredentialsDAO credsValidator) {
 		_credsValidator = credsValidator;
+	}
+	
+	public CredentialsBOImpl(){
+		
 	}
 
 	/* (non-Javadoc)

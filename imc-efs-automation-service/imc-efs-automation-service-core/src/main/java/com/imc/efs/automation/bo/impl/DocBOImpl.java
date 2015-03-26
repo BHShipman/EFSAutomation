@@ -2,19 +2,27 @@ package com.imc.efs.automation.bo.impl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import com.imc.efs.automation.bo.DocBO;
+import com.imc.efs.automation.dao.DexDAO;
 import com.imc.efs.automation.dao.impl.DexDAOImpl;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
 
+@Remote(DocBO.class)
+@Stateless(name="DocBO")
 public class DocBOImpl implements DocBO {
 
-	private DexDAOImpl _dex;
+	@EJB(beanName="DexDAO")
+	private DexDAO _dex;
 
 	public DocBOImpl() {
 	}
 
-	public DocBOImpl(DexDAOImpl _dex) {
+	public DocBOImpl(DexDAO _dex) {
 		this._dex = _dex;
 	}
 

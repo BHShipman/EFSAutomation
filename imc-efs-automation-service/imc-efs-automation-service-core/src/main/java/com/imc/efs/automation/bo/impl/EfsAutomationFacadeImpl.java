@@ -5,52 +5,67 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.cxf.security.claims.authorization.Claim;
-import org.hibernate.annotations.OnDelete;
 
+import com.imc.efs.automation.bo.CredentialsBO;
+import com.imc.efs.automation.bo.DocBO;
 import com.imc.efs.automation.bo.EfsAutomationFacade;
+import com.imc.efs.automation.bo.EfsBO;
+import com.imc.efs.automation.bo.GpBO;
+import com.imc.efs.automation.bo.NotificationBO;
+import com.imc.efs.automation.bo.RequestBO;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.enums.RequestStatuses;
 import com.imc.efs.automation.helper.EfsCheckRequestExtensions;
-
+@Stateless(name="EfsAutomationFacadeImpl")
+@Remote(EfsAutomationFacade.class)
 public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
-	private CredentialsBOImpl credentialsBOImpl;
-	private DocBOImpl docBOImpl;
-	private EfsBOImpl efsBOImpl;
-	private GpBOImpl gpBOImpl;
-	private NotificationBOImpl notificationBOImpl;
-	private RequestBOImpl requestBOImpl;
+	@EJB(beanName="CredentialsBO")
+	private CredentialsBO credentialsBO;
+	@EJB(beanName="DocBO")
+	private DocBO docBO;
+	@EJB(beanName="EfsBO")
+	private EfsBO efsBO;
+	@EJB(beanName="GpBO")
+	private GpBO gpBO;
+	@EJB(beanName="NotificationBO")
+	private NotificationBO notificationBO;
+	@EJB(beanName="RequestBO")
+	private RequestBO requestBO;
+	@EJB(beanName="RequestExtensions")
 	EfsCheckRequestExtensions requestExtension;
 
-	public EfsAutomationFacadeImpl(CredentialsBOImpl credentials,
-			DocBOImpl doc, EfsBOImpl efs, GpBOImpl gp,
-			NotificationBOImpl notification, RequestBOImpl request) {
-		this.credentialsBOImpl = credentials;
-		this.docBOImpl = doc;
-		this.efsBOImpl = efs;
-		this.gpBOImpl = gp;
-		this.notificationBOImpl = notification;
-		this.requestBOImpl = request;
+	public EfsAutomationFacadeImpl(CredentialsBO credentials,
+			DocBO doc, EfsBO efs, GpBO gp,
+			NotificationBO notification, RequestBO request) {
+		this.credentialsBO = credentials;
+		this.docBO = doc;
+		this.efsBO = efs;
+		this.gpBO = gp;
+		this.notificationBO = notification;
+		this.requestBO = request;
+	}
+	
+	public EfsAutomationFacadeImpl(){
+		
 	}
 
 	public boolean validateCredentials(String username, String password) {
-		return credentialsBOImpl.validateCredentials(username, password);
+		return credentialsBO.validateCredentials(username, password);
 	}
 
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
 			throws Exception {
-		requestExtension = new EfsCheckRequestExtensions();
 		Requests request = requestExtension.ToRequest(newRequest);
-		System.out.println(request.toString());
-
+		
 		request.setRequestDate(new Date());
 		request.setCompany(request.getCompany().trim());
 		if (request.getDriverId() != null) {
@@ -59,15 +74,15 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 		// Get request type in order to determine what validations should take
 		// place
-		request.setRequestTypes(requestBOImpl.getRequestType(request
+		request.setRequestTypes(requestBO.getRequestType(request
 				.getRequestTypeId()));
 
-		requestBOImpl.validateRequestInputAgainstConfig(request
+		requestBO.validateRequestInputAgainstConfig(request
 				.getRequestTypes().getRequestTypeConfigs(), request);
 
 		if (!StringUtils.isEmpty(request.getPoWoNumber())
 				|| request.getPoWoNumber() != null) {
-			requestBOImpl
+			requestBO
 					.validateIsNotDuplicateRequest(request.getPoWoNumber());
 		}
 		boolean hasInvoice = false;
@@ -85,15 +100,15 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					throw new Exception("Not Implemented");
 				}
 
-				request.setRequestId(requestBOImpl.saveRequest(request));
+				request.setRequestId(requestBO.saveRequest(request));
 				long efsDexProjId = 129;
-				docBOImpl.storeDocuments(newRequest.getFileUploads(),
+				docBO.storeDocuments(newRequest.getFileUploads(),
 						request.getRequestId(), request.getRequester(),
 						efsDexProjId);
 			} else {
 				Pattern pattern = Pattern.compile("@\\d+");
 				Matcher matcher = pattern.matcher(request.getPoWoNumber());
-				docBOImpl.validateHasInvoice(request.getRequestTypes()
+				docBO.validateHasInvoice(request.getRequestTypes()
 						.getRequestTypeConfigs().getDexProjectId(),
 						matcher.group(1));
 			}
@@ -103,7 +118,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	}
 
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId) {
-		Requests request = requestBOImpl.getRequest(requestId);
+		Requests request = requestBO.getRequest(requestId);
 		return processRequest(request, true);
 	}
 
@@ -115,13 +130,13 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				request.getStatus().setStatusId(
 						RequestStatuses.PendingApproval.index());
 				try {
-					requestBOImpl.saveRequest(request);
+					requestBO.saveRequest(request);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				String recipient  = null;
 				try {
-					recipient = notificationBOImpl
+					recipient = notificationBO
 							.sendApprovalRequestEmail(request);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -136,7 +151,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			} else {
 				BigDecimal requestersLimit = null;
 				try {
-					requestersLimit = requestBOImpl.getUsersEfsCheckLimit(
+					requestersLimit = requestBO.getUsersEfsCheckLimit(
 							request.getRequester(), request.getRequestTypes()
 									.getRequestTypeId());
 				} catch (Exception e) {
@@ -146,13 +161,13 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					request.getStatus().setStatusId(
 							RequestStatuses.PendingApproval.index());
 					try {
-						requestBOImpl.saveRequest(request);
+						requestBO.saveRequest(request);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					String recipient = null;
 					try {
-						recipient = notificationBOImpl
+						recipient = notificationBO
 								.sendApprovalRequestEmail(request);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -173,7 +188,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			request.getStatus().setStatusId(
 					RequestStatuses.PendingDsAudit.index());
 			try {
-				requestBOImpl.saveRequest(request);
+				requestBO.saveRequest(request);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -193,7 +208,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				.getDriverId() + " " + request.getDriverName() : request
 				.getVendorName();
 
-		EfsMoneyCode moneyCode = efsBOImpl.IssueMoneyCode(
+		EfsMoneyCode moneyCode = efsBO.IssueMoneyCode(
 				request.getEfsAmount(), issueTo, request.getDescription(),
 				request.getCompany());
 
@@ -204,12 +219,12 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			request.setIssuer(request.getRequester());
 
 		try {
-			requestBOImpl.saveRequest(request);
+			requestBO.saveRequest(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		gpBOImpl.createIssuanceTransaction(request.getRequestTypes()
+		gpBO.createIssuanceTransaction(request.getRequestTypes()
 				.getIssuanceDebit(), request.getRequestTypes()
 				.getIssuanceCredit(), request.getCompany(), request
 				.getRequestId(), moneyCode.getReferenceNumber(), request
@@ -219,19 +234,19 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 		// should send issuance email if IsOpsPortalType
 		if (request.getRequestTypes().isIsOpsPortalType()) {
-			docBOImpl.createIssueDoc(request, 129);
+			docBO.createIssueDoc(request, 129);
 			try {
-				notificationBOImpl.sendIssuanceEmail(request,
+				notificationBO.sendIssuanceEmail(request,
 						moneyCode.getMoneyCode());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
-			docBOImpl.createIssueDoc(request, request.getRequestTypes()
+			docBO.createIssueDoc(request, request.getRequestTypes()
 					.getDexProjectId());
 			if (resumed)
 				try {
-					notificationBOImpl.sendIssuanceEmail(request,
+					notificationBO.sendIssuanceEmail(request,
 							moneyCode.getMoneyCode());
 				} catch (Exception e) {
 					e.printStackTrace();

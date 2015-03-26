@@ -1,9 +1,11 @@
 package com.imc.efs.automation.data;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="FileUpload")
-public class FileUpload {
+public class FileUpload implements Serializable {
 
 	public FileUpload() {
 	}

@@ -3,6 +3,8 @@ package com.imc.efs.automation.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -10,11 +12,13 @@ import javax.persistence.Query;
 import com.imc.efs.automation.dao.GpDAO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
 
+@Stateless(name="GpDAO")
+@Remote(GpDAO.class)
 public class GpDAOImpl implements GpDAO {
 
-	@PersistenceContext(name = "Integration")
+	@PersistenceContext(name = "Integrations", unitName="Integrations")
 	EntityManager emIntegration;
-	@PersistenceContext(name = "GP")
+	@PersistenceContext(name = "GP", unitName="GP")
 	EntityManager emGP;
 
 	@Override
