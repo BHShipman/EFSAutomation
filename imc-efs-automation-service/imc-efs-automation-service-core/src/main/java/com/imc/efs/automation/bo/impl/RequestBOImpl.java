@@ -122,7 +122,7 @@ public class RequestBOImpl implements RequestBO {
 	 */
 	@Override
 	public int saveRequest(Requests request) throws Exception{
-		throw new Exception("Not Implemented");
+		return requestDAO.addRequest(request);
 	}
 	
 	/* (non-Javadoc)

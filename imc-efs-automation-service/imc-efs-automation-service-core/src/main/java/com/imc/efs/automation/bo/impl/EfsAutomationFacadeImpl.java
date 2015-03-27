@@ -105,11 +105,12 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 						request.getRequestId(), request.getRequester(),
 						efsDexProjId);
 			} else {
-				Pattern pattern = Pattern.compile("@\\d+");
+				Pattern pattern = Pattern.compile("\\d+");
 				Matcher matcher = pattern.matcher(request.getPoWoNumber());
+				matcher.find();
 				docBO.validateHasInvoice(request.getRequestTypes()
 						.getRequestTypeConfigs().getDexProjectId(),
-						matcher.group(1));
+						matcher.group(0));
 			}
 		}
 
@@ -123,7 +124,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 	private EfsMoneyCode processRequest(Requests request, boolean resumed) {
 
-		if (request.getStatus().getStatusId() <= RequestStatuses.PendingApproval
+		if (request.getStatusId() <= RequestStatuses.PendingApproval
 				.index()) {
 			if (request.getRequestTypes().isRequiresManagementApproval()) {
 				request.getStatus().setStatusId(
@@ -207,6 +208,11 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				.getDriverId() + " " + request.getDriverName() : request
 				.getVendorName();
 
+				System.out.println(System.getProperty("efs.test.ws.user"));
+				System.out.println(System.getProperty("efs.test.ws.password"));
+				
+				
+				
 		EfsMoneyCode moneyCode = efsBO.IssueMoneyCode(
 				request.getEfsAmount(), issueTo, request.getDescription(),
 				request.getCompany());

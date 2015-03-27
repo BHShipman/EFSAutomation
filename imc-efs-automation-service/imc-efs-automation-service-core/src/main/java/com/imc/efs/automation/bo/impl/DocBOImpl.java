@@ -52,7 +52,7 @@ public class DocBOImpl implements DocBO {
 	public void validateHasInvoice(long dexProjectId, String poWoNumber) throws Exception {
 		boolean hasInvoice = _dex.checkIfHasInvoice(dexProjectId, poWoNumber);
 		if (!hasInvoice) {
-			throw new Exception("Not Implemented");
+			throw new Exception("Not Implemented - No Invoice found");
 		}
 	}
 

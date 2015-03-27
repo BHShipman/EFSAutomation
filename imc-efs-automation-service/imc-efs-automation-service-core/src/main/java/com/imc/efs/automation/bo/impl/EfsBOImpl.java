@@ -8,23 +8,23 @@ import javax.ejb.Stateless;
 
 import com.imc.efs.automation.bo.EfsBO;
 import com.imc.efs.automation.dao.EfsDAO;
-import com.imc.efs.automation.dao.impl.EfsDAOImpl;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
+import com.imc.efs.web.service.EfsServiceInvoker;
 @Remote(EfsBO.class)
 @Stateless(name="EfsBO")
 public class EfsBOImpl implements EfsBO {
 
-	@EJB(beanName="EfsDAO")
-	private EfsDAO _efs;
+//	@EJB(beanName="EfsDAO")
+//	private EfsDAO _efs;
 	
 	public EfsBOImpl() {
 
 	}
 
-	public EfsBOImpl(EfsDAO efs){
-		this._efs = efs;
-	}
+//	public EfsBOImpl(EfsDAO efs){
+//		this._efs = efs;
+//	}
 	
 	/* (non-Javadoc)
 	 * @see com.imc.efs.automation.bo.impl.EfsBO#IssueMoneyCode(double, java.lang.String, java.lang.String, java.lang.String)
@@ -32,8 +32,8 @@ public class EfsBOImpl implements EfsBO {
 	@Override
 	public EfsMoneyCode IssueMoneyCode(BigDecimal efsAmount, String issueTo, String description, String company){
 		EfsMoneyCode moneyCode;
-		
-		moneyCode = _efs.GetMoneyCode_TEST(efsAmount, issueTo, description, company);
+		EfsServiceInvoker service = new EfsServiceInvoker();
+		moneyCode = service.getMoneyCode_TEST(efsAmount, issueTo, description, company);
 		
 		return moneyCode;
 	}
@@ -45,9 +45,10 @@ public class EfsBOImpl implements EfsBO {
 	public MoneyCodeDetailsDTO GetMoneyCodeDetails(String company, int referenceNumber){
 		MoneyCodeDetailsDTO moneyCodeDetails;
 		
-		moneyCodeDetails = _efs.GetMoneyCodeDetails(company, referenceNumber);
+//		moneyCodeDetails = _efs.GetMoneyCodeDetails(company, referenceNumber);
 		
-		return moneyCodeDetails;
+//		return moneyCodeDetails;
+		return null;
 	}
 
 }

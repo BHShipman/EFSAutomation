@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 public class Requests implements Serializable {
 
 	private int requestId;
+	private int statusId;
 	private int requestTypeId;
 	private Status status;
 	private RequestTypes requestTypes;
@@ -457,6 +458,15 @@ public class Requests implements Serializable {
 				+ ", moneyCode=" + moneyCode + ", rejectionReason="
 				+ rejectionReason + ", isChargedToCustomer="
 				+ isChargedToCustomer + ", driverName=" + driverName + "]";
+	}
+
+	@Transient
+	public int getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(int statusId) {
+		this.statusId = statusId;
 	}
 
 }

@@ -3,20 +3,7 @@ package com.imc.efs.automation.webservice.impl;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 
-import org.apache.cxf.interceptor.Fault;
-import org.apache.webbeans.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import com.imc.efs.automation.bo.EfsAutomationFacade;
-import com.imc.efs.automation.bo.impl.CredentialsBOImpl;
-import com.imc.efs.automation.bo.impl.DocBOImpl;
-import com.imc.efs.automation.bo.impl.EfsAutomationFacadeImpl;
-import com.imc.efs.automation.bo.impl.EfsBOImpl;
-import com.imc.efs.automation.bo.impl.GpBOImpl;
-import com.imc.efs.automation.bo.impl.NotificationBOImpl;
-import com.imc.efs.automation.bo.impl.RequestBOImpl;
-import com.imc.efs.automation.dao.impl.RequestDAOImpl;
-import com.imc.efs.automation.dao.impl.RequestTypeDAOImpl;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.webservice.face.EfsAutoService;
