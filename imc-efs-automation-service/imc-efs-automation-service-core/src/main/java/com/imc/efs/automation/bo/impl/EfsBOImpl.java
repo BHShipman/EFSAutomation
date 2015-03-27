@@ -33,7 +33,7 @@ public class EfsBOImpl implements EfsBO {
 	public EfsMoneyCode IssueMoneyCode(BigDecimal efsAmount, String issueTo, String description, String company){
 		EfsMoneyCode moneyCode;
 		
-		moneyCode = _efs.getMoneyCode(efsAmount, issueTo, description, company);
+		moneyCode = _efs.GetMoneyCode_TEST(efsAmount, issueTo, description, company);
 		
 		return moneyCode;
 	}

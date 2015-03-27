@@ -10,7 +10,7 @@ public class EfsClient {
 	public int contractId;
 	public int carrierId;
 
-	public EfsClient(Companies company) {
+	public EfsClient(Companies company) throws Exception {
 
 		switch (company) {
 		case AIS:
@@ -34,7 +34,7 @@ public class EfsClient {
 			contractId = 128394;
 			break;
 		case ATEST:
-			throw new NotImplementedException();
+			throw new Exception("Trying to use test company in Prod Environment");
 		}
 		
 	}

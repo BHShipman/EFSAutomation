@@ -4,9 +4,9 @@ import com.imc.efs.automation.enums.Companies;
 
 public class EfsClient_TEST {
 
-	String userId;
-	int contractId = 0;
-	int _carrierId = 0;
+	public String userId;
+	public int contractId = 0;
+	public int _carrierId = 0;
 
 	public EfsClient_TEST(Companies company) throws Exception{
 		

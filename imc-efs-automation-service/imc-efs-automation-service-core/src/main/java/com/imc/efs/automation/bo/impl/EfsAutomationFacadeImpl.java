@@ -88,7 +88,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		boolean hasInvoice = false;
 		for (FileUpload file : newRequest.getFileUploads()) {
 			if (file.getFileType() == ("INV"))
-				;
 			hasInvoice = true;
 		}
 		if (request.getRequestTypes().getRequestTypeConfigs()
