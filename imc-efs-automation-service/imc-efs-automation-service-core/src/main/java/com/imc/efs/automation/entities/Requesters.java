@@ -22,7 +22,7 @@ public class Requesters implements java.io.Serializable {
 
 	private int id;
 	private RequestTypes requestTypes;
-	private Serializable name;
+	private String name;
 	private BigDecimal limit;
 
 	public Requesters() {
@@ -34,7 +34,7 @@ public class Requesters implements java.io.Serializable {
 		this.limit = limit;
 	}
 
-	public Requesters(int id, RequestTypes requestTypes, Serializable name,
+	public Requesters(int id, RequestTypes requestTypes, String name,
 			BigDecimal limit) {
 		this.id = id;
 		this.requestTypes = requestTypes;
@@ -63,11 +63,11 @@ public class Requesters implements java.io.Serializable {
 	}
 
 	@Column(name = "\"Name\"")
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

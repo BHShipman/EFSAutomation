@@ -9,16 +9,18 @@ import java.util.List;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.ejb.Stateless;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 
+@Stateless(name="EmailService")
 public class EmailServiceInvoker {
 
 	private final String serviceUrl = "http://ils3.iilogistics.com:8080/imc-email-service/EmailService";
 	private final String defaultFrom = "EFSAutomation@imccompanies.com";
 
-	public void sendEmail(Collection<String> to, String subject, String body, Collection<String> cc,
-			Collection<String> filePaths) throws IOException {
+	public void sendEmail(List<String> to, String subject, String body, List<String> cc,
+			List<String> filePaths) throws IOException {
 		sendEmailFull(to, subject, body, cc, filePaths);
 	}
 
@@ -34,9 +36,9 @@ public class EmailServiceInvoker {
 		return emailService;
 	}
 
-	private void sendEmailFull(Collection<String> to, String subject,
-			String body, Collection<String> cc,
-			Collection<String> filePaths) throws IOException {
+	private void sendEmailFull(List<String> to, String subject,
+			String body, List<String> cc,
+			List<String> filePaths) throws IOException {
 		EmailServicePortType emailService = createEmailService();
 
 		SendEmailRequest request = getSendEmailRequest(to, subject,
@@ -56,7 +58,7 @@ public class EmailServiceInvoker {
 		}
 	}
 			
-    private SendEmailRequest getSendEmailRequest(Collection<String> to, String subject, String body, Collection<String> cc, Collection<String> filePaths) throws IOException {
+    private SendEmailRequest getSendEmailRequest(List<String> to, String subject, String body, List<String> cc, List<String> filePaths) throws IOException {
 
         SendEmailRequest request = new SendEmailRequest();
         
@@ -77,7 +79,7 @@ public class EmailServiceInvoker {
 
         // set "to" addresses
         RecipientInfo recipientInfo = new RecipientInfo();
-        recipientInfo.setToEmailAddresses((String[])to.toArray());
+        recipientInfo.setToEmailAddresses(to);
 
         // set "cc" addresses
         if(cc != null){

@@ -1,6 +1,8 @@
 package com.imc.efs.automation.dto;
 
-public abstract class AbstractRequestDTO {
+import java.io.Serializable;
+
+public abstract class AbstractRequestDTO implements Serializable{
 
 	public AbstractRequestDTO() {
 	}

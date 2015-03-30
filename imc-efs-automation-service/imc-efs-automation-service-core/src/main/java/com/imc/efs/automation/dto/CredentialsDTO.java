@@ -1,6 +1,8 @@
 package com.imc.efs.automation.dto;
 
-public class CredentialsDTO {
+import java.io.Serializable;
+
+public class CredentialsDTO implements Serializable{
 
 	public CredentialsDTO() {
 	}

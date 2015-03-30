@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,6 +16,7 @@ import com.imc.efs.automation.dto.GpIntegrationDTO;
 
 @Stateless(name="GpDAO")
 @Remote(GpDAO.class)
+@TransactionManagement(TransactionManagementType.BEAN)
 public class GpDAOImpl implements GpDAO {
 
 	@PersistenceContext(name = "Integrations", unitName="Integrations")
@@ -96,13 +99,13 @@ public class GpDAOImpl implements GpDAO {
 	@Override
 	public String getDivisionByDriverId(String driverId) {
 		@SuppressWarnings("unchecked")
-		List<Object[]> results = emGP.createNativeQuery("{call USP_QuerySWS(?,?)}")
+		List<Object> results = emGP.createNativeQuery("{call USP_QuerySWS(?,?)}")
 				.setParameter(1, "SELECT div_code FROM trk.driver WHERE code = '" + driverId + "';")
 				.setParameter(2, null)
 				.getResultList();
 		
-		Object[] obj = results.get(0);
-		return obj[0].toString();
+		
+		return results.get(0).toString();
 	}
 
 }

@@ -1,9 +1,10 @@
 package com.imc.efs.automation.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class GpIntegrationDTO {
+public class GpIntegrationDTO implements Serializable {
 
 	public GpIntegrationDTO() {
 	}

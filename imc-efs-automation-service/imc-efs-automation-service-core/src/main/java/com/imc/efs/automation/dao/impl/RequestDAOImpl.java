@@ -1,5 +1,6 @@
 package com.imc.efs.automation.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -8,8 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.imc.efs.automation.dao.RequestDAO;
+import com.imc.efs.automation.entities.Requesters;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.RsaVendorsNetwork;
+import com.imc.efs.automation.entities.Status;
 
 @Stateless(name="RequestDAO")
 @Remote(RequestDAO.class)
@@ -101,6 +104,25 @@ public class RequestDAOImpl implements RequestDAO {
 
 	public List<Requests> getRequestsOfStatusIssued() throws Exception {
 		throw new Exception("Not Implemented");
+	}
+	
+	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId){
+		
+		Requesters requesters = (Requesters) emEFS.createQuery("select req from Requesters req where req.name = :requester AND req.requestTypes.requestTypeId = :requestTypeId")
+				.setParameter("requester", requester.toUpperCase())
+				.setParameter("requestTypeId", requestTypeId)
+				.getSingleResult();
+		
+		return requesters.getLimit();
+	}
+
+	@Override
+	public Status getStatus(int statusId) {
+		Status status = (Status)emEFS.createQuery("select stat from Status stat where stat.statusId = :statusId")
+		.setParameter("statusId", statusId)
+		.getSingleResult();
+		
+		return status;
 	}
 
 }

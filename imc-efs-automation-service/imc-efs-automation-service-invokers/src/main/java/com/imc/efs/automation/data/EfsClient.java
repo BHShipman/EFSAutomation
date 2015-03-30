@@ -1,10 +1,10 @@
 package com.imc.efs.automation.data;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.io.Serializable;
 
 import com.imc.efs.automation.enums.Companies;
 
-public class EfsClient {
+public class EfsClient implements Serializable{
 
 	public String userId;
 	public int contractId;

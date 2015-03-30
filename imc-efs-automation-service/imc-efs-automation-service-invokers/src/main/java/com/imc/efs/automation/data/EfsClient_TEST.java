@@ -1,8 +1,10 @@
 package com.imc.efs.automation.data;
 
+import java.io.Serializable;
+
 import com.imc.efs.automation.enums.Companies;
 
-public class EfsClient_TEST {
+public class EfsClient_TEST implements Serializable{
 
 	public String userId;
 	public int contractId = 0;

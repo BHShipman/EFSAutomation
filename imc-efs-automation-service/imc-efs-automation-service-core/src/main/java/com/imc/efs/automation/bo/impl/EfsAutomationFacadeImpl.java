@@ -100,6 +100,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				}
 
 				request.setRequestId(requestBO.saveRequest(request));
+				
 				long efsDexProjId = 129;
 				docBO.storeDocuments(newRequest.getFileUploads(),
 						request.getRequestId(), request.getRequester(),
@@ -124,6 +125,9 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 	private EfsMoneyCode processRequest(Requests request, boolean resumed) {
 
+		request.setStatus(requestBO.getStatus(request.getStatusId()));
+		
+		
 		if (request.getStatusId() <= RequestStatuses.PendingApproval
 				.index()) {
 			if (request.getRequestTypes().isRequiresManagementApproval()) {
@@ -131,6 +135,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 						RequestStatuses.PendingApproval.index());
 				try {
 					requestBO.saveRequest(request);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -157,11 +162,12 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				if (request.getEfsAmount().subtract(requestersLimit).intValue() > 0) {
-					request.getStatus().setStatusId(
-							RequestStatuses.PendingApproval.index());
+				if (request.getEfsAmount().subtract(requestersLimit).doubleValue() > 0) {
+					request.setStatusId(1);
+					request.setStatus(requestBO.getStatus(request.getStatusId()));
 					try {
 						requestBO.saveRequest(request);
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -189,6 +195,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					RequestStatuses.PendingDsAudit.index());
 			try {
 				requestBO.saveRequest(request);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -207,12 +214,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		String issueTo = request.getRequestTypes().isIsDriverPay() ? request
 				.getDriverId() + " " + request.getDriverName() : request
 				.getVendorName();
-
-				System.out.println(System.getProperty("efs.test.ws.user"));
-				System.out.println(System.getProperty("efs.test.ws.password"));
-				
-				
-				
+		
 		EfsMoneyCode moneyCode = efsBO.IssueMoneyCode(
 				request.getEfsAmount(), issueTo, request.getDescription(),
 				request.getCompany());
@@ -224,7 +226,8 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			request.setIssuer(request.getRequester());
 
 		try {
-			requestBO.saveRequest(request);
+			requestBO.updateRequest(request);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

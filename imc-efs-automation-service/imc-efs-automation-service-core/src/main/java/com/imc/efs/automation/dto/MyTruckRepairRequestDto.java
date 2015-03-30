@@ -1,6 +1,8 @@
 package com.imc.efs.automation.dto;
 
-public class MyTruckRepairRequestDto extends AbstractRequestDTO {
+import java.io.Serializable;
+
+public class MyTruckRepairRequestDto extends AbstractRequestDTO implements Serializable {
 
 	private static final int REQUEST_TYPE_ID = 2;
 

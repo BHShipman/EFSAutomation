@@ -25,7 +25,7 @@ public class EfsCheckRequestExtensions {
 		request.setDriverName(efsCheckRequest.getDriverName());
 		request.setPoWoNumber(efsCheckRequest.getPoWoNumber());
 		request.setTruckId(efsCheckRequest.getTruckId());
-		request.setStatusId(3);
+		request.setStatusId(0);
 		return request;
 	}
 }

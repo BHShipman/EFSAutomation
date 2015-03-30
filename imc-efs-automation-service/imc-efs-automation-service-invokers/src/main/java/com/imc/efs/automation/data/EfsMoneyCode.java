@@ -1,9 +1,11 @@
 package com.imc.efs.automation.data;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="EfsMoneyCode")
-public class EfsMoneyCode {
+public class EfsMoneyCode implements Serializable{
 
 	public EfsMoneyCode() {
 	}

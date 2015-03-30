@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class Status implements java.io.Serializable {
 
 	private int statusId;
-	private Serializable description;
+	private String description;
 	private Set<Requests> requestses = new HashSet<Requests>(0);
 
 	public Status() {
@@ -31,7 +31,7 @@ public class Status implements java.io.Serializable {
 		this.statusId = statusId;
 	}
 
-	public Status(int statusId, Serializable description,
+	public Status(int statusId, String description,
 			Set<Requests> requestses) {
 		this.statusId = statusId;
 		this.description = description;
@@ -49,11 +49,11 @@ public class Status implements java.io.Serializable {
 	}
 
 	@Column(name = "\"Description\"")
-	public Serializable getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

@@ -134,7 +134,7 @@ public class Requests implements Serializable {
 		this.requestId = requestId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"StatusId\"", nullable = false)
 	public Status getStatus() {
 		return this.status;

@@ -16,6 +16,7 @@ import com.imc.efs.automation.dao.RequestTypeDAO;
 import com.imc.efs.automation.entities.RequestTypeConfigs;
 import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.enums.RequirementTypes;
 
 @Remote(RequestBO.class)
@@ -125,12 +126,17 @@ public class RequestBOImpl implements RequestBO {
 		return requestDAO.addRequest(request);
 	}
 	
+	@Override
+	public int updateRequest(Requests request){
+		return requestDAO.updateRequest(request);
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.imc.efs.automation.bo.impl.RequestBO#getUsersEfsCheckLimit(java.lang.String, int)
 	 */
 	@Override
-	public BigDecimal getUsersEfsCheckLimit(String p1, int p2) throws Exception{
-		throw new Exception("Not Implemented");
+	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId) throws Exception{
+		return requestDAO.getUsersEfsCheckLimit(requester, requestTypeId);
 	}
 	
 	/* (non-Javadoc)
@@ -145,6 +151,11 @@ public class RequestBOImpl implements RequestBO {
 		}finally{
 			return null;
 		}
+	}
+
+	@Override
+	public Status getStatus(int statusId) {
+		return requestDAO.getStatus(statusId);
 	}
 
 }

@@ -2,34 +2,36 @@ package com.imc.efs.web.service;
 
 import java.math.BigDecimal;
 
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 
 import service.cards.tch.com.CardManagementEP;
-import service.cards.tch.com.CardManagementEP_TEST;
 import service.cards.tch.com.types.WSMoneyCode;
 
 import com.imc.efs.automation.data.EfsClient_TEST;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.enums.Companies;
 
+@Stateless(name="EfsService")
 public class EfsServiceInvoker {
 
-	private final String serviceUrl = "http://ils3.iilogistics.com:8080/imc-email-service/EmailService";
-	private final String serviceUrl_TEST = "https://test.efsllc.com/richapp/Wsdl.action?wsdl=/axis2/service/CardManagementWS";
+	private final String serviceUrl_TEST = "https://test.efsllc.com/axis2/services/CardManagementWS/";
 
-	private CardManagementEP createEfsService() {
+//	private CardManagementEP createEfsService() {
+//		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+//		factory.setServiceClass(CardManagementEP.class);
+//		factory.setAddress(serviceUrl);
+//		CardManagementEP efsService = (CardManagementEP) factory.create();
+//		return efsService;
+//	}
+
+	private CardManagementEP createEfsService_TEST() {
 		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
 		factory.setServiceClass(CardManagementEP.class);
-		factory.setAddress(serviceUrl);
-		CardManagementEP efsService = (CardManagementEP) factory.create();
-		return efsService;
-	}
-
-	private CardManagementEP_TEST createEfsService_TEST() {
-		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-		factory.setServiceClass(CardManagementEP_TEST.class);
 		factory.setAddress(serviceUrl_TEST);
-		CardManagementEP_TEST efsService = (CardManagementEP_TEST) factory
+		CardManagementEP efsService = (CardManagementEP) factory
 				.create();
 		return efsService;
 	}
@@ -49,7 +51,7 @@ public class EfsServiceInvoker {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		CardManagementEP_TEST efsService = createEfsService_TEST();
+		CardManagementEP efsService = createEfsService_TEST();
 
 		String userId = efsService.login(System.getProperty("efs.test.ws.user"),
 				System.getProperty("efs.test.ws.password"));

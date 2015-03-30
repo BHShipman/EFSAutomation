@@ -17,11 +17,12 @@ import com.imc.efs.automation.email.service.EmailServiceInvoker;
 import com.imc.efs.automation.entities.Requests;
 
 @Remote(NotificationBO.class)
-@Stateless(name="NotificationBO")
+@Stateless(name = "NotificationBO")
 public class NotificationBOImpl implements NotificationBO {
 
+	@EJB(beanName = "EmailService")
 	private EmailServiceInvoker _mailer;
-	@EJB(beanName="DexDAO")
+	@EJB(beanName = "DexDAO")
 	private DexDAO _dex;
 
 	public NotificationBOImpl() {
@@ -32,17 +33,22 @@ public class NotificationBOImpl implements NotificationBO {
 		this._mailer = mailer;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.imc.efs.automation.bo.impl.NotificationBO#sendIssuanceEmail(com.imc.efs.automation.entities.Requests, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.imc.efs.automation.bo.impl.NotificationBO#sendIssuanceEmail(com.imc
+	 * .efs.automation.entities.Requests, java.lang.String)
 	 */
 	@Override
-	public void sendIssuanceEmail(Requests request, String moneyCode) throws Exception{
+	public void sendIssuanceEmail(Requests request, String moneyCode)
+			throws Exception {
 		List<String> to = new ArrayList<String>();
-		to.add("mcoolican@iils.com");
-		to.add("RBrower@iilogistics.com");
+		// to.add("mcoolican@iils.com");
+		// to.add("RBrower@iilogistics.com");
 		to.add("bshipman@imccompanies.com");
 
-		List<String>cc = null;
+		List<String> cc = null;
 		// cc.add("driver_Services@IMCG.COM");
 
 		String subject;
@@ -72,24 +78,29 @@ public class NotificationBOImpl implements NotificationBO {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.imc.efs.automation.bo.impl.NotificationBO#sendApprovalRequestEmail(com.imc.efs.automation.entities.Requests)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.imc.efs.automation.bo.impl.NotificationBO#sendApprovalRequestEmail
+	 * (com.imc.efs.automation.entities.Requests)
 	 */
 	@Override
 	public String sendApprovalRequestEmail(Requests request) throws Exception {
-		Pattern pattern = Pattern.compile("@\\d+");
+		Pattern pattern = Pattern.compile("\\d+");
 		Matcher matcher = pattern.matcher(request.getPoWoNumber());
+		matcher.find();
 		int recordId = request.getRequestTypes().isIsOpsPortalType() ? request
-				.getRequestId() : Integer.parseInt(matcher.group(1));
+				.getRequestId() : Integer.parseInt(matcher.group(0));
 		List<String> filePaths = _dex.getDocumentFilePathsByRequestId(recordId,
 				request.getRequestTypes().getDexProjectId());
 
 		List<String> to = new ArrayList<String>();
-		to.add("mcoolican@iils.com");
-		to.add("RBrower@iilogistics.com");
+		 to.add("mcoolican@iils.com");
+		// to.add("RBrower@iilogistics.com");
 		to.add("bshipman@imccompanies.com");
 
-		List<String>cc = null;
+		List<String> cc = null;
 		// cc.add("driver_Services@IMCG.COM");
 
 		String subject;
@@ -115,17 +126,20 @@ public class NotificationBOImpl implements NotificationBO {
 					+ request.getRequestTypes().getName()
 					+ " EFS Check. Request #" + request.getRequestId();
 		}
-
-		boolean hasAttachments = filePaths.size() > 0;
+		boolean hasAttachments = false;
+		if (filePaths != null) {
+			hasAttachments = filePaths.size() > 0;
+		}
 		String body = getCheckRequestEmailBody(request, hasAttachments);
 
 		_mailer.sendEmail(to, subject, body, cc, filePaths);
-		
-		String recipient = null;
-		for(String toString : to){
-			recipient = recipient + ";" + toString;
+
+		String recipient = to.get(0);
+		if (to.size() > 1) {
+			for (int i = 1; i < to.size(); i++){
+				recipient = recipient + ";" + to.get(i);
+			}
 		}
-		
 		return recipient;
 	}
 
@@ -140,37 +154,42 @@ public class NotificationBOImpl implements NotificationBO {
 		message.append("<br/><b>Request Date:</b> " + request.getRequestDate())
 				.append("<br/><b>Amount:</b> $" + request.getEfsAmount())
 				.append("<br/><b>Status:</b> "
-						+ request.getStatus().getDescription())
-				.append("<br/><b>Requester:</b> " + request.getRequester())
-				.append("<br/><b>Company:</b> " + request.getCompany());
+						+ request.getStatus().getDescription().trim())
+				.append("<br/><b>Requester:</b> "
+						+ request.getRequester().trim())
+				.append("<br/><b>Company:</b> " + request.getCompany().trim());
 
 		if (StringUtils.isNotEmpty(request.getProNumber())
 				|| request.getProNumber() != null)
-			message.append("<br><b>Pro Number:</b> " + request.getProNumber());
+			message.append("<br><b>Pro Number:</b> "
+					+ request.getProNumber().trim());
 		if (StringUtils.isNotEmpty(request.getPoWoNumber())
 				|| request.getPoWoNumber() != null)
 			message.append("<br><b>PO Number / WO Number:</b> "
-					+ request.getPoWoNumber());
+					+ request.getPoWoNumber().trim());
 		if (request.getServiceCharge() != null)
 			message.append("<br><b>Service Charge:</b> $"
 					+ request.getServiceCharge());
 		if (StringUtils.isNotEmpty(request.getVendorName())
 				|| request.getVendorName() != null)
-			message.append("<br><b>VendorName:</b> " + request.getVendorName());
+			message.append("<br><b>VendorName:</b> "
+					+ request.getVendorName().trim());
 		if (StringUtils.isNotEmpty(request.getDriverId())
 				|| request.getDriverId() != null)
-			message.append("<br><b>Driver Id:</b> " + request.getDriverId());
+			message.append("<br><b>Driver Id:</b> "
+					+ request.getDriverId().trim());
 		if (StringUtils.isNotEmpty(request.getTruckId())
 				|| request.getTruckId() != null)
-			message.append("<br><b>Truck Id:</b> " + request.getTruckId());
+			message.append("<br><b>Truck Id:</b> "
+					+ request.getTruckId().trim());
 		if (StringUtils.isNotEmpty(request.getChassisNumber())
 				|| request.getChassisNumber() != null)
 			message.append("<br><b>Chassis Number:</b> "
-					+ request.getChassisNumber());
+					+ request.getChassisNumber().trim());
 		if (StringUtils.isNotEmpty(request.getContainerNumber())
 				|| request.getContainerNumber() != null)
 			message.append("<br><b>Container Number:</b> "
-					+ request.getContainerNumber());
+					+ request.getContainerNumber().trim());
 
 		if (hasAttachments)
 			message.append("<br><br>The attached documents are related to this request.");

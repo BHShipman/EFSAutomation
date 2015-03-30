@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "CardManagementWS", targetNamespace = "http://com.tch.cards.service", wsdlLocation = "https://www.tch.com/richapp/Wsdl.action?wsdl=/axis2/services/CardManagementWS")
+@WebServiceClient(name = "CardManagementWS", targetNamespace = "http://com.tch.cards.service", wsdlLocation = "file:/C:/Users/bshipman/AppData/Local/Temp/tempdir5049752374454454562.tmp/Wsdl_1.wsdl")
 public class CardManagementWS
     extends Service
 {
@@ -30,7 +30,7 @@ public class CardManagementWS
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://www.tch.com/richapp/Wsdl.action?wsdl=/axis2/services/CardManagementWS");
+            url = new URL("file:/C:/Users/bshipman/AppData/Local/Temp/tempdir5049752374454454562.tmp/Wsdl_1.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

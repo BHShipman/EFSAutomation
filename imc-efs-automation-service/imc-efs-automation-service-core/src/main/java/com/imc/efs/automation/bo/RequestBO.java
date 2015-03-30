@@ -3,6 +3,7 @@ package com.imc.efs.automation.bo;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.entities.RequestTypeConfigs;
 import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
@@ -20,10 +21,14 @@ public interface RequestBO {
 			throws Exception;
 
 	public abstract int saveRequest(Requests request) throws Exception;
+	
+	public abstract int updateRequest(Requests request);
 
 	public abstract BigDecimal getUsersEfsCheckLimit(String p1, int p2)
 			throws Exception;
 
 	public abstract List<Requests> getIssuedRequests();
+
+	public abstract Status getStatus(int statusId);
 
 }

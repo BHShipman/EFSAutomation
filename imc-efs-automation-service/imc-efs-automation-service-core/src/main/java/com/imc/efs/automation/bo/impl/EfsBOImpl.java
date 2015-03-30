@@ -15,16 +15,16 @@ import com.imc.efs.web.service.EfsServiceInvoker;
 @Stateless(name="EfsBO")
 public class EfsBOImpl implements EfsBO {
 
-//	@EJB(beanName="EfsDAO")
-//	private EfsDAO _efs;
+	@EJB(beanName="EfsService")
+	private EfsServiceInvoker _efs;
 	
 	public EfsBOImpl() {
 
 	}
 
-//	public EfsBOImpl(EfsDAO efs){
-//		this._efs = efs;
-//	}
+	public EfsBOImpl(EfsServiceInvoker efs){
+		this._efs = efs;
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.imc.efs.automation.bo.impl.EfsBO#IssueMoneyCode(double, java.lang.String, java.lang.String, java.lang.String)
@@ -32,8 +32,7 @@ public class EfsBOImpl implements EfsBO {
 	@Override
 	public EfsMoneyCode IssueMoneyCode(BigDecimal efsAmount, String issueTo, String description, String company){
 		EfsMoneyCode moneyCode;
-		EfsServiceInvoker service = new EfsServiceInvoker();
-		moneyCode = service.getMoneyCode_TEST(efsAmount, issueTo, description, company);
+		moneyCode = _efs.getMoneyCode_TEST(efsAmount, issueTo, description, company);
 		
 		return moneyCode;
 	}

@@ -1,6 +1,8 @@
 package com.imc.efs.automation.dto;
 
-public class MoneyCodeDetailsDTO {
+import java.io.Serializable;
+
+public class MoneyCodeDetailsDTO implements Serializable {
 
 	private boolean voided;
 	private double amount;
