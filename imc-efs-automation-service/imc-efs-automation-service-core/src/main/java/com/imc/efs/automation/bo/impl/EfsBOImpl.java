@@ -7,7 +7,6 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.imc.efs.automation.bo.EfsBO;
-import com.imc.efs.automation.dao.EfsDAO;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.web.service.EfsServiceInvoker;

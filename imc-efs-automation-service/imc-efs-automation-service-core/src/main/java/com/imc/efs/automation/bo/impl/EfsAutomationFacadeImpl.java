@@ -134,7 +134,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				request.getStatus().setStatusId(
 						RequestStatuses.PendingApproval.index());
 				try {
-					requestBO.saveRequest(request);
+					request.setRequestId(requestBO.saveRequest(request));
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -166,7 +166,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					request.setStatusId(1);
 					request.setStatus(requestBO.getStatus(request.getStatusId()));
 					try {
-						requestBO.saveRequest(request);
+						request.setRequestId(requestBO.saveRequest(request));
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -184,6 +184,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 							.setMessage("A request for approval has been sent to "
 									+ recipient
 									+ ". You will be notified when he/she responds.");
+					return moneyCode;
 				}
 			}
 		}
@@ -194,7 +195,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			request.getStatus().setStatusId(
 					RequestStatuses.PendingDsAudit.index());
 			try {
-				requestBO.saveRequest(request);
+				request.setRequestId(requestBO.saveRequest(request));
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -226,7 +227,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			request.setIssuer(request.getRequester());
 
 		try {
-			requestBO.updateRequest(request);
+			request.setRequestId(requestBO.updateRequest(request));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

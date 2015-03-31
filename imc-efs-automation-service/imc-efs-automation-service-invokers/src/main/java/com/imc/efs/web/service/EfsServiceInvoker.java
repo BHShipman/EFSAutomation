@@ -2,7 +2,6 @@ package com.imc.efs.web.service;
 
 import java.math.BigDecimal;
 
-import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;

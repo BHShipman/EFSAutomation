@@ -3,13 +3,21 @@ package com.imc.efs.automation.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 import com.imc.efs.automation.dao.GpDAO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
@@ -23,9 +31,20 @@ public class GpDAOImpl implements GpDAO {
 	EntityManager emIntegration;
 	@PersistenceContext(name = "GP", unitName="GP")
 	EntityManager emGP;
+	@Resource
+	UserTransaction utx;
 
+	
 	@Override
 	public void integrateIssuance(GpIntegrationDTO gpDto) {
+		if (gpDto.getCompany().compareTo("ATEST") == 0){
+			gpDto.setVendorId("1070");
+		}
+		try {
+			utx.begin();
+		} catch (NotSupportedException | SystemException e) {
+			e.printStackTrace();
+		}
 		emIntegration
 				.createNativeQuery(
 						"{call USP_Integrations_AP_Full(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}")
@@ -65,11 +84,24 @@ public class GpDAOImpl implements GpDAO {
 				.setParameter(34, gpDto.getRepairType())
 				.setParameter(35, gpDto.getInvoiceNumber())
 				.setParameter(36, gpDto.isApHold()).executeUpdate();
+		try {
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException
+				| SystemException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void executeRecievedIntegrations(String company, String batchId) {
+		try {
+			utx.begin();
+		} catch (NotSupportedException | SystemException e) {
+			e.printStackTrace();
+		}
 		emIntegration
 				.createNativeQuery(
 						"{call USP_ReceivedIntegrations(?,?,?,?,?,?,?,?,?,?)}")
@@ -77,8 +109,14 @@ public class GpDAOImpl implements GpDAO {
 				.setParameter(3, batchId).setParameter(4, 0)
 				.setParameter(5, null).setParameter(6, null)
 				.setParameter(7, null).setParameter(8, new Date())
-				.setParameter(9, "ILSGP01").setParameter(10, "EFS_Automation")
-				.executeUpdate();
+				.setParameter(9, "ILSGP01").setParameter(10, "EFS_Automation").executeUpdate();
+				try {
+					utx.commit();
+				} catch (SecurityException | IllegalStateException
+						| RollbackException | HeuristicMixedException
+						| HeuristicRollbackException | SystemException e) {
+					e.printStackTrace();
+				}
 	}
 
 	@Override

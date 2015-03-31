@@ -1,11 +1,9 @@
 package com.imc.efs.automation.data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "EfsCheckRequest")
 public class EfsCheckRequest implements Serializable {

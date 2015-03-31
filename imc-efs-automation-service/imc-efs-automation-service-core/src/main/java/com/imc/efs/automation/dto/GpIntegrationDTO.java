@@ -2,7 +2,6 @@ package com.imc.efs.automation.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class GpIntegrationDTO implements Serializable {
 
@@ -17,15 +16,15 @@ public class GpIntegrationDTO implements Serializable {
 	private String docNumber;
 	private short docType;
 	private String docAmount;
-	private Date docDate;
-	private Date pstgDate;
+	private String docDate;
+	private String pstgDate;
 	private BigDecimal chrgAmount;
 	private BigDecimal ten99Amount;
 	private BigDecimal prchAmount;
 	private String TRXDSCRN;
 	private String currency;
 	private String rateTPid;
-	private Date exchangeDate;
+	private String exchangeDate;
 	private short rateExp;
 	private short createDist;
 	private short distType;
@@ -102,19 +101,19 @@ public class GpIntegrationDTO implements Serializable {
 		this.docAmount = docAmount;
 	}
 
-	public Date getDocDate() {
+	public String getDocDate() {
 		return docDate;
 	}
 
-	public void setDocDate(Date docDate) {
+	public void setDocDate(String docDate) {
 		this.docDate = docDate;
 	}
 
-	public Date getPstgDate() {
+	public String getPstgDate() {
 		return pstgDate;
 	}
 
-	public void setPstgDate(Date pstgDate) {
+	public void setPstgDate(String pstgDate) {
 		this.pstgDate = pstgDate;
 	}
 
@@ -166,11 +165,11 @@ public class GpIntegrationDTO implements Serializable {
 		this.rateTPid = rateTPid;
 	}
 
-	public Date getExchangeDate() {
+	public String getExchangeDate() {
 		return exchangeDate;
 	}
 
-	public void setExchangeDate(Date exchangeDate) {
+	public void setExchangeDate(String exchangeDate) {
 		this.exchangeDate = exchangeDate;
 	}
 

@@ -107,6 +107,10 @@ public class RecipientInfo {
         }
         return this.ccEmailAddresses;
     }
+    
+    public void setCcEmailAddresses(List<String> ccEmailAddresses){
+    	this.ccEmailAddresses = ccEmailAddresses;
+    }
 
     /**
      * Gets the value of the testEmailAddresses property.
@@ -136,15 +140,10 @@ public class RecipientInfo {
         }
         return this.testEmailAddresses;
     }
+    
+    public void setTestEmailAddresses(List<String> testEmailAddresses){
+    	this.testEmailAddresses = testEmailAddresses;
+    }
 
-	public void setToEmailAddresses(String[] array) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setCcEmailAddresses(String[] array) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -1,7 +1,10 @@
 package com.imc.efs.automation.bo.impl;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -96,7 +99,7 @@ public class NotificationBOImpl implements NotificationBO {
 				request.getRequestTypes().getDexProjectId());
 
 		List<String> to = new ArrayList<String>();
-		 to.add("mcoolican@iils.com");
+//		 to.add("mcoolican@iils.com");
 		// to.add("RBrower@iilogistics.com");
 		to.add("bshipman@imccompanies.com");
 
@@ -151,8 +154,12 @@ public class NotificationBOImpl implements NotificationBO {
 				+ request.getRequestTypes().getName()
 				+ "</h3>Please reply to this email with \"APPROVED\" or \"REJECTED\" included in the body.");
 
+		NumberFormat amountFormat = NumberFormat.getCurrencyInstance(Locale.US);
+		amountFormat.setMinimumFractionDigits(1);
+		amountFormat.setMaximumFractionDigits(2);
+		
 		message.append("<br/><b>Request Date:</b> " + request.getRequestDate())
-				.append("<br/><b>Amount:</b> $" + request.getEfsAmount())
+				.append("<br/><b>Amount:</b> " + amountFormat.format(request.getEfsAmount().setScale(2, RoundingMode.HALF_EVEN).doubleValue()))
 				.append("<br/><b>Status:</b> "
 						+ request.getStatus().getDescription().trim())
 				.append("<br/><b>Requester:</b> "

@@ -9,9 +9,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,7 +60,7 @@ public class Requests implements Serializable {
 	private Integer moneyCodeReferenceNumber;
 	private String moneyCode;
 	private String rejectionReason;
-	private Boolean isChargedToCustomer;
+	private byte isChargedToCustomer;
 	private String driverName;
 
 	public Requests() {
@@ -89,7 +92,7 @@ public class Requests implements Serializable {
 			String claimType, String tagEquipment,
 			String tagPurchType, String description,
 			Integer moneyCodeReferenceNumber, String moneyCode,
-			String rejectionReason, Boolean isChargedToCustomer) {
+			String rejectionReason, byte isChargedToCustomer) {
 		this.requestId = requestId;
 		this.status = status;
 		this.requestTypes = requestTypes;
@@ -125,6 +128,11 @@ public class Requests implements Serializable {
 	}
 
 	@Id
+    @SequenceGenerator(name="dbo.\"Requests_RequestId_seq\"",
+                       sequenceName="dbo.\"Requests_RequestId_seq\"",
+                       allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+                    generator="dbo.\"Requests_RequestId_seq\"")
 	@Column(name = "\"RequestId\"", unique = true, nullable = false)
 	public int getRequestId() {
 		return this.requestId;
@@ -410,11 +418,11 @@ public class Requests implements Serializable {
 	}
 
 	@Column(name = "\"IsChargedToCustomer\"")
-	public Boolean getIsChargedToCustomer() {
+	public byte getIsChargedToCustomer() {
 		return this.isChargedToCustomer;
 	}
 
-	public void setIsChargedToCustomer(Boolean isChargedToCustomer) {
+	public void setIsChargedToCustomer(byte isChargedToCustomer) {
 		this.isChargedToCustomer = isChargedToCustomer;
 	}
 

@@ -3,6 +3,7 @@ package com.imc.efs.automation.email.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -213,6 +214,10 @@ public class SendEmailRequest {
         }
         return this.keyValues;
     }
+    
+    public void setKeyValues(List<KeyValueDataType> keyValues){
+    	this.keyValues = keyValues;
+    }
 
     /**
      * Gets the value of the tableValues property.
@@ -241,6 +246,10 @@ public class SendEmailRequest {
             tableValues = new ArrayList<TableDataType>();
         }
         return this.tableValues;
+    }
+    
+    public void setTableValues(List<TableDataType> tableValues){
+    	this.tableValues = tableValues;
     }
 
     /**
@@ -272,8 +281,8 @@ public class SendEmailRequest {
         return this.emailAttachments;
     }
 
-	public void setEmailAttachments(EmailAttachment[] array) {
-		// TODO Auto-generated method stub
+	public void setEmailAttachments(List<EmailAttachment> emailAttachments){
+		this.emailAttachments = emailAttachments;
 		
 	}
 

@@ -2,7 +2,6 @@ package com.imc.efs.automation.entities;
 
 // Generated Mar 16, 2015 4:02:11 PM by Hibernate Tools 4.0.0
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
