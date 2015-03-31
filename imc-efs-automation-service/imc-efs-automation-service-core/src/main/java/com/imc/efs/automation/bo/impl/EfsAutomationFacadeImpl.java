@@ -95,8 +95,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			if (request.getRequestTypes().getRequestTypeConfigs()
 					.isIsOpsPortalType()) {
 				if (newRequest.getFileUploads() == null || !hasInvoice) {
-					// an invoice is required for this type of request
-					throw new Exception("Not Implemented");
+					throw new Exception("Not Implemented - An invoice is required for this type of request");
 				}
 
 				request.setRequestId(requestBO.saveRequest(request));
@@ -233,9 +232,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			e.printStackTrace();
 		}
 
-		gpBO.createIssuanceTransaction(request.getRequestTypes()
-				.getIssuanceDebit(), request.getRequestTypes()
-				.getIssuanceCredit(), request.getCompany(), request
+		gpBO.createIssuanceTransaction(request.getCompany(), request
 				.getRequestId(), moneyCode.getReferenceNumber(), request
 				.getEfsAmount(), new Date(), request.getProNumber(), request
 				.getContainerNumber(), request.getChassisNumber(), request
@@ -251,7 +248,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				e.printStackTrace();
 			}
 		} else {
-			docBO.createIssueDoc(request, request.getRequestTypes()
+			docBO.createIssueDoc(request, request.getRequestTypes().getRequestTypeConfigs()
 					.getDexProjectId());
 			if (resumed)
 				try {

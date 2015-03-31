@@ -47,30 +47,10 @@
 			<version>3.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.hibernate</groupId> -->
-<!-- 			<artifactId>hibernate-entitymanager</artifactId> -->
-<!-- 			<version>4.1.7.Final</version> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.openejb</groupId> -->
-<!-- 			<artifactId>openejb-lite</artifactId> -->
-<!-- 			<version>4.5.1</version> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.openejb</groupId> -->
-<!-- 			<artifactId>openejb-core</artifactId> -->
-<!-- 			<version>4.5.1</version> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring-web</artifactId> -->
-<!-- 			<version>4.1.5.RELEASE</version> -->
-<!-- 		</dependency> -->
-
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>4.2.1</version>
+		</dependency>
 	</dependencies>
 </project>

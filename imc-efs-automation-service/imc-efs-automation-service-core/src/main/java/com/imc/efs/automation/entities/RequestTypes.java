@@ -28,17 +28,25 @@ public class RequestTypes implements Serializable {
 	private boolean requiresAuthorizedVendor;
 	private boolean requiresInvoice;
 	private boolean preventDuplicates;
-	private long dexProjectId;
-	private String issuanceDebit;
-	private String issuanceCredit;
-	private String expenseDebit;
-	private String expenseCredit;
 	private String name;
 	private RequestTypeConfigs requestTypeConfigs;
 	private Set<Requesters> requesterses = new HashSet<Requesters>(0);
 	private Set<Requests> requestses = new HashSet<Requests>(0);
 	private Set<RequestTypeComments> requestTypeCommentses = new HashSet<RequestTypeComments>(
 			0);
+	private int driverId;
+	private int vendorId;
+	private int serviceCharge;
+	private int proNumber;
+	private int poWoNumber;
+	private int truckId;
+	private int ChassisNumber;
+	private int ContainerNumber;
+	private int claimNumber;
+	private int claimType;
+	private int tagEquipment;
+	private int tagPurchType;
+	private boolean isChargedToCustomer;
 
 	public RequestTypes() {
 	}
@@ -46,9 +54,7 @@ public class RequestTypes implements Serializable {
 	public RequestTypes(int requestTypeId, boolean isOpsPortalType,
 			boolean isDriverPay, boolean requiresManagementApproval,
 			boolean requiresAuthorizedVendor, boolean requiresInvoice,
-			boolean preventDuplicates, long dexProjectId,
-			String issuanceDebit, String issuanceCredit,
-			String name) {
+			boolean preventDuplicates, String name) {
 		this.requestTypeId = requestTypeId;
 		this.isOpsPortalType = isOpsPortalType;
 		this.isDriverPay = isDriverPay;
@@ -56,19 +62,14 @@ public class RequestTypes implements Serializable {
 		this.requiresAuthorizedVendor = requiresAuthorizedVendor;
 		this.requiresInvoice = requiresInvoice;
 		this.preventDuplicates = preventDuplicates;
-		this.dexProjectId = dexProjectId;
-		this.issuanceDebit = issuanceDebit;
-		this.issuanceCredit = issuanceCredit;
 		this.name = name;
 	}
 
 	public RequestTypes(int requestTypeId, boolean isOpsPortalType,
 			boolean isDriverPay, boolean requiresManagementApproval,
 			boolean requiresAuthorizedVendor, boolean requiresInvoice,
-			boolean preventDuplicates, long dexProjectId,
-			String issuanceDebit, String issuanceCredit,
-			String expenseDebit, String expenseCredit,
-			String name, RequestTypeConfigs requestTypeConfigs,
+			boolean preventDuplicates, String name,
+			RequestTypeConfigs requestTypeConfigs,
 			Set<Requesters> requesterses, Set<Requests> requestses,
 			Set<RequestTypeComments> requestTypeCommentses) {
 		this.requestTypeId = requestTypeId;
@@ -78,11 +79,6 @@ public class RequestTypes implements Serializable {
 		this.requiresAuthorizedVendor = requiresAuthorizedVendor;
 		this.requiresInvoice = requiresInvoice;
 		this.preventDuplicates = preventDuplicates;
-		this.dexProjectId = dexProjectId;
-		this.issuanceDebit = issuanceDebit;
-		this.issuanceCredit = issuanceCredit;
-		this.expenseDebit = expenseDebit;
-		this.expenseCredit = expenseCredit;
 		this.name = name;
 		this.requestTypeConfigs = requestTypeConfigs;
 		this.requesterses = requesterses;
@@ -154,51 +150,6 @@ public class RequestTypes implements Serializable {
 		this.preventDuplicates = preventDuplicates;
 	}
 
-	@Column(name = "\"DexProjectId\"", nullable = false)
-	public long getDexProjectId() {
-		return this.dexProjectId;
-	}
-
-	public void setDexProjectId(long dexProjectId) {
-		this.dexProjectId = dexProjectId;
-	}
-
-	@Column(name = "\"IssuanceDebit\"", nullable = false)
-	public String getIssuanceDebit() {
-		return this.issuanceDebit;
-	}
-
-	public void setIssuanceDebit(String issuanceDebit) {
-		this.issuanceDebit = issuanceDebit;
-	}
-
-	@Column(name = "\"IssuanceCredit\"", nullable = false)
-	public String getIssuanceCredit() {
-		return this.issuanceCredit;
-	}
-
-	public void setIssuanceCredit(String issuanceCredit) {
-		this.issuanceCredit = issuanceCredit;
-	}
-
-	@Column(name = "\"ExpenseDebit\"")
-	public String getExpenseDebit() {
-		return this.expenseDebit;
-	}
-
-	public void setExpenseDebit(String expenseDebit) {
-		this.expenseDebit = expenseDebit;
-	}
-
-	@Column(name = "\"ExpenseCredit\"")
-	public String getExpenseCredit() {
-		return this.expenseCredit;
-	}
-
-	public void setExpenseCredit(String expenseCredit) {
-		this.expenseCredit = expenseCredit;
-	}
-
 	@Column(name = "\"Name\"", nullable = false)
 	public String getName() {
 		return this.name;
@@ -243,6 +194,123 @@ public class RequestTypes implements Serializable {
 	public void setRequestTypeCommentses(
 			Set<RequestTypeComments> requestTypeCommentses) {
 		this.requestTypeCommentses = requestTypeCommentses;
+	}
+
+	@Column(name = "\"DriverId\"", nullable = false)
+	public int getDriverId() {
+		return driverId;
+	}
+
+	public void setDriverId(int driverId) {
+		this.driverId = driverId;
+	}
+
+	@Column(name = "\"VendorId\"", nullable = false)
+	public int getVendorId() {
+		return vendorId;
+	}
+
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
+	}
+
+	@Column(name = "\"ServiceCharge\"", nullable = false)
+	public int getServiceCharge() {
+		return serviceCharge;
+	}
+
+	public void setServiceCharge(int serviceCharge) {
+		this.serviceCharge = serviceCharge;
+	}
+
+	@Column(name = "\"ProNumber\"", nullable = false)
+	public int getProNumber() {
+		return proNumber;
+	}
+
+	public void setProNumber(int proNumber) {
+		this.proNumber = proNumber;
+	}
+
+	@Column(name = "\"PoWoNumber\"", nullable = false)
+	public int getPoWoNumber() {
+		return poWoNumber;
+	}
+
+	public void setPoWoNumber(int poWoNumber) {
+		this.poWoNumber = poWoNumber;
+	}
+
+	@Column(name = "\"TruckId\"", nullable = false)
+	public int getTruckId() {
+		return truckId;
+	}
+
+	public void setTruckId(int truckId) {
+		this.truckId = truckId;
+	}
+
+	@Column(name = "\"ChassisNumber\"", nullable = false)
+	public int getChassisNumber() {
+		return ChassisNumber;
+	}
+
+	public void setChassisNumber(int chassisNumber) {
+		ChassisNumber = chassisNumber;
+	}
+
+	@Column(name = "\"ContainerNumber\"", nullable = false)
+	public int getContainerNumber() {
+		return ContainerNumber;
+	}
+
+	public void setContainerNumber(int containerNumber) {
+		ContainerNumber = containerNumber;
+	}
+
+	@Column(name = "\"ClaimNumber\"", nullable = false)
+	public int getClaimNumber() {
+		return claimNumber;
+	}
+
+	public void setClaimNumber(int claimNumber) {
+		this.claimNumber = claimNumber;
+	}
+
+	@Column(name = "\"ClaimType\"", nullable = false)
+	public int getClaimType() {
+		return claimType;
+	}
+
+	public void setClaimType(int claimType) {
+		this.claimType = claimType;
+	}
+
+	@Column(name = "\"TagEquipment\"", nullable = false)
+	public int getTagEquipment() {
+		return tagEquipment;
+	}
+
+	public void setTagEquipment(int tagEquipment) {
+		this.tagEquipment = tagEquipment;
+	}
+
+	@Column(name = "\"TagPurchType\"", nullable = false)
+	public int getTagPurchType() {
+		return tagPurchType;
+	}
+
+	public void setTagPurchType(int tagPurchType) {
+		this.tagPurchType = tagPurchType;
+	}
+
+	@Column(name = "\"IsChargedToCustomer\"", nullable = false)
+	public boolean isChargedToCustomer() {
+		return isChargedToCustomer;
+	}
+
+	public void setChargedToCustomer(boolean isChargedToCustomer) {
+		this.isChargedToCustomer = isChargedToCustomer;
 	}
 
 }

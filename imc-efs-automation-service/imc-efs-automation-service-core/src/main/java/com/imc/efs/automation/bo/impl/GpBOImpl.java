@@ -32,8 +32,7 @@ public class GpBOImpl implements GpBO {
 	 * @see com.imc.efs.automation.bo.impl.GpBO#createIssuanceTransaction(java.lang.String, java.lang.String, java.lang.String, int, int, double, java.util.Date, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void createIssuanceTransaction(String debitGlAccount,
-			String creditGlAcount, String company, int requestId,
+	public void createIssuanceTransaction(String company, int requestId,
 			int moneyCodeReferenceNumber, BigDecimal efsAmount, Date issueDate,
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber) {
@@ -68,7 +67,7 @@ public class GpBOImpl implements GpBO {
 		gpDto.setBatchId(dailyBatchId);
 		gpDto.setVCHNUMWK("EFS" + String.format("%06d", requestId));
 		gpDto.setVendorId(vendorId);
-		gpDto.setDocNumber(moneyCodeReferenceNumberString + "_I");
+		gpDto.setDocNumber(moneyCodeReferenceNumberString);
 		gpDto.setDocType((short) 1);
 		gpDto.setDocAmount(String.valueOf(efsAmountPlusEfsFee));
 		gpDto.setDocDate(sdf.format(issueDate));
@@ -99,7 +98,7 @@ public class GpBOImpl implements GpBO {
 		String description = driverId + "|Flow Through";
 		gpDto.setTRXDSCRN(description);
 		gpDto.setDISTREF(moneyCodeReferenceNumberString + "|" + poWoNumber);
-		gpDto.setActNumSt(debitGlAccount);
+		gpDto.setActNumSt("0-00-2109");
 		gpDto.setDistType((short)6);
 		gpDto.setDebitAmount(amount);
 		gpDto.setCreditAmount(new BigDecimal(0));
@@ -109,7 +108,7 @@ public class GpBOImpl implements GpBO {
 		description = driverId + "|EFS Payables";
 		gpDto.setTRXDSCRN(description);
 		gpDto.setDISTREF(description);
-		gpDto.setActNumSt(creditGlAcount);
+		gpDto.setActNumSt("0-00-2070");
 		gpDto.setDistType((short)2);
 		gpDto.setDebitAmount(new BigDecimal(0));
 		gpDto.setCreditAmount(amount);

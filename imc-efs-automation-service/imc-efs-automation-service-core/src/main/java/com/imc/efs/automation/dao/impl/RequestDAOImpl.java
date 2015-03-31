@@ -14,7 +14,7 @@ import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.RsaVendorsNetwork;
 import com.imc.efs.automation.entities.Status;
 
-@Stateless(name="RequestDAO")
+@Stateless(name = "RequestDAO")
 @Remote(RequestDAO.class)
 public class RequestDAOImpl implements RequestDAO {
 
@@ -29,15 +29,32 @@ public class RequestDAOImpl implements RequestDAO {
 		} catch (RuntimeException re) {
 			throw re;
 		}
+		request = (Requests) emEFS
+				.createQuery(
+						"select req from Requests req where req.poWoNumber = :poWoNumber")
+				.setParameter("poWoNumber", request.getPoWoNumber())
+				.getSingleResult();
 		return request.getRequestId();
 	}
 
 	public int updateRequest(Requests request) {
-		try {
-			emEFS.merge(request);
-		} catch (RuntimeException re) {
-			throw re;
-		}
+		if (emEFS.contains(request)) {
+			try {
+				emEFS.merge(request);
+			} catch (RuntimeException re) {
+				throw re;
+			}
+		} else
+			try {
+				emEFS.persist(request);
+			} catch (RuntimeException re) {
+				throw re;
+			}
+		request = (Requests) emEFS
+				.createQuery(
+						"select req from Requests req where req.poWoNumber = :poWoNumber")
+				.setParameter("poWoNumber", request.getPoWoNumber())
+				.getSingleResult();
 		return request.getRequestId();
 	}
 
@@ -98,30 +115,33 @@ public class RequestDAOImpl implements RequestDAO {
 		return request;
 	}
 
-	public Requests updateAndReturnRequestWithReference(Requests request) throws Exception {
+	public Requests updateAndReturnRequestWithReference(Requests request)
+			throws Exception {
 		throw new Exception("Not Implemented");
 	}
 
 	public List<Requests> getRequestsOfStatusIssued() throws Exception {
 		throw new Exception("Not Implemented");
 	}
-	
-	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId){
-		
-		Requesters requesters = (Requesters) emEFS.createQuery("select req from Requesters req where req.name = :requester AND req.requestTypes.requestTypeId = :requestTypeId")
+
+	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId) {
+
+		Requesters requesters = (Requesters) emEFS
+				.createQuery(
+						"select req from Requesters req where req.name = :requester AND req.requestTypes.requestTypeId = :requestTypeId")
 				.setParameter("requester", requester.toUpperCase())
-				.setParameter("requestTypeId", requestTypeId)
-				.getSingleResult();
-		
+				.setParameter("requestTypeId", requestTypeId).getSingleResult();
+
 		return requesters.getLimit();
 	}
 
 	@Override
 	public Status getStatus(int statusId) {
-		Status status = (Status)emEFS.createQuery("select stat from Status stat where stat.statusId = :statusId")
-		.setParameter("statusId", statusId)
-		.getSingleResult();
-		
+		Status status = (Status) emEFS
+				.createQuery(
+						"select stat from Status stat where stat.statusId = :statusId")
+				.setParameter("statusId", statusId).getSingleResult();
+
 		return status;
 	}
 

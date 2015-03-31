@@ -1,6 +1,8 @@
 package com.imc.efs.automation.bo.impl;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -10,6 +12,7 @@ import com.imc.efs.automation.bo.DocBO;
 import com.imc.efs.automation.dao.DexDAO;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.helper.PdfGenerator;
 
 @Remote(DocBO.class)
 @Stateless(name="DocBO")
@@ -17,12 +20,15 @@ public class DocBOImpl implements DocBO {
 
 	@EJB(beanName="DexDAO")
 	private DexDAO _dex;
+	@EJB(beanName="PdfGenerator")
+	private PdfGenerator pdfGenerator;
 
 	public DocBOImpl() {
 	}
 
-	public DocBOImpl(DexDAO _dex) {
+	public DocBOImpl(DexDAO _dex, PdfGenerator pdf) {
 		this._dex = _dex;
+		this.pdfGenerator = pdf;
 	}
 
 	/*
@@ -34,7 +40,22 @@ public class DocBOImpl implements DocBO {
 	 */
 	@Override
 	public void createIssueDoc(Requests request, long projectId) {
-		// TODO research java equivalent of ABCpdf
+		String issDocFilePath =  pdfGenerator.generateIssuanceDoc(request);
+		
+		String field1 = null;
+		if(request.getRequestTypes().isIsOpsPortalType()){
+			field1 = String.valueOf(request.getRequestId());
+		} else
+		{
+			Pattern pattern = Pattern.compile("\\d+");
+			Matcher matcher = pattern.matcher(request.getPoWoNumber());
+			matcher.find();
+			field1 = matcher.group(0);
+		}
+		if (field1 != null)
+			_dex.saveDocument(projectId, "admin", "admin", field1, "ISSU", issDocFilePath);
+			
+			
 	}
 
 	@Override
