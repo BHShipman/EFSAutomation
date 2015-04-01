@@ -3,10 +3,10 @@ package com.imc.efs.automation.bo;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.imc.efs.automation.entities.RequestTypeConfigs;
 import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Status;
+import com.imc.efs.automation.exception.NotImplemented;
 
 public interface RequestBO {
 
@@ -15,10 +15,10 @@ public interface RequestBO {
 	public abstract RequestTypes getRequestType(int requestTypeId);
 
 	public abstract void validateRequestInputAgainstConfig(
-			RequestTypeConfigs config, Requests request) throws Exception;
+			Requests request) throws NotImplemented;
 
 	public abstract void validateIsNotDuplicateRequest(String poWoNumber)
-			throws Exception;
+			throws NotImplemented;
 
 	public abstract int saveRequest(Requests request) throws Exception;
 	

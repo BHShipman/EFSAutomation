@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "EfsCheckRequest")
 public class EfsCheckRequest implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public EfsCheckRequest() {
 	}
 
@@ -22,6 +27,7 @@ public class EfsCheckRequest implements Serializable {
 	private String driverName;
 	private String poWoNumber;
 	private String truckId;
+	private String pathToInvoice;
 
 	private List<FileUpload> FileUploads;
 
@@ -119,6 +125,14 @@ public class EfsCheckRequest implements Serializable {
 
 	public void setFileUploads(List<FileUpload> fileUploads) {
 		FileUploads = fileUploads;
+	}
+
+	public String getPathToInvoice() {
+		return pathToInvoice;
+	}
+
+	public void setPathToInvoice(String pathToInvoice) {
+		this.pathToInvoice = pathToInvoice;
 	}
 
 }

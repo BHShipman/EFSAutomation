@@ -95,8 +95,7 @@ public class NotificationBOImpl implements NotificationBO {
 		matcher.find();
 		int recordId = request.getRequestTypes().isIsOpsPortalType() ? request
 				.getRequestId() : Integer.parseInt(matcher.group(0));
-		List<String> filePaths = _dex.getDocumentFilePathsByRequestId(recordId,
-				request.getRequestTypes().getRequestTypeConfigs().getDexProjectId());
+		List<String> filePaths = _dex.getDocumentFilePathsByRequestId(recordId);
 
 		List<String> to = new ArrayList<String>();
 //		 to.add("mcoolican@iils.com");

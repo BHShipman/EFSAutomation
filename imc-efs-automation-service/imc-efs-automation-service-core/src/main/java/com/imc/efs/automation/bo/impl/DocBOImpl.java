@@ -1,5 +1,6 @@
 package com.imc.efs.automation.bo.impl;
 
+import java.io.File;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,7 +40,7 @@ public class DocBOImpl implements DocBO {
 	 * .entities.Requests, long)
 	 */
 	@Override
-	public void createIssueDoc(Requests request, long projectId) {
+	public void createIssueDoc(Requests request) {
 		String issDocFilePath =  pdfGenerator.generateIssuanceDoc(request);
 		
 		String field1 = null;
@@ -53,17 +54,17 @@ public class DocBOImpl implements DocBO {
 			field1 = matcher.group(0);
 		}
 		if (field1 != null)
-			_dex.saveDocument(projectId, "admin", "admin", field1, "ISSU", issDocFilePath);
+			_dex.saveDocument("admin", "admin", field1, "ISSU", issDocFilePath);
 			
 			
 	}
 
 	@Override
 	public void storeDocuments(List<FileUpload> fileUploads, int requestId,
-			String user, long dexProjectId) {
+			String user) {
 		
 		for (FileUpload fu : fileUploads) {
-			_dex.saveDocument(dexProjectId, "admin", "admin", String.valueOf(requestId), fu.getFileType(), fu.getFilePath());
+			_dex.saveDocument("admin", "admin", String.valueOf(requestId), fu.getFileType(), fu.getFilePath());
 		}
 	}
 
@@ -75,6 +76,16 @@ public class DocBOImpl implements DocBO {
 		if (!hasInvoice) {
 			throw new Exception("Not Implemented - No Invoice found");
 		}
+	}
+	
+	@Override
+	public boolean validateHasInvoice(Requests request){
+		File invoice = new File(request.getPathToInvoice());
+		
+		if(invoice.exists() && !invoice.isDirectory()){
+			return true;
+		}else
+			return false;
 	}
 
 }

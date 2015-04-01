@@ -62,6 +62,7 @@ public class Requests implements Serializable {
 	private String rejectionReason;
 	private byte isChargedToCustomer;
 	private String driverName;
+	private String pathToInvoice;
 
 	public Requests() {
 	}
@@ -475,6 +476,14 @@ public class Requests implements Serializable {
 
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
+	}
+	@Transient
+	public String getPathToInvoice() {
+		return pathToInvoice;
+	}
+
+	public void setPathToInvoice(String pathToInvoice) {
+		this.pathToInvoice = pathToInvoice;
 	}
 
 }

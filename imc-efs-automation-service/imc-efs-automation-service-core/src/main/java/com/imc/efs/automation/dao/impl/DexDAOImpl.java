@@ -21,7 +21,7 @@ public class DexDAOImpl implements DexDAO {
 	EntityManager em;
 
 	@Override
-	public void saveDocument(long dexProjectId, String username,
+	public void saveDocument(String username,
 			String password, String requestId, String docType, String filePath) {
 		// TODO Auto-generated method stub
 
@@ -43,9 +43,7 @@ public class DexDAOImpl implements DexDAO {
 	}
 
 	@Override
-	public List<String> getDocumentFilePathsByRequestId(int requestId,
-			long dexProjectId) {
-		// TODO Auto-generated method stub
+	public List<String> getDocumentFilePathsByRequestId(int requestId) {
 		return null;
 	}
 

@@ -23,6 +23,8 @@ import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.enums.RequestStatuses;
+import com.imc.efs.automation.exception.NotImplemented;
+import com.imc.efs.automation.exception.Unexpected;
 import com.imc.efs.automation.helper.EfsCheckRequestExtensions;
 @Stateless(name="EfsAutomationFacadeImpl")
 @Remote(EfsAutomationFacade.class)
@@ -63,7 +65,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	}
 
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
-			throws Exception {
+			throws NotImplemented, Unexpected {
 		Requests request = requestExtension.ToRequest(newRequest);
 		
 		request.setRequestDate(new Date());
@@ -77,8 +79,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		request.setRequestTypes(requestBO.getRequestType(request
 				.getRequestTypeId()));
 
-		requestBO.validateRequestInputAgainstConfig(request
-				.getRequestTypes().getRequestTypeConfigs(), request);
+		requestBO.validateRequestInputAgainstConfig(request);
 
 		if (!StringUtils.isEmpty(request.getPoWoNumber())
 				|| request.getPoWoNumber() != null) {
@@ -90,39 +91,45 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			if (file.getFileType() == ("INV"))
 			hasInvoice = true;
 		}
-		if (request.getRequestTypes().getRequestTypeConfigs()
+		if (request.getRequestTypes()
 				.isRequiresInvoice()) {
-			if (request.getRequestTypes().getRequestTypeConfigs()
+			if (request.getRequestTypes()
 					.isIsOpsPortalType()) {
 				if (newRequest.getFileUploads() == null || !hasInvoice) {
-					throw new Exception("Not Implemented - An invoice is required for this type of request");
+					throw new NotImplemented("Not Implemented - An invoice is required for this type of request");
 				}
 
+				try{
 				request.setRequestId(requestBO.saveRequest(request));
-				
+				}catch (Exception e){
+					throw new Unexpected(e.getLocalizedMessage());
+				}
 				long efsDexProjId = 129;
 				docBO.storeDocuments(newRequest.getFileUploads(),
-						request.getRequestId(), request.getRequester(),
-						efsDexProjId);
+						request.getRequestId(), request.getRequester());
 			} else {
-				Pattern pattern = Pattern.compile("\\d+");
-				Matcher matcher = pattern.matcher(request.getPoWoNumber());
-				matcher.find();
-				docBO.validateHasInvoice(request.getRequestTypes()
-						.getRequestTypeConfigs().getDexProjectId(),
-						matcher.group(0));
+//				Pattern pattern = Pattern.compile("\\d+");
+//				Matcher matcher = pattern.matcher(request.getPoWoNumber());
+//				matcher.find();
+//				docBO.validateHasInvoice(request.getRequestTypes()
+//						.getDexProjectId(),
+//						matcher.group(0));
+				if(!docBO.validateHasInvoice(request)){
+					throw new NotImplemented("Not Implemented - An invoice is required for this type of request");
+					
+				}
 			}
 		}
 
 		return processRequest(request, false);
 	}
 
-	public EfsMoneyCode resumeEfsCheckIssuance(int requestId) {
+	public EfsMoneyCode resumeEfsCheckIssuance(int requestId) throws Unexpected {
 		Requests request = requestBO.getRequest(requestId);
 		return processRequest(request, true);
 	}
 
-	private EfsMoneyCode processRequest(Requests request, boolean resumed) {
+	private EfsMoneyCode processRequest(Requests request, boolean resumed) throws Unexpected {
 
 		request.setStatus(requestBO.getStatus(request.getStatusId()));
 		
@@ -136,7 +143,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					request.setRequestId(requestBO.saveRequest(request));
 					
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new Unexpected(e.getLocalizedMessage());
 				}
 				String recipient  = null;
 				try {
@@ -168,7 +175,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 						request.setRequestId(requestBO.saveRequest(request));
 						
 					} catch (Exception e) {
-						e.printStackTrace();
+						throw new Unexpected(e.getLocalizedMessage());
 					}
 					String recipient = null;
 					try {
@@ -197,7 +204,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				request.setRequestId(requestBO.saveRequest(request));
 				
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new Unexpected(e.getLocalizedMessage());
 			}
 			EfsMoneyCode moneyCode = new EfsMoneyCode();
 			moneyCode.setIssued(false);
@@ -240,7 +247,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 		// should send issuance email if IsOpsPortalType
 		if (request.getRequestTypes().isIsOpsPortalType()) {
-			docBO.createIssueDoc(request, 129);
+			docBO.createIssueDoc(request);
 			try {
 				notificationBO.sendIssuanceEmail(request,
 						moneyCode.getMoneyCode());
@@ -248,8 +255,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				e.printStackTrace();
 			}
 		} else {
-			docBO.createIssueDoc(request, request.getRequestTypes().getRequestTypeConfigs()
-					.getDexProjectId());
+			docBO.createIssueDoc(request);
 			if (resumed)
 				try {
 					notificationBO.sendIssuanceEmail(request,

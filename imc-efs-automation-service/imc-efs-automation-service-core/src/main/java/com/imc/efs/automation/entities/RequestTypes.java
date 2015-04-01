@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,7 +28,6 @@ public class RequestTypes implements Serializable {
 	private boolean requiresInvoice;
 	private boolean preventDuplicates;
 	private String name;
-	private RequestTypeConfigs requestTypeConfigs;
 	private Set<Requesters> requesterses = new HashSet<Requesters>(0);
 	private Set<Requests> requestses = new HashSet<Requests>(0);
 	private Set<RequestTypeComments> requestTypeCommentses = new HashSet<RequestTypeComments>(
@@ -69,7 +67,6 @@ public class RequestTypes implements Serializable {
 			boolean isDriverPay, boolean requiresManagementApproval,
 			boolean requiresAuthorizedVendor, boolean requiresInvoice,
 			boolean preventDuplicates, String name,
-			RequestTypeConfigs requestTypeConfigs,
 			Set<Requesters> requesterses, Set<Requests> requestses,
 			Set<RequestTypeComments> requestTypeCommentses) {
 		this.requestTypeId = requestTypeId;
@@ -80,7 +77,6 @@ public class RequestTypes implements Serializable {
 		this.requiresInvoice = requiresInvoice;
 		this.preventDuplicates = preventDuplicates;
 		this.name = name;
-		this.requestTypeConfigs = requestTypeConfigs;
 		this.requesterses = requesterses;
 		this.requestses = requestses;
 		this.requestTypeCommentses = requestTypeCommentses;
@@ -157,15 +153,6 @@ public class RequestTypes implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "requestTypes")
-	public RequestTypeConfigs getRequestTypeConfigs() {
-		return this.requestTypeConfigs;
-	}
-
-	public void setRequestTypeConfigs(RequestTypeConfigs requestTypeConfigs) {
-		this.requestTypeConfigs = requestTypeConfigs;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "requestTypes")
