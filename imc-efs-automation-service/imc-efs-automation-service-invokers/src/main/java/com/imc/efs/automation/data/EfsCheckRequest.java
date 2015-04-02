@@ -3,6 +3,7 @@ package com.imc.efs.automation.data;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "EfsCheckRequest")
@@ -31,6 +32,7 @@ public class EfsCheckRequest implements Serializable {
 
 	private List<FileUpload> FileUploads;
 
+	@XmlElement(required = true)
 	public int getRequestTypeId() {
 		return requestTypeId;
 	}
@@ -39,6 +41,7 @@ public class EfsCheckRequest implements Serializable {
 		this.requestTypeId = requestTypeId;
 	}
 
+	@XmlElement(required = true)
 	public String getCompany() {
 		return company;
 	}
@@ -47,6 +50,7 @@ public class EfsCheckRequest implements Serializable {
 		this.company = company;
 	}
 
+	@XmlElement(required = true)
 	public double getEfsAmount() {
 		return efsAmount;
 	}
@@ -55,6 +59,7 @@ public class EfsCheckRequest implements Serializable {
 		this.efsAmount = efsAmount;
 	}
 
+	@XmlElement(required = true)
 	public String getRequester() {
 		return requester;
 	}
@@ -63,6 +68,7 @@ public class EfsCheckRequest implements Serializable {
 		this.requester = requester;
 	}
 
+	@XmlElement(required = true)
 	public String getDescription() {
 		return description;
 	}
@@ -71,6 +77,7 @@ public class EfsCheckRequest implements Serializable {
 		this.description = description;
 	}
 
+	@XmlElement(required = true)
 	public int getVendorId() {
 		return vendorId;
 	}
@@ -79,6 +86,7 @@ public class EfsCheckRequest implements Serializable {
 		this.vendorId = vendorId;
 	}
 
+	@XmlElement(required = true)
 	public String getVendorName() {
 		return vendorName;
 	}
@@ -87,6 +95,7 @@ public class EfsCheckRequest implements Serializable {
 		this.vendorName = vendorName;
 	}
 
+	@XmlElement(required = true)
 	public String getDriverId() {
 		return driverId;
 	}
@@ -95,6 +104,7 @@ public class EfsCheckRequest implements Serializable {
 		this.driverId = driverId;
 	}
 
+	@XmlElement(required = true)
 	public String getDriverName() {
 		return driverName;
 	}
@@ -103,6 +113,7 @@ public class EfsCheckRequest implements Serializable {
 		this.driverName = driverName;
 	}
 
+	@XmlElement(required = true)
 	public String getPoWoNumber() {
 		return poWoNumber;
 	}
@@ -111,6 +122,7 @@ public class EfsCheckRequest implements Serializable {
 		this.poWoNumber = poWoNumber;
 	}
 
+	@XmlElement(required = true)
 	public String getTruckId() {
 		return truckId;
 	}
@@ -119,6 +131,7 @@ public class EfsCheckRequest implements Serializable {
 		this.truckId = truckId;
 	}
 
+	@XmlElement(required = true)
 	public List<FileUpload> getFileUploads() {
 		return FileUploads;
 	}
@@ -127,6 +140,7 @@ public class EfsCheckRequest implements Serializable {
 		FileUploads = fileUploads;
 	}
 
+	@XmlElement(required = true)
 	public String getPathToInvoice() {
 		return pathToInvoice;
 	}

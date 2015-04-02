@@ -9,10 +9,5 @@
 	<artifactId>imc-efs-automation-service-security</artifactId>
 	<packaging>jar</packaging>
 	<dependencies>
-		<dependency>
-			<groupId>com.efs.automation.web.service</groupId>
-			<artifactId>imc-efs-automation-service-soap-war</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 </project>

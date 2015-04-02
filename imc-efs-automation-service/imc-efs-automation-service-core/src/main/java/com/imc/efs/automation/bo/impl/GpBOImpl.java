@@ -116,9 +116,11 @@ public class GpBOImpl implements GpBO {
 		
 		//call to execute recievedIntegrations
 		_gp.executeRecievedIntegrations(company, dailyBatchId);
-		
-		
-		
+			
+	}
+	
+	public int relaseAPHold(String company, String moneyCodeReferenceNumber){
+		return _gp.releaseAPHold(company, moneyCodeReferenceNumber);
 	}
 
 }

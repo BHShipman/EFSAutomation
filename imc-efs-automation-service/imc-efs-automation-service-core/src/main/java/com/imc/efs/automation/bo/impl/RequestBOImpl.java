@@ -10,6 +10,9 @@ import javax.ejb.Stateless;
 
 import org.apache.commons.lang3.StringUtils;
 
+import service.cards.tch.com.types.WSMoneyCode;
+import service.cards.tch.com.types.WSMoneyCodeHistRec;
+
 import com.imc.efs.automation.bo.RequestBO;
 import com.imc.efs.automation.dao.RequestDAO;
 import com.imc.efs.automation.dao.RequestTypeDAO;
@@ -135,8 +138,15 @@ public class RequestBOImpl implements RequestBO {
 	 * @see com.imc.efs.automation.bo.impl.RequestBO#getUsersEfsCheckLimit(java.lang.String, int)
 	 */
 	@Override
-	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId) throws Exception{
-		return requestDAO.getUsersEfsCheckLimit(requester, requestTypeId);
+	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId) throws NotImplemented{
+		BigDecimal limit = requestDAO.getUsersEfsCheckLimit(requester, requestTypeId);
+		
+		if (limit != null){
+		return limit;
+		}
+		else
+			throw new NotImplemented("A Limit has not been made for this User, Please contact your manager");
+		
 	}
 	
 	/* (non-Javadoc)

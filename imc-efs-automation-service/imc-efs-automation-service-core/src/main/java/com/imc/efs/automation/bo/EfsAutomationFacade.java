@@ -11,5 +11,5 @@ public interface EfsAutomationFacade {
 
 	EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest) throws NotImplemented, Unexpected;
 
-	EfsMoneyCode resumeEfsCheckIssuance(int requestId) throws Unexpected;
+	EfsMoneyCode resumeEfsCheckIssuance(int requestId) throws NotImplemented, Unexpected;
 }

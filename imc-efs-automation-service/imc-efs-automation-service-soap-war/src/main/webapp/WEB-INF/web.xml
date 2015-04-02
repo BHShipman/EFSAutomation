@@ -7,15 +7,20 @@
 		<servlet-class>com.imc.efs.automation.webservice.impl.EfsAutoServiceImpl</servlet-class>	
 	</servlet>
 	
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:applicationContext.xml</param-value>
-	</context-param>
+<!-- 	<context-param> -->
+<!-- 		<param-name>contextConfigLocation</param-name> -->
+<!-- 		<param-value>classpath*:applicationContext.xml</param-value> -->
+<!-- 	</context-param> -->
 	
 	<servlet-mapping>
 		<servlet-name>EfsAutoService</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
+	<listener>
+	<listener-class>
+	com.imc.efs.automation.hold.removal.HoldRemovalService
+	</listener-class>
+	</listener>
 	
 
 </web-app>

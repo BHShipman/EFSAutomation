@@ -8,6 +8,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 
 import service.cards.tch.com.CardManagementEP;
 import service.cards.tch.com.types.WSMoneyCode;
+import service.cards.tch.com.types.WSMoneyCodeHistRec;
 
 import com.imc.efs.automation.data.EfsClient_TEST;
 import com.imc.efs.automation.data.EfsMoneyCode;
@@ -65,5 +66,25 @@ public class EfsServiceInvoker {
 		efsService.logout(userId);
 
 		return moneyCode;
+	}
+	
+	public WSMoneyCodeHistRec getMoneyCodeFromReferenceNumber(String Company, int moneyCodeReferenceNumber){
+		EfsClient_TEST efsClient = null;
+		try{
+			efsClient = new EfsClient_TEST(Companies.ATEST);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		CardManagementEP efsService = createEfsService_TEST();
+		
+		String userId = efsService.login(System.getProperty("efs.test.ws.user"),
+				System.getProperty("efs.test.ws.password"));
+		
+		
+		return efsService.getMoneyCode(userId, String.valueOf(moneyCodeReferenceNumber));
+		
+		
+		
 	}
 }

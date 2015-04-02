@@ -2,6 +2,8 @@ package com.imc.efs.automation.bo;
 
 import java.math.BigDecimal;
 
+import service.cards.tch.com.types.WSMoneyCodeHistRec;
+
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 
@@ -12,5 +14,5 @@ public interface EfsBO {
 
 	public abstract MoneyCodeDetailsDTO GetMoneyCodeDetails(String company,
 			int referenceNumber);
-
+	
 }

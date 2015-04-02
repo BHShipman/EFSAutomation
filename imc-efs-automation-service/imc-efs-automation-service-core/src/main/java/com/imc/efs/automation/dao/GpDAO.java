@@ -8,4 +8,5 @@ public interface GpDAO {
 	void executeRecievedIntegrations(String company, String batchId);
 	String getEfsGpVendorIdByCompany(String company) throws Exception;
 	String getDivisionByDriverId(String driverId);
+	int releaseAPHold(String company, String moneyCodeReferenceNumber);
 }

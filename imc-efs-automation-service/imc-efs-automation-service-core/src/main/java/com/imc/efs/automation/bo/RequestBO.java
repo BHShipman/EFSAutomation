@@ -25,7 +25,7 @@ public interface RequestBO {
 	public abstract int updateRequest(Requests request);
 
 	public abstract BigDecimal getUsersEfsCheckLimit(String p1, int p2)
-			throws Exception;
+			throws NotImplemented;
 
 	public abstract List<Requests> getIssuedRequests();
 

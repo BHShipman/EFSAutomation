@@ -9,5 +9,7 @@ public interface GpBO {
 			int moneyCodeReferenceNumber, BigDecimal efsAmount, Date issueDate,
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber);
+	
+	public abstract int relaseAPHold(String company, String moneyCodeReferenceNumber);
 
 }

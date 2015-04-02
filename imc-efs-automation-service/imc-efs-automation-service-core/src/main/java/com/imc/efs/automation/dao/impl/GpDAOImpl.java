@@ -145,5 +145,13 @@ public class GpDAOImpl implements GpDAO {
 		
 		return results.get(0).toString();
 	}
+	
+	@Override
+	public int releaseAPHold(String company, String moneyCodeReferenceNumber){
+		return (int)emGP.createNativeQuery("{call USP_ReleaseAPHold(?,?)}")
+		.setParameter(1, company)
+		.setParameter(2, moneyCodeReferenceNumber)
+		.getSingleResult();
+	}
 
 }
