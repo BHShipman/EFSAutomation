@@ -1,15 +1,10 @@
 package com.imc.efs.automation.bo.impl;
 
 import java.math.BigDecimal;
-import java.rmi.UnexpectedException;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.imc.efs.automation.bo.CredentialsBO;
@@ -27,7 +22,6 @@ import com.imc.efs.automation.enums.RequestStatuses;
 import com.imc.efs.automation.exception.NotImplemented;
 import com.imc.efs.automation.exception.Unexpected;
 import com.imc.efs.automation.helper.EfsCheckRequestExtensions;
-import com.imc.efs.automation.hold.removal.HoldRemovalService;
 
 @Stateless(name = "EfsAutomationFacadeImpl")
 @Remote(EfsAutomationFacade.class)
@@ -65,7 +59,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	public boolean validateCredentials(String username, String password) {
 		return credentialsBO.validateCredentials(username, password);
 	}
-
+	
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
 			throws NotImplemented, Unexpected {
 		Requests request = requestExtension.ToRequest(newRequest);

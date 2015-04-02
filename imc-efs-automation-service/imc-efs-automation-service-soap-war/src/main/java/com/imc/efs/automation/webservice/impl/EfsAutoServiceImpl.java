@@ -1,48 +1,41 @@
 package com.imc.efs.automation.webservice.impl;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.interceptor.Interceptors;
 import javax.jws.WebService;
+import javax.xml.ws.WebServiceContext;
 
-import com.imc.cxf.sample.security.BasicUserPasswordAuthorizingInterceptor;
 import com.imc.efs.automation.bo.EfsAutomationFacade;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.exception.NotImplemented;
 import com.imc.efs.automation.exception.Unexpected;
 import com.imc.efs.automation.webservice.EfsAutoService;
+import com.imc.efs.security.BasicUserAuthenticator;
 
-@WebService(serviceName = "EfsAutoService", portName = "EfsAutoService", name = "EfsAutoService", endpointInterface = "com.imc.efs.automation.webservice.EfsAutoService")
-@Interceptors(value = { BasicUserPasswordAuthorizingInterceptor.class })
+@WebService(serviceName = "EfsAutomationWS", portName = "EfsAutomationWS", endpointInterface = "com.imc.efs.automation.webservice.EfsAutoService")
 public class EfsAutoServiceImpl implements EfsAutoService {
 
 	@EJB(name = "EfsAutomationFacade")
 	EfsAutomationFacade efs;
+	@EJB(name = "Authenticator")
+	BasicUserAuthenticator auth;
 
 	public boolean validateCredentials(String username, String password) {
-		// AnnotationConfigApplicationContext ctx = new
-		// AnnotationConfigApplicationContext(
-		// EfsConfig.class);
-		// efs = ctx.getBean(EfsAutomationFacadeImpl.class);
-		// try {
-		// return efs.validateCredentials(username, password);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// } finally {
-		// ctx.close();
-		// }
+
 		return false;
 	}
 
-	@Interceptors(value = { BasicUserPasswordAuthorizingInterceptor.class })
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest request)
 			throws NotImplemented, Unexpected {
 
-		return efs.requestEfsCheck(request);
+		if (auth.authenticateRequest(request.getUser(), request.getPass())) {
+			return efs.requestEfsCheck(request);
+		} else
+			throw new Unexpected("Invalid Username and Password");
 
 	}
-	
-	@Interceptors(value = { BasicUserPasswordAuthorizingInterceptor.class })
+
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId)
 			throws NotImplemented, Unexpected {
 

@@ -29,6 +29,8 @@ public class EfsCheckRequest implements Serializable {
 	private String poWoNumber;
 	private String truckId;
 	private String pathToInvoice;
+	private String user;
+	private String pass;
 
 	private List<FileUpload> FileUploads;
 
@@ -147,6 +149,24 @@ public class EfsCheckRequest implements Serializable {
 
 	public void setPathToInvoice(String pathToInvoice) {
 		this.pathToInvoice = pathToInvoice;
+	}
+
+	@XmlElement(required = true)
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	@XmlElement(required = true)
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 }
