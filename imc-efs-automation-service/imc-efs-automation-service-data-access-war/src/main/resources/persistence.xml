@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="EFS">
+		<jta-data-source>java:jboss/EfsAutomation</jta-data-source>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="GP">
+		<jta-data-source>java:jboss/GPCustom</jta-data-source>
+		<properties>
+
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="Integrations">
+		<jta-data-source>java:jboss/Integrations</jta-data-source>
+		<properties>
+
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="DEX">
+		<jta-data-source>java:jboss/DEX</jta-data-source>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

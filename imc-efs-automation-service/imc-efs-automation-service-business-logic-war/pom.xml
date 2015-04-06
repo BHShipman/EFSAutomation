@@ -9,20 +9,6 @@
 	<artifactId>imc-efs-automation-service-business-logic-war</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
-		<dependency>
-			<groupId>com.efs.automation.web.service</groupId>
-			<artifactId>imc-efs-automation-service-security</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.efs.automation.web.service</groupId>
-			<artifactId>imc-efs-automation-service-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis</groupId>
-			<artifactId>axis</artifactId>
-			<version>1.4</version>
-		</dependency>
+	
 	</dependencies>
 </project>

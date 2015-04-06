@@ -1,6 +1,1 @@
-com\imc\cxf\sample\security\BasicUserPasswordAuthorizingInterceptor.class
-com\imc\cxf\sample\security\authenticate\helper\UserDataHelperImpl.class
-com\imc\cxf\sample\security\data\UserData.class
-com\imc\cxf\sample\security\BasicUserPasswordAuthorizingInterceptorOld.class
-com\imc\cxf\sample\security\authenticate\impl\BaseUserNamePasswordAuthenticatorImpl.class
-com\imc\cxf\sample\security\authenticate\UserAuthenticator.class
+com\imc\efs\security\BasicUserAuthenticator.class
