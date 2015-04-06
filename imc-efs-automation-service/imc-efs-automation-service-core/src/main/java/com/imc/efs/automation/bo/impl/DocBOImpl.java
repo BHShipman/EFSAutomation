@@ -68,15 +68,15 @@ public class DocBOImpl implements DocBO {
 		}
 	}
 
-	@Override
-	public void validateHasInvoice(long dexProjectId, String poWoNumber) throws Exception {
-		
-		boolean hasInvoice = _dex.checkIfHasInvoice(dexProjectId, poWoNumber);
-		
-		if (!hasInvoice) {
-			throw new Exception("Not Implemented - No Invoice found");
-		}
-	}
+//	@Override
+//	public void validateHasInvoice(long dexProjectId, String poWoNumber) throws Exception {
+//		
+//		boolean hasInvoice = _dex.checkIfHasInvoice(dexProjectId, poWoNumber);
+//		
+//		if (!hasInvoice) {
+//			throw new Exception("Not Implemented - No Invoice found");
+//		}
+//	}
 	
 	@Override
 	public boolean validateHasInvoice(Requests request){

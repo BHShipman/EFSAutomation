@@ -12,7 +12,7 @@
 		<module>imc-efs-automation-service-invokers</module>
 		<module>imc-efs-automation-service-core</module>
 		<module>imc-efs-automation-service-security</module>
-		<module>imc-efs-automation-service-soap-war</module>
+		<module>imc-efs-automation-service-orchestration-war</module>
 	</modules>
 	<dependencies>
 		<dependency>

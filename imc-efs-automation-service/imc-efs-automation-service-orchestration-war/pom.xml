@@ -6,12 +6,23 @@
 		<artifactId>imc-efs-automation-service</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>imc-efs-automation-service-invokers</artifactId>
+	<artifactId>imc-efs-automation-service-orchestration-war</artifactId>
+	<packaging>war</packaging>
 	<dependencies>
-	<dependency>
+		<dependency>
 			<groupId>com.efs.automation.web.service</groupId>
-			<artifactId>imc-efs-automation-service-common-domain</artifactId>
+			<artifactId>imc-efs-automation-service-security</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.efs.automation.web.service</groupId>
+			<artifactId>imc-efs-automation-service-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
 		</dependency>
 	</dependencies>
 </project>
