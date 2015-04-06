@@ -2,15 +2,23 @@
 package com.imc.business.logic.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
+
+import com.imc.efs.automation.data.EfsCheckRequest;
+import com.imc.efs.automation.data.EfsMoneyCode;
+import com.imc.efs.automation.data.FileUpload;
+import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Status;
 
 
 /**
@@ -233,6 +241,48 @@ public interface EfsAutomationBusinessLogicService {
      * 
      * @param arg0
      * @return
+     *     returns com.imc.business.logic.service.Requests
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getRequest", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.GetRequest")
+    @ResponseWrapper(localName = "getRequestResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.GetRequestResponse")
+    public Requests getRequest(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @throws NotImplemented_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "validateIsNotDuplicateRequest", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ValidateIsNotDuplicateRequest")
+    @ResponseWrapper(localName = "validateIsNotDuplicateRequestResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ValidateIsNotDuplicateRequestResponse")
+    public void validateIsNotDuplicateRequest(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0)
+        throws NotImplemented_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns com.imc.business.logic.service.Requests
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "toRequest", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ToRequest")
+    @ResponseWrapper(localName = "toRequestResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ToRequestResponse")
+    public Requests toRequest(
+        @WebParam(name = "arg0", targetNamespace = "")
+        EfsCheckRequest arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns boolean
      */
     @WebMethod
@@ -267,15 +317,18 @@ public interface EfsAutomationBusinessLogicService {
      * 
      * @param arg0
      * @return
-     *     returns com.imc.business.logic.service.Requests
+     *     returns java.lang.String
+     * @throws Exception_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getRequest", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.GetRequest")
-    @ResponseWrapper(localName = "getRequestResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.GetRequestResponse")
-    public Requests getRequest(
+    @RequestWrapper(localName = "sendApprovalRequestEmail", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.SendApprovalRequestEmail")
+    @ResponseWrapper(localName = "sendApprovalRequestEmailResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.SendApprovalRequestEmailResponse")
+    public String sendApprovalRequestEmail(
         @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
+        Requests arg0)
+        throws Exception_Exception
+    ;
 
     /**
      * 
@@ -303,7 +356,7 @@ public interface EfsAutomationBusinessLogicService {
         @WebParam(name = "arg3", targetNamespace = "")
         BigDecimal arg3,
         @WebParam(name = "arg4", targetNamespace = "")
-        XMLGregorianCalendar arg4,
+        Date arg4,
         @WebParam(name = "arg5", targetNamespace = "")
         String arg5,
         @WebParam(name = "arg6", targetNamespace = "")
@@ -314,36 +367,5 @@ public interface EfsAutomationBusinessLogicService {
         String arg8,
         @WebParam(name = "arg9", targetNamespace = "")
         String arg9);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.lang.String
-     * @throws Exception_Exception
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "sendApprovalRequestEmail", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.SendApprovalRequestEmail")
-    @ResponseWrapper(localName = "sendApprovalRequestEmailResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.SendApprovalRequestEmailResponse")
-    public String sendApprovalRequestEmail(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Requests arg0)
-        throws Exception_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
-     * @throws NotImplemented_Exception
-     */
-    @WebMethod
-    @RequestWrapper(localName = "validateIsNotDuplicateRequest", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ValidateIsNotDuplicateRequest")
-    @ResponseWrapper(localName = "validateIsNotDuplicateRequestResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ValidateIsNotDuplicateRequestResponse")
-    public void validateIsNotDuplicateRequest(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0)
-        throws NotImplemented_Exception
-    ;
 
 }

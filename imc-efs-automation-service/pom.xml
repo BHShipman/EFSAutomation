@@ -10,8 +10,8 @@
 	</properties>
 	<modules>
 		<module>imc-efs-automation-service-invokers</module>
-		<module>imc-efs-automation-service-core</module>
 		<module>imc-efs-automation-service-security</module>
+		<module>imc-efs-automation-service-common-domain</module>
 		<module>imc-efs-automation-service-data-access-war</module>
 		<module>imc-efs-automation-service-business-logic-war</module>
 		<module>imc-efs-automation-service-orchestration-war</module>

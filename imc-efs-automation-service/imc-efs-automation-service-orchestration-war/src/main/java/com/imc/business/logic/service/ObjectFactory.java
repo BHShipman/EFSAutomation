@@ -6,6 +6,15 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
+import com.imc.efs.automation.data.EfsCheckRequest;
+import com.imc.efs.automation.data.EfsMoneyCode;
+import com.imc.efs.automation.data.FileUpload;
+import com.imc.efs.automation.entities.RequestTypeComments;
+import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesters;
+import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Status;
+
 
 /**
  * This object contains factory methods for each 
@@ -49,15 +58,18 @@ public class ObjectFactory {
     private final static QName _ValidateHasInvoiceResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "validateHasInvoiceResponse");
     private final static QName _ValidateHasInvoice_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "validateHasInvoice");
     private final static QName _FileUpload_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "FileUpload");
+    private final static QName _ToRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "toRequest");
     private final static QName _ValidateIsNotDuplicateRequestResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "validateIsNotDuplicateRequestResponse");
     private final static QName _RelaseAPHold_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "relaseAPHold");
     private final static QName _IssueMoneyCode_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "IssueMoneyCode");
+    private final static QName _EfsCheckRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "EfsCheckRequest");
     private final static QName _CreateIssuanceTransactionResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "createIssuanceTransactionResponse");
     private final static QName _SaveRequestResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "saveRequestResponse");
     private final static QName _GetRequestType_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "getRequestType");
     private final static QName _CreateIssuanceTransaction_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "createIssuanceTransaction");
     private final static QName _GetIssuedRequests_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "getIssuedRequests");
     private final static QName _UpdateRequestResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "updateRequestResponse");
+    private final static QName _ToRequestResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "toRequestResponse");
     private final static QName _SaveRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "saveRequest");
     private final static QName _GetStatusResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "getStatusResponse");
     private final static QName _NotImplemented_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "NotImplemented");
@@ -307,6 +319,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ToRequest }
+     * 
+     */
+    public ToRequest createToRequest() {
+        return new ToRequest();
+    }
+
+    /**
      * Create an instance of {@link FileUpload }
      * 
      */
@@ -363,6 +383,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link EfsCheckRequest }
+     * 
+     */
+    public EfsCheckRequest createEfsCheckRequest() {
+        return new EfsCheckRequest();
+    }
+
+    /**
      * Create an instance of {@link CreateIssuanceTransactionResponse }
      * 
      */
@@ -411,19 +439,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ToRequestResponse }
+     * 
+     */
+    public ToRequestResponse createToRequestResponse() {
+        return new ToRequestResponse();
+    }
+
+    /**
      * Create an instance of {@link MoneyCodeDetailsDTO }
      * 
      */
     public MoneyCodeDetailsDTO createMoneyCodeDetailsDTO() {
         return new MoneyCodeDetailsDTO();
-    }
-
-    /**
-     * Create an instance of {@link RequestTypes }
-     * 
-     */
-    public RequestTypes createRequestTypes() {
-        return new RequestTypes();
     }
 
     /**
@@ -435,19 +463,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RequestTypeComments }
-     * 
-     */
-    public RequestTypeComments createRequestTypeComments() {
-        return new RequestTypeComments();
-    }
-
-    /**
      * Create an instance of {@link Status }
      * 
      */
     public Status createStatus() {
         return new Status();
+    }
+
+    /**
+     * Create an instance of {@link RequestTypes }
+     * 
+     */
+    public RequestTypes createRequestTypes() {
+        return new RequestTypes();
+    }
+
+    /**
+     * Create an instance of {@link RequestTypeComments }
+     * 
+     */
+    public RequestTypeComments createRequestTypeComments() {
+        return new RequestTypeComments();
     }
 
     /**
@@ -684,6 +720,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ToRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "toRequest")
+    public JAXBElement<ToRequest> createToRequest(ToRequest value) {
+        return new JAXBElement<ToRequest>(_ToRequest_QNAME, ToRequest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ValidateIsNotDuplicateRequestResponse }{@code >}}
      * 
      */
@@ -708,6 +753,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "IssueMoneyCode")
     public JAXBElement<IssueMoneyCode> createIssueMoneyCode(IssueMoneyCode value) {
         return new JAXBElement<IssueMoneyCode>(_IssueMoneyCode_QNAME, IssueMoneyCode.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link EfsCheckRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "EfsCheckRequest")
+    public JAXBElement<EfsCheckRequest> createEfsCheckRequest(EfsCheckRequest value) {
+        return new JAXBElement<EfsCheckRequest>(_EfsCheckRequest_QNAME, EfsCheckRequest.class, null, value);
     }
 
     /**
@@ -762,6 +816,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "updateRequestResponse")
     public JAXBElement<UpdateRequestResponse> createUpdateRequestResponse(UpdateRequestResponse value) {
         return new JAXBElement<UpdateRequestResponse>(_UpdateRequestResponse_QNAME, UpdateRequestResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ToRequestResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "toRequestResponse")
+    public JAXBElement<ToRequestResponse> createToRequestResponse(ToRequestResponse value) {
+        return new JAXBElement<ToRequestResponse>(_ToRequestResponse_QNAME, ToRequestResponse.class, null, value);
     }
 
     /**

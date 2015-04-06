@@ -16,7 +16,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.efs.automation.web.service</groupId>
-			<artifactId>imc-efs-automation-service-core</artifactId>
+			<artifactId>imc-efs-automation-service-common-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

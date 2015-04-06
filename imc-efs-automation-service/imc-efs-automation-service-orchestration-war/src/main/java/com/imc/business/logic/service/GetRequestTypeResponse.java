@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.imc.efs.automation.entities.RequestTypes;
+
 
 /**
  * <p>Java class for getRequestTypeResponse complex type.

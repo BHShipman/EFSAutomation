@@ -12,7 +12,7 @@ public class EfsCheckRequestExtensions {
 	public EfsCheckRequestExtensions() {
 	}
 
-	public Requests ToRequest(EfsCheckRequest efsCheckRequest) {
+	public Requests toRequest(EfsCheckRequest efsCheckRequest) {
 		Requests request = new Requests();
 		request.setRequestTypeId(efsCheckRequest.getRequestTypeId());
 		request.setCompany(efsCheckRequest.getCompany());

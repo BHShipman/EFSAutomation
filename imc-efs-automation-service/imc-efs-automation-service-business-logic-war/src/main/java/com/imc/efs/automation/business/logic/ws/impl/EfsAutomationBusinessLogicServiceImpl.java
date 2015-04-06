@@ -15,6 +15,7 @@ import com.imc.efs.automation.bo.GpBO;
 import com.imc.efs.automation.bo.NotificationBO;
 import com.imc.efs.automation.bo.RequestBO;
 import com.imc.efs.automation.business.logic.ws.EfsAutomationBusinessLogicService;
+import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
@@ -22,6 +23,7 @@ import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.exception.NotImplemented;
+import com.imc.efs.automation.helper.EfsCheckRequestExtensions;
 
 @WebService(serviceName = "EfsAutomationBusinessLogicWS", portName = "EfsAutomationBusinessLogicWS", endpointInterface = "com.imc.efs.automation.business.logic.ws.EfsAutomationBusinessLogicService")
 public class EfsAutomationBusinessLogicServiceImpl implements
@@ -39,6 +41,8 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 	NotificationBO notificationBO;
 	@EJB(name = "RequestBO")
 	RequestBO requestBO;
+	@EJB(name="RequestExtensions")
+	EfsCheckRequestExtensions requestExtensions;
 
 	@WebMethod
 	@Override
@@ -170,6 +174,12 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 	@Override
 	public Status getStatus(int statusId) {
 		return requestBO.getStatus(statusId);
+	}
+	
+	@WebMethod
+	@Override
+	public Requests toRequest(EfsCheckRequest request){
+		return requestExtensions.toRequest(request);
 	}
 
 }

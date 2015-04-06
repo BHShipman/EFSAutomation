@@ -7,6 +7,7 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
@@ -81,4 +82,6 @@ public interface EfsAutomationBusinessLogicService {
 
 	@WebMethod
 	Status getStatus(int statusId);
+
+	Requests toRequest(EfsCheckRequest request);
 }

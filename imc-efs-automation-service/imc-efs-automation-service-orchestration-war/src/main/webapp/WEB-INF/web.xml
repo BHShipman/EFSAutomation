@@ -14,9 +14,4 @@
     <servlet-name>mCXFServlet</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
-  <listener>
-    <listener-class>
-	com.imc.efs.automation.hold.removal.HoldRemovalService
-	</listener-class>
-  </listener>
 </web-app>

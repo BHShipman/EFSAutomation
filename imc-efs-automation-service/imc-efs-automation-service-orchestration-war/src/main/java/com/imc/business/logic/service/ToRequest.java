@@ -5,20 +5,20 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.data.EfsCheckRequest;
 
 
 /**
- * <p>Java class for createIssueDoc complex type.
+ * <p>Java class for toRequest complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="createIssueDoc">
+ * &lt;complexType name="toRequest">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg0" type="{http://ws.logic.business.automation.efs.imc.com/}requests" minOccurs="0"/>
+ *         &lt;element name="arg0" type="{http://ws.logic.business.automation.efs.imc.com/}efsCheckRequest" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,22 +28,22 @@ import com.imc.efs.automation.entities.Requests;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "createIssueDoc", propOrder = {
+@XmlType(name = "toRequest", propOrder = {
     "arg0"
 })
-public class CreateIssueDoc {
+public class ToRequest {
 
-    protected Requests arg0;
+    protected EfsCheckRequest arg0;
 
     /**
      * Gets the value of the arg0 property.
      * 
      * @return
      *     possible object is
-     *     {@link Requests }
+     *     {@link EfsCheckRequest }
      *     
      */
-    public Requests getArg0() {
+    public EfsCheckRequest getArg0() {
         return arg0;
     }
 
@@ -52,10 +52,10 @@ public class CreateIssueDoc {
      * 
      * @param value
      *     allowed object is
-     *     {@link Requests }
+     *     {@link EfsCheckRequest }
      *     
      */
-    public void setArg0(Requests value) {
+    public void setArg0(EfsCheckRequest value) {
         this.arg0 = value;
     }
 

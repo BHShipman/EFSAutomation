@@ -2,11 +2,13 @@ package com.imc.efs.automation.webservice.impl;
 
 import javax.ejb.EJB;
 import javax.jws.WebService;
-import com.imc.efs.automation.bo.EfsAutomationFacade;
+
+import com.imc.business.logic.service.NotImplemented_Exception;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.exception.NotImplemented;
 import com.imc.efs.automation.exception.Unexpected;
+import com.imc.efs.automation.facade.EfsAutomationFacade;
 import com.imc.efs.automation.webservice.EfsAutoService;
 import com.imc.efs.security.BasicUserAuthenticator;
 
@@ -24,7 +26,7 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 	}
 
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest request)
-			throws NotImplemented, Unexpected {
+			throws NotImplemented, Unexpected, NotImplemented_Exception {
 
 		if (auth.authenticateRequest(request.getUser(), request.getPass())) {
 			return efs.requestEfsCheck(request);
@@ -34,7 +36,7 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 	}
 
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId)
-			throws NotImplemented, Unexpected {
+			throws NotImplemented, Unexpected, NotImplemented_Exception {
 
 		return efs.resumeEfsCheckIssuance(requestId);
 
