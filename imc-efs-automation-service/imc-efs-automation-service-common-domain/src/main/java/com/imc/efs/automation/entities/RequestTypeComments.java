@@ -21,13 +21,13 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "\"RequestTypeComments\"", schema = "dbo")
-public class RequestTypeComments implements java.io.Serializable {
+public class RequestTypeComments implements Serializable {
 
 	private int id;
 	private Date timestamp;
 	private RequestTypes requestTypes;
-	private Serializable note;
-	private Serializable user;
+	private String note;
+	private String user;
 
 	public RequestTypeComments() {
 	}
@@ -38,7 +38,7 @@ public class RequestTypeComments implements java.io.Serializable {
 	}
 
 	public RequestTypeComments(int id, RequestTypes requestTypes,
-			Serializable note, Serializable user) {
+			String note, String user) {
 		this.id = id;
 		this.requestTypes = requestTypes;
 		this.note = note;
@@ -77,20 +77,20 @@ public class RequestTypeComments implements java.io.Serializable {
 	}
 
 	@Column(name = "\"Note\"")
-	public Serializable getNote() {
+	public String getNote() {
 		return this.note;
 	}
 
-	public void setNote(Serializable note) {
+	public void setNote(String note) {
 		this.note = note;
 	}
 
 	@Column(name = "\"User\"")
-	public Serializable getUser() {
+	public String getUser() {
 		return this.user;
 	}
 
-	public void setUser(Serializable user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 
