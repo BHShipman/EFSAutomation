@@ -16,7 +16,7 @@ import com.imc.efs.automation.dao.RequestTypeDAO;
 import com.imc.efs.automation.data.access.ws.EfsAutomationDataAccessService;
 import com.imc.efs.automation.dto.CredentialsDTO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
-import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Status;
 
@@ -170,7 +170,7 @@ public class EfsAutomationDataAccessServiceImpl implements EfsAutomationDataAcce
 
 	@WebMethod
 	@Override
-	public RequestTypes getRequestTypeById(int requestTypeId) {
+	public Requesttypes getRequestTypeById(int requestTypeId) {
 		return requestTypeDAO.getRequestTypeById(requestTypeId);
 	}
 

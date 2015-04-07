@@ -42,16 +42,7 @@ public class EmailServiceInvoker {
 
 		SendEmailResponse result = emailService.sendEmail(request);
 
-		System.out.println("EmailServiceTest response back from service: "
-				+ result);
-		if (result != null) {
-			System.out.println("EmailServiceTest result.getResponse()::"
-					+ result.getResponse());
-			System.out.println("EmailServiceTest result.getResponseCode()::"
-					+ result.getResponseCode());
-			System.out.println("EmailServiceTest result.getResponseMessage()::"
-					+ result.getResponseMessage());
-		}
+		
 	}
 
 	private SendEmailRequest getSendEmailRequest(List<String> to,

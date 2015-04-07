@@ -8,7 +8,7 @@ import javax.jws.WebService;
 
 import com.imc.efs.automation.dto.CredentialsDTO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
-import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Status;
 
@@ -82,5 +82,5 @@ public interface EfsAutomationDataAccessService {
 	Status getStatus(int statusId);
 	
 	@WebMethod
-	RequestTypes getRequestTypeById(int requestTypeId);
+	Requesttypes getRequestTypeById(int requestTypeId);
 }

@@ -34,7 +34,7 @@ public class PdfGenerator {
 		amountFormat.setMinimumFractionDigits(1);
 		amountFormat.setMaximumFractionDigits(2);
 		
-		String header = "<h2 align=\"center\">" + request.getRequestTypes().getName() + " EFS Automation Check Issuance Document</h2><h4 align=\"center\">Generated at " + sdf.format(new Date()) + "<h4><hr/>";
+		String header = "<h2 align=\"center\">" + request.getRequesttypes().getName() + " EFS Automation Check Issuance Document</h2><h4 align=\"center\">Generated at " + sdf.format(new Date()) + "<h4><hr/>";
 		List<String> htmlList = new ArrayList<String>();
 		htmlList.add(makeLabelAndValue("Request Date", sdf.format(request.getRequestDate())));
 		htmlList.add(makeLabelAndValue("Reference ID", String.valueOf(request.getMoneyCodeReferenceNumber())));

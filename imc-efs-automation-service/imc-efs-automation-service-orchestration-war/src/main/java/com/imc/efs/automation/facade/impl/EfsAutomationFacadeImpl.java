@@ -24,11 +24,10 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 	@EJB(beanName = "EfsBOService")
 	private EfsBusinessLogicServiceBean boService;
-	
 
 	public EfsAutomationFacadeImpl(EfsBusinessLogicServiceBean boService) {
 		this.boService = boService;
-		
+
 	}
 
 	public EfsAutomationFacadeImpl() {
@@ -38,7 +37,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	public boolean validateCredentials(String username, String password) {
 		return boService.efsBOService.validateCredentials(username, password);
 	}
-	
+
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
 			throws NotImplemented, Unexpected, NotImplemented_Exception {
 		Requests request = boService.efsBOService.toRequest(newRequest);
@@ -52,8 +51,8 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		// Get request type in order to determine what validations should take
 		// place
 		try {
-			request.setRequestTypes(boService.efsBOService.getRequestType(request
-					.getRequestTypeId()));
+			request.setRequesttypes(boService.efsBOService
+					.getRequestType(request.getRequestTypeId()));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -62,28 +61,32 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 		if (!(request.getPoWoNumber().isEmpty())
 				|| request.getPoWoNumber() != null) {
-			boService.efsBOService.validateIsNotDuplicateRequest(request.getPoWoNumber());
+			boService.efsBOService.validateIsNotDuplicateRequest(request
+					.getPoWoNumber());
 		}
+
 		boolean hasInvoice = false;
 		for (FileUpload file : newRequest.getFileUploads()) {
 			if (file.getFileType() == ("INV"))
 				hasInvoice = true;
 		}
-		if (request.getRequestTypes().isRequiresInvoice()) {
-			if (request.getRequestTypes().isIsOpsPortalType()) {
+		if (request.getRequesttypes().isRequiresInvoice()) {
+			if (request.getRequesttypes().isIsOpsPortalType()) {
 				if (newRequest.getFileUploads() == null || !hasInvoice) {
 					throw new NotImplemented(
 							"Not Implemented - An invoice is required for this type of request");
 				}
 
 				try {
-					request.setRequestId(boService.efsBOService.saveRequest(request));
+					request.setRequestId(boService.efsBOService
+							.updateRequest(request));
 				} catch (Exception e) {
 					throw new Unexpected(e.getLocalizedMessage());
 				}
 				long efsDexProjId = 129;
-				boService.efsBOService.storeDocuments(newRequest.getFileUploads(),
-						request.getRequestId(), request.getRequester());
+				boService.efsBOService.storeDocuments(
+						newRequest.getFileUploads(), request.getRequestId(),
+						request.getRequester());
 			} else {
 				// Pattern pattern = Pattern.compile("\\d+");
 				// Matcher matcher = pattern.matcher(request.getPoWoNumber());
@@ -110,15 +113,18 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 	private EfsMoneyCode processRequest(Requests request, boolean resumed)
 			throws NotImplemented, Unexpected, NotImplemented_Exception {
-
-		request.setStatus(boService.efsBOService.getStatus(request.getStatusId()));
-
-		if (request.getStatusId() <= RequestStatuses.PendingApproval.index()) {
-			if (request.getRequestTypes().isRequiresManagementApproval()) {
+		if (request.getStatus() == null) {
+			request.setStatus(boService.efsBOService.getStatus(request
+					.getStatusId()));
+		}
+		if (request.getStatus().getStatusId() <= RequestStatuses.PendingApproval.index()) {
+			if (request.getRequesttypes().isRequiresManagementApproval()) {
 				request.getStatus().setStatusId(
 						RequestStatuses.PendingApproval.index());
+				request.setStatusId(RequestStatuses.PendingApproval.index());
 				try {
-					request.setRequestId(boService.efsBOService.saveRequest(request));
+					request.setRequestId(boService.efsBOService
+							.updateRequest(request));
 
 				} catch (Exception e) {
 					throw new Unexpected(e.getLocalizedMessage());
@@ -139,15 +145,17 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				return moneyCode;
 			} else {
 				BigDecimal requestersLimit = null;
-				requestersLimit = boService.efsBOService.getUsersEfsCheckLimit(request
-						.getRequester(), request.getRequestTypes()
-						.getRequestTypeId());
+				requestersLimit = boService.efsBOService.getUsersEfsCheckLimit(
+						request.getRequester(), request.getRequesttypes()
+								.getRequestTypeId());
 				if (request.getEfsAmount().subtract(requestersLimit)
 						.doubleValue() > 0) {
 					request.setStatusId(1);
-					request.setStatus(boService.efsBOService.getStatus(request.getStatusId()));
+					request.setStatus(boService.efsBOService.getStatus(request
+							.getStatusId()));
 					try {
-						request.setRequestId(boService.efsBOService.saveRequest(request));
+						request.setRequestId(boService.efsBOService
+								.updateRequest(request));
 
 					} catch (Exception e) {
 						throw new Unexpected(e.getLocalizedMessage());
@@ -170,13 +178,15 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			}
 		}
 
-		if (request.getRequestTypes().isIsOpsPortalType()
+		if (request.getRequesttypes().isIsOpsPortalType()
 				&& request.getStatus().getStatusId() <= RequestStatuses.PendingDsAudit
 						.index()) {
 			request.getStatus().setStatusId(
 					RequestStatuses.PendingDsAudit.index());
+			request.setStatusId(RequestStatuses.PendingDsAudit.index());
 			try {
-				request.setRequestId(boService.efsBOService.saveRequest(request));
+				request.setRequestId(boService.efsBOService
+						.updateRequest(request));
 
 			} catch (Exception e) {
 				throw new Unexpected(e.getLocalizedMessage());
@@ -194,14 +204,16 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			throws Unexpected {
 		// If requestType is driver pay, use the driver for "Issue to." Else,
 		// use vendor name
-		String issueTo = request.getRequestTypes().isIsDriverPay() ? request
+		String issueTo = request.getRequesttypes().isIsDriverPay() ? request
 				.getDriverId() + " " + request.getDriverName() : request
 				.getVendorName();
 
-		EfsMoneyCode moneyCode = boService.efsBOService.issueMoneyCode(request.getEfsAmount(),
-				issueTo, request.getDescription(), request.getCompany());
+		EfsMoneyCode moneyCode = boService.efsBOService.issueMoneyCode(
+				request.getEfsAmount(), issueTo, request.getDescription(),
+				request.getCompany());
 
 		request.getStatus().setStatusId(RequestStatuses.Issued.index());
+		request.setStatusId(RequestStatuses.Issued.index());
 		request.setMoneyCodeReferenceNumber(moneyCode.getReferenceNumber());
 		request.setIssueDate(new Date());
 		if (!resumed)
@@ -214,14 +226,15 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			throw new Unexpected(e.getLocalizedMessage());
 		}
 
+		System.out.println("creating issuance transaction");
 		boService.efsBOService.createIssuanceTransaction(request.getCompany(),
 				request.getRequestId(), moneyCode.getReferenceNumber(),
-				request.getEfsAmount(), new Date(), request.getProNumber(),
+				request.getEfsAmount(), request.getProNumber(),
 				request.getContainerNumber(), request.getChassisNumber(),
 				request.getDriverId(), request.getPoWoNumber());
 
 		// should send issuance email if IsOpsPortalType
-		if (request.getRequestTypes().isIsOpsPortalType()) {
+		if (request.getRequesttypes().isIsOpsPortalType()) {
 			boService.efsBOService.createIssueDoc(request);
 			try {
 				boService.efsBOService.sendIssuanceEmail(request,

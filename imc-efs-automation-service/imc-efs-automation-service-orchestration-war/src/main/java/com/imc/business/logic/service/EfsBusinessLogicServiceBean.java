@@ -7,7 +7,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 @Stateless(name="EfsBOService")
 public class EfsBusinessLogicServiceBean {
 	
-	private final String serviceUrl = "http://localhost:8080/imc-efs-automation-service-business-logic-war/EfsAutomationBusinessLogicWS";
+	private final String serviceUrl = "http://localhost:8180/imc-efs-automation-service-business-logic-war/EfsAutomationBusinessLogicWS";
 	
 	public EfsAutomationBusinessLogicService efsBOService;
 	

@@ -3,8 +3,8 @@ package com.imc.efs.automation.bo;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.exception.NotImplemented;
 
@@ -12,7 +12,7 @@ public interface RequestBO {
 
 	public abstract Requests getRequest(int id);
 
-	public abstract RequestTypes getRequestType(int requestTypeId);
+	public abstract Requesttypes getRequestType(int requestTypeId);
 
 	public abstract void validateRequestInputAgainstConfig(
 			Requests request) throws NotImplemented;

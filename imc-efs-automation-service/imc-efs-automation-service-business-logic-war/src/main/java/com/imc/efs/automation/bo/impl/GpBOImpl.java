@@ -32,7 +32,7 @@ public class GpBOImpl implements GpBO {
 	 */
 	@Override
 	public void createIssuanceTransaction(String company, int requestId,
-			int moneyCodeReferenceNumber, BigDecimal efsAmount, Date issueDate,
+			int moneyCodeReferenceNumber, BigDecimal efsAmount,
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber) {
 
@@ -69,7 +69,7 @@ public class GpBOImpl implements GpBO {
 		gpDto.setDocNumber(moneyCodeReferenceNumberString);
 		gpDto.setDocType((short) 1);
 		gpDto.setDocAmount(String.valueOf(efsAmountPlusEfsFee));
-		gpDto.setDocDate(sdf.format(issueDate));
+		gpDto.setDocDate(sdf.format(new Date()));
 		gpDto.setPstgDate(sdf.format(now));
 		gpDto.setChrgAmount(amount);
 		gpDto.setTen99Amount(amount);

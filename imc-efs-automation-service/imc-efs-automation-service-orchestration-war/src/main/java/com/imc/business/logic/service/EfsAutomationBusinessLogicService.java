@@ -16,7 +16,7 @@ import javax.xml.ws.ResponseWrapper;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
-import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Status;
 
@@ -233,7 +233,7 @@ public interface EfsAutomationBusinessLogicService {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getRequestType", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.GetRequestType")
     @ResponseWrapper(localName = "getRequestTypeResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.GetRequestTypeResponse")
-    public RequestTypes getRequestType(
+    public Requesttypes getRequestType(
         @WebParam(name = "arg0", targetNamespace = "")
         int arg0);
 
@@ -356,7 +356,7 @@ public interface EfsAutomationBusinessLogicService {
         @WebParam(name = "arg3", targetNamespace = "")
         BigDecimal arg3,
         @WebParam(name = "arg4", targetNamespace = "")
-        Date arg4,
+        String arg4,
         @WebParam(name = "arg5", targetNamespace = "")
         String arg5,
         @WebParam(name = "arg6", targetNamespace = "")
@@ -364,8 +364,6 @@ public interface EfsAutomationBusinessLogicService {
         @WebParam(name = "arg7", targetNamespace = "")
         String arg7,
         @WebParam(name = "arg8", targetNamespace = "")
-        String arg8,
-        @WebParam(name = "arg9", targetNamespace = "")
-        String arg9);
+        String arg8);
 
 }

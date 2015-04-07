@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesttypes;
 
 
 /**
@@ -35,7 +35,7 @@ import com.imc.efs.automation.entities.RequestTypes;
 public class GetRequestTypeResponse {
 
     @XmlElement(name = "return")
-    protected RequestTypes _return;
+    protected Requesttypes _return;
 
     /**
      * Gets the value of the return property.
@@ -45,7 +45,7 @@ public class GetRequestTypeResponse {
      *     {@link RequestTypes }
      *     
      */
-    public RequestTypes getReturn() {
+    public Requesttypes getReturn() {
         return _return;
     }
 
@@ -57,7 +57,7 @@ public class GetRequestTypeResponse {
      *     {@link RequestTypes }
      *     
      */
-    public void setReturn(RequestTypes value) {
+    public void setReturn(Requesttypes value) {
         this._return = value;
     }
 

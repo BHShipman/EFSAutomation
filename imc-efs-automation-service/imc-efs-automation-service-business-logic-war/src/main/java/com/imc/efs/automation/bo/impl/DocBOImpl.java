@@ -44,7 +44,7 @@ public class DocBOImpl implements DocBO {
 		String issDocFilePath =  pdfGenerator.generateIssuanceDoc(request);
 		
 		String field1 = null;
-		if(request.getRequestTypes().isIsOpsPortalType()){
+		if(request.getRequesttypes().isIsOpsPortalType()){
 			field1 = String.valueOf(request.getRequestId());
 		} else
 		{

@@ -7,7 +7,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 @Stateless(name="EfsDAOService")
 public class EfsDataAccessServiceBean {
 
-	private final String serviceUrl = "http://localhost:8080/imc-efs-automation-service-data-access-war/EfsAutomationDataAccessWS";
+	private final String serviceUrl = "http://localhost:8180/imc-efs-automation-service-data-access-war/EfsAutomationDataAccessWS";
 	
 	public EfsAutomationDataAccessService efsDAOService;
 	

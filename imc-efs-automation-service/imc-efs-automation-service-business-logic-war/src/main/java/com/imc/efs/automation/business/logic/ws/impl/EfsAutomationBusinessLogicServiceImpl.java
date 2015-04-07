@@ -1,7 +1,6 @@
 package com.imc.efs.automation.business.logic.ws.impl;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -19,7 +18,7 @@ import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
-import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.exception.NotImplemented;
@@ -87,12 +86,12 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 	@WebMethod
 	@Override
 	public void createIssuanceTransaction(String company, int requestId,
-			int moneyCodeReferenceNumber, BigDecimal efsAmount, Date issueDate,
+			int moneyCodeReferenceNumber, BigDecimal efsAmount,
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber) {
 
 		gpBO.createIssuanceTransaction(company, requestId,
-				moneyCodeReferenceNumber, efsAmount, issueDate, proNumber,
+				moneyCodeReferenceNumber, efsAmount, proNumber,
 				containerNumber, chassisNumber, driverId, poWoNumber);
 
 	}
@@ -125,7 +124,7 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 
 	@WebMethod
 	@Override
-	public RequestTypes getRequestType(int requestTypeId) {
+	public Requesttypes getRequestType(int requestTypeId) {
 		return requestBO.getRequestType(requestTypeId);
 	}
 

@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.imc.efs.automation.dao.RequestTypeDAO;
-import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesttypes;
 
 @Stateless(name="RequestTypeDAO")
 @Remote(RequestTypeDAO.class)
@@ -17,12 +17,12 @@ public class RequestTypeDAOImpl implements RequestTypeDAO {
 	private EntityManager entityManager;
 
 	
-	public RequestTypes getRequestTypeById(int requestTypeId) {
+	public Requesttypes getRequestTypeById(int requestTypeId) {
 
 		try {
-			Query query = entityManager.createQuery("Select reqType from RequestTypes reqType where reqType.requestTypeId = :reqTypeId");
+			Query query = entityManager.createQuery("Select reqType from Requesttypes reqType where reqType.requestTypeId = :reqTypeId");
 			query.setParameter("reqTypeId", requestTypeId);
-			RequestTypes instance = (RequestTypes)query.getSingleResult();
+			Requesttypes instance = (Requesttypes)query.getSingleResult();
 			return instance;
 		} catch (RuntimeException re) {
 			throw re;

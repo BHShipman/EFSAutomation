@@ -1,8 +1,8 @@
 package com.imc.efs.automation.dao;
 
-import com.imc.efs.automation.entities.RequestTypes;
+import com.imc.efs.automation.entities.Requesttypes;
 
 public interface RequestTypeDAO {
 
-	RequestTypes getRequestTypeById(int requestTypeId);
+	Requesttypes getRequestTypeById(int requestTypeId);
 }

@@ -1,7 +1,6 @@
 package com.imc.efs.automation.business.logic.ws;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -11,8 +10,8 @@ import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
-import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.exception.NotImplemented;
 
@@ -42,7 +41,7 @@ public interface EfsAutomationBusinessLogicService {
 
 	@WebMethod
 	void createIssuanceTransaction(String company, int requestId,
-			int moneyCodeReferenceNumber, BigDecimal efsAmount, Date issueDate,
+			int moneyCodeReferenceNumber, BigDecimal efsAmount,
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber);
 
@@ -59,7 +58,7 @@ public interface EfsAutomationBusinessLogicService {
 	Requests getRequest(int id);
 
 	@WebMethod
-	RequestTypes getRequestType(int requestTypeId);
+	Requesttypes getRequestType(int requestTypeId);
 
 	@WebMethod
 	void validateRequestInputAgainstConfig(Requests request)

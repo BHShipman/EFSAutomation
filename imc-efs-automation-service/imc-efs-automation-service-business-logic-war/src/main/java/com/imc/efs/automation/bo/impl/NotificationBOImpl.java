@@ -56,15 +56,15 @@ public class NotificationBOImpl implements NotificationBO {
 		String subject;
 		if (!(request.getPoWoNumber().isEmpty()) || request
 				.getPoWoNumber() != null) {
-			subject = request.getRequestTypes().getName()
+			subject = request.getRequesttypes().getName()
 					+ "EFS Check Issuance Notice for "
 					+ request.getPoWoNumber();
 		} else if (request.getDriverId() != null) {
-			subject = request.getRequestTypes().getName()
+			subject = request.getRequesttypes().getName()
 					+ "EFS Check Issuance Notice for Driver "
 					+ request.getDriverId() + " " + request.getDriverName();
 		} else {
-			subject = request.getRequestTypes().getName()
+			subject = request.getRequesttypes().getName()
 					+ "EFS Check Issuance Notice";
 		}
 
@@ -92,7 +92,7 @@ public class NotificationBOImpl implements NotificationBO {
 		Pattern pattern = Pattern.compile("\\d+");
 		Matcher matcher = pattern.matcher(request.getPoWoNumber());
 		matcher.find();
-		int recordId = request.getRequestTypes().isIsOpsPortalType() ? request
+		int recordId = request.getRequesttypes().isIsOpsPortalType() ? request
 				.getRequestId() : Integer.parseInt(matcher.group(0));
 		List<String> filePaths = efsDAOService.efsDAOService.getDocumentFilePathsByRequestId(recordId);
 
@@ -108,23 +108,23 @@ public class NotificationBOImpl implements NotificationBO {
 		if (!(request.getPoWoNumber().isEmpty())
 				|| request.getPoWoNumber() != null) {
 			subject = "Requesting approval for "
-					+ request.getRequestTypes().getName() + " EFS Check for "
+					+ request.getRequesttypes().getName() + " EFS Check for "
 					+ request.getPoWoNumber() + ". Request #"
 					+ request.getRequestId();
 		} else if (request.getDriverId() != null) {
 			subject = "Requesting approval for "
-					+ request.getRequestTypes().getName()
+					+ request.getRequesttypes().getName()
 					+ " EFS Check for Driver " + request.getDriverId() + " "
 					+ request.getDriverName() + ". Request #"
 					+ request.getRequestId();
 		} else if (request.getVendorName() != null) {
 			subject = "Requesting approval fo "
-					+ request.getRequestTypes().getName()
+					+ request.getRequesttypes().getName()
 					+ " EFS Check for Vendor " + request.getVendorName()
 					+ ". Request #" + request.getRequestId();
 		} else {
 			subject = "Requesting approval for "
-					+ request.getRequestTypes().getName()
+					+ request.getRequesttypes().getName()
 					+ " EFS Check. Request #" + request.getRequestId();
 		}
 		boolean hasAttachments = false;
@@ -149,7 +149,7 @@ public class NotificationBOImpl implements NotificationBO {
 		StringBuilder message = new StringBuilder();
 
 		message.append("<h3>EFS Check Request For "
-				+ request.getRequestTypes().getName()
+				+ request.getRequesttypes().getName()
 				+ "</h3>Please reply to this email with \"APPROVED\" or \"REJECTED\" included in the body.");
 
 		NumberFormat amountFormat = NumberFormat.getCurrencyInstance(Locale.US);
@@ -164,35 +164,28 @@ public class NotificationBOImpl implements NotificationBO {
 						+ request.getRequester().trim())
 				.append("<br/><b>Company:</b> " + request.getCompany().trim());
 
-		if (!(request.getProNumber().isEmpty())
-				|| request.getProNumber() != null)
-			message.append("<br><b>Pro Number:</b> "
-					+ request.getProNumber().trim());
-		if (!(request.getPoWoNumber().isEmpty())
-				|| request.getPoWoNumber() != null)
+		if (request.getProNumber() != null)
+				message.append("<br><b>Pro Number:</b> "
+						+ request.getProNumber().trim());
+		if (request.getPoWoNumber() != null)
 			message.append("<br><b>PO Number / WO Number:</b> "
 					+ request.getPoWoNumber().trim());
 		if (request.getServiceCharge() != null)
 			message.append("<br><b>Service Charge:</b> $"
 					+ request.getServiceCharge());
-		if (!(request.getVendorName().isEmpty())
-				|| request.getVendorName() != null)
+		if (request.getVendorName() != null)
 			message.append("<br><b>VendorName:</b> "
 					+ request.getVendorName().trim());
-		if (!(request.getDriverId().isEmpty())
-				|| request.getDriverId() != null)
+		if (request.getDriverId() != null)
 			message.append("<br><b>Driver Id:</b> "
 					+ request.getDriverId().trim());
-		if (!(request.getTruckId().isEmpty())
-				|| request.getTruckId() != null)
+		if (request.getTruckId() != null)
 			message.append("<br><b>Truck Id:</b> "
 					+ request.getTruckId().trim());
-		if (!(request.getChassisNumber().isEmpty())
-				|| request.getChassisNumber() != null)
+		if (request.getChassisNumber() != null)
 			message.append("<br><b>Chassis Number:</b> "
 					+ request.getChassisNumber().trim());
-		if (!(request.getContainerNumber().isEmpty())
-				|| request.getContainerNumber() != null)
+		if (request.getContainerNumber() != null)
 			message.append("<br><b>Container Number:</b> "
 					+ request.getContainerNumber().trim());
 

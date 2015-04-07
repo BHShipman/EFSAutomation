@@ -10,8 +10,8 @@ import javax.ejb.Stateless;
 
 import com.imc.data.access.service.EfsDataAccessServiceBean;
 import com.imc.efs.automation.bo.RequestBO;
-import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.enums.RequirementTypes;
 import com.imc.efs.automation.exception.NotImplemented;
@@ -44,7 +44,7 @@ public class RequestBOImpl implements RequestBO {
 	 * @see com.imc.efs.automation.bo.impl.RequestBO#getRequestType(int)
 	 */
 	@Override
-	public RequestTypes getRequestType(int requestTypeId){
+	public Requesttypes getRequestType(int requestTypeId){
 		return efsDAOService.efsDAOService.getRequestTypeById(requestTypeId);
 	}
 	
@@ -57,40 +57,40 @@ public class RequestBOImpl implements RequestBO {
 		
 		
 		//DriverId
-		 if (request.getRequestTypes().getDriverId() == RequirementTypes.Required.index() && ((request.getDriverId().isEmpty()) || request.getDriverId() == null))
+		 if (request.getRequesttypes().getDriverId() == RequirementTypes.Required.index() && ((request.getDriverId().isEmpty()) || request.getDriverId() == null))
              invalidParams.add("DriverId");
 
-         if (request.getRequestTypes().getVendorId() == RequirementTypes.Required.index() && ((String.valueOf(request.getVendorId()).isEmpty()) || request.getVendorId() == null))
+         if (request.getRequesttypes().getVendorId() == RequirementTypes.Required.index() && ((String.valueOf(request.getVendorId()).isEmpty()) || request.getVendorId() == null))
              invalidParams.add("VendorId");
 
-         if (request.getRequestTypes().getServiceCharge() == RequirementTypes.Required.index() && ((String.valueOf(request.getServiceCharge()).isEmpty()) || request.getServiceCharge() == null))
+         if (request.getRequesttypes().getServiceCharge() == RequirementTypes.Required.index() && ((String.valueOf(request.getServiceCharge()).isEmpty()) || request.getServiceCharge() == null))
              invalidParams.add("ServiceCharge");
 
-         if (request.getRequestTypes().getProNumber() == RequirementTypes.Required.index() && ((request.getProNumber().isEmpty()) || request.getProNumber() == null))
+         if (request.getRequesttypes().getProNumber() == RequirementTypes.Required.index() && ((request.getProNumber().isEmpty()) || request.getProNumber() == null))
              invalidParams.add("ProNumber");
 
-         if (request.getRequestTypes().getPoWoNumber() == RequirementTypes.Required.index() && ((request.getPoWoNumber().isEmpty()) || request.getPoWoNumber() == null))
+         if (request.getRequesttypes().getPoWoNumber() == RequirementTypes.Required.index() && ((request.getPoWoNumber().isEmpty()) || request.getPoWoNumber() == null))
              invalidParams.add("PoWoNumber");
 
-         if (request.getRequestTypes().getTruckId() == RequirementTypes.Required.index() && ((request.getTruckId().isEmpty()) || request.getTruckId() == null))
+         if (request.getRequesttypes().getTruckId() == RequirementTypes.Required.index() && ((request.getTruckId().isEmpty()) || request.getTruckId() == null))
              invalidParams.add("TruckId");
 
-         if (request.getRequestTypes().getChassisNumber() == RequirementTypes.Required.index() && ((request.getChassisNumber().isEmpty()) || request.getChassisNumber() == null))
+         if (request.getRequesttypes().getChassisNumber() == RequirementTypes.Required.index() && ((request.getChassisNumber().isEmpty()) || request.getChassisNumber() == null))
              invalidParams.add("ChassisNumber");
 
-         if (request.getRequestTypes().getContainerNumber() == RequirementTypes.Required.index() && ((request.getContainerNumber().isEmpty()) || request.getContainerNumber() == null))
+         if (request.getRequesttypes().getContainerNumber() == RequirementTypes.Required.index() && ((request.getContainerNumber().isEmpty()) || request.getContainerNumber() == null))
              invalidParams.add("ContainerNumber");
 
-         if (request.getRequestTypes().getClaimNumber() == RequirementTypes.Required.index() && ((request.getClaimNumber().isEmpty()) || request.getClaimNumber() == null))
+         if (request.getRequesttypes().getClaimNumber() == RequirementTypes.Required.index() && ((request.getClaimNumber().isEmpty()) || request.getClaimNumber() == null))
              invalidParams.add("ClaimNumber");
 
-         if (request.getRequestTypes().getClaimType() == RequirementTypes.Required.index() && ((request.getClaimType().isEmpty()) || request.getClaimType() == null))
+         if (request.getRequesttypes().getClaimType() == RequirementTypes.Required.index() && ((request.getClaimType().isEmpty()) || request.getClaimType() == null))
              invalidParams.add("ClaimType");
 
-         if (request.getRequestTypes().getTagEquipment() == RequirementTypes.Required.index() && ((request.getTagEquipment().isEmpty()) || request.getTagEquipment() == null))
+         if (request.getRequesttypes().getTagEquipment() == RequirementTypes.Required.index() && ((request.getTagEquipment().isEmpty()) || request.getTagEquipment() == null))
              invalidParams.add("TagEquipment");
 
-         if (request.getRequestTypes().getTagPurchType() == RequirementTypes.Required.index() && ((request.getTagPurchType().isEmpty()) || request.getTagPurchType() == null))
+         if (request.getRequesttypes().getTagPurchType() == RequirementTypes.Required.index() && ((request.getTagPurchType().isEmpty()) || request.getTagPurchType() == null))
              invalidParams.add("TagPurchType");
 
          //if (config.IsChargedToCustomer == RequirementTypes.Required.index() && string.IsNullOrEmpty(request.IsChargedToCustomer))

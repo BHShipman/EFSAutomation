@@ -14,8 +14,8 @@ import javax.xml.ws.ResponseWrapper;
 
 import com.imc.efs.automation.dto.CredentialsDTO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
-import com.imc.efs.automation.entities.RequestTypes;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
 
 
@@ -315,7 +315,7 @@ public interface EfsAutomationDataAccessService {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getRequestTypeById", targetNamespace = "http://ws.access.data.automation.efs.imc.com/", className = "com.imc.data.access.service.GetRequestTypeById")
     @ResponseWrapper(localName = "getRequestTypeByIdResponse", targetNamespace = "http://ws.access.data.automation.efs.imc.com/", className = "com.imc.data.access.service.GetRequestTypeByIdResponse")
-    public RequestTypes getRequestTypeById(
+    public Requesttypes getRequestTypeById(
         @WebParam(name = "arg0", targetNamespace = "")
         int arg0);
 

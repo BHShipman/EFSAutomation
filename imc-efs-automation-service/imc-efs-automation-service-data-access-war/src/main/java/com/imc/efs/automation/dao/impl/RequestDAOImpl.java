@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.imc.efs.automation.dao.RequestDAO;
@@ -38,18 +39,19 @@ public class RequestDAOImpl implements RequestDAO {
 	}
 
 	public int updateRequest(Requests request) {
-		if (emEFS.contains(request)) {
+		Requests req = null;
+		try{
+		req = (Requests) emEFS.createQuery("select req from Requests req where req.poWoNumber = :poWoNumber").setParameter("poWoNumber", request.getPoWoNumber()).getSingleResult();
+		}catch(NoResultException e){
+			emEFS.persist(request);
+		}
+		if (req != null) {
 			try {
 				emEFS.merge(request);
 			} catch (RuntimeException re) {
 				throw re;
 			}
-		} else
-			try {
-				emEFS.persist(request);
-			} catch (RuntimeException re) {
-				throw re;
-			}
+		}
 		request = (Requests) emEFS
 				.createQuery(
 						"select req from Requests req where req.poWoNumber = :poWoNumber")
@@ -59,12 +61,11 @@ public class RequestDAOImpl implements RequestDAO {
 	}
 
 	public Requests getRequestsById(int requestId) {
-		try {
-			Requests instance = emEFS.find(Requests.class, requestId);
-			return instance;
-		} catch (RuntimeException re) {
-			throw re;
-		}
+		
+		 Requests instance = (Requests) emEFS.createQuery("select req from Requests req where req.requestId = :requestId")
+					.setParameter("requestId", requestId).getSingleResult();
+		
+		return instance;
 	}
 
 	public boolean checkIfQualifiedVendor(int vendorId) {
@@ -128,7 +129,7 @@ public class RequestDAOImpl implements RequestDAO {
 
 		Requesters requesters = (Requesters) emEFS
 				.createQuery(
-						"select req from Requesters req where req.name = :requester AND req.requestTypes.requestTypeId = :requestTypeId")
+						"select req from Requesters req where req.name = :requester AND req.requesttypes.requestTypeId = :requestTypeId")
 				.setParameter("requester", requester.toUpperCase())
 				.setParameter("requestTypeId", requestTypeId).getSingleResult();
 
