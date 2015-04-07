@@ -8,8 +8,8 @@ import javax.jws.WebService;
 
 import com.imc.efs.automation.dto.CredentialsDTO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
-import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
 
 @WebService

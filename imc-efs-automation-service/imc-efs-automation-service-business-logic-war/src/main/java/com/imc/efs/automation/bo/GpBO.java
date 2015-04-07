@@ -1,7 +1,6 @@
 package com.imc.efs.automation.bo;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public interface GpBO {
 

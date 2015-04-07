@@ -2,14 +2,12 @@ package com.imc.efs.automation.hold.removal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import javax.ejb.EJB;
-import javax.ejb.TimerService;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -19,7 +17,6 @@ import com.imc.efs.automation.bo.RequestBO;
 import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.enums.RequestStatuses;
-import com.imc.efs.web.service.EfsServiceInvoker;
 
 public class HoldRemovalService implements ServletContextListener {
 

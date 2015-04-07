@@ -2,13 +2,9 @@ package com.imc.efs.automation.entities;
 
 // Generated Apr 6, 2015 4:37:07 PM by Hibernate Tools 4.0.0
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
