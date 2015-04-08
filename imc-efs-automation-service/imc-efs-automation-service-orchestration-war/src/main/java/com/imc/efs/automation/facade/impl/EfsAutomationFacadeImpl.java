@@ -22,7 +22,7 @@ import com.imc.efs.automation.facade.EfsAutomationFacade;
 @Remote(EfsAutomationFacade.class)
 public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
-	@EJB(beanName = "EfsBOService")
+//	@EJB(beanName = "EfsBOService")
 	private EfsBusinessLogicServiceBean boService;
 
 	public EfsAutomationFacadeImpl(EfsBusinessLogicServiceBean boService) {
@@ -40,6 +40,8 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
 			throws NotImplemented, Unexpected, NotImplemented_Exception {
+		
+		boService = new EfsBusinessLogicServiceBean();
 		Requests request = boService.efsBOService.toRequest(newRequest);
 
 		request.setRequestDate(new Date());
