@@ -8,9 +8,7 @@ import javax.xml.namespace.QName;
 
 import com.imc.efs.automation.dto.CredentialsDTO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
-import com.imc.efs.automation.entities.Requesters;
 import com.imc.efs.automation.entities.Requests;
-import com.imc.efs.automation.entities.Requesttypecomments;
 import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
 
@@ -478,27 +476,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RequestTypes }
+     * Create an instance of {@link Requesttypes }
      * 
      */
-    public Requesttypes createRequestTypes() {
+    public Requesttypes createRequesttypes() {
         return new Requesttypes();
-    }
-
-    /**
-     * Create an instance of {@link RequestTypeComments }
-     * 
-     */
-    public Requesttypecomments createRequestTypeComments() {
-        return new Requesttypecomments();
-    }
-
-    /**
-     * Create an instance of {@link Requesters }
-     * 
-     */
-    public Requesters createRequesters() {
-        return new Requesters();
     }
 
     /**

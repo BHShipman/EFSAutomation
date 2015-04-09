@@ -38,7 +38,7 @@ public class EfsAutomationDataAccessServiceImpl implements EfsAutomationDataAcce
 	
 	@WebMethod
 	@Override
-	public BigDecimal getEfsCheckLimitByUser(String requester, int requestTypeId) {
+	public BigDecimal getEfsCheckLimitByUser(String requester, int requestTypeId) throws Exception {
 		return checkLimitDAO.getEfsCheckLimitByUser(requester, requestTypeId);
 	}
 

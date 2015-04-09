@@ -16,7 +16,7 @@ import com.imc.efs.automation.entities.Status;
 public interface EfsAutomationDataAccessService {
 
 	@WebMethod
-	BigDecimal getEfsCheckLimitByUser(String requester, int requestTypeId);
+	BigDecimal getEfsCheckLimitByUser(String requester, int requestTypeId) throws Exception;
 
 	@WebMethod
 	CredentialsDTO GetEncryptedCredentials(String username);

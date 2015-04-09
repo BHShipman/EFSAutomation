@@ -74,15 +74,15 @@ public class GpDAOImpl implements GpDAO {
 				.setParameter(24, gpDto.getDISTREF().trim())
 				.setParameter(25, gpDto.getRecordid())
 				.setParameter(26, gpDto.getUserId().trim())
-				.setParameter(27, gpDto.getProNumber().trim())
-				.setParameter(28, gpDto.getContainer().trim())
-				.setParameter(29, gpDto.getChassis().trim())
+				.setParameter(27, gpDto.getProNumber())
+				.setParameter(28, gpDto.getContainer())
+				.setParameter(29, gpDto.getChassis())
 				.setParameter(30, gpDto.getDriverId().trim())
-				.setParameter(31, gpDto.getPordNumber().trim())
-				.setParameter(32, gpDto.getDivision().trim())
-				.setParameter(33, gpDto.getFailure().trim())
-				.setParameter(34, gpDto.getRepairType().trim())
-				.setParameter(35, gpDto.getInvoiceNumber().trim())
+				.setParameter(31, gpDto.getPordNumber())
+				.setParameter(32, gpDto.getDivision())
+				.setParameter(33, gpDto.getFailure())
+				.setParameter(34, gpDto.getRepairType())
+				.setParameter(35, gpDto.getInvoiceNumber())
 				.setParameter(36, gpDto.isApHold()).executeUpdate();
 		try {
 			utx.commit();
@@ -95,7 +95,6 @@ public class GpDAOImpl implements GpDAO {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void executeRecievedIntegrations(String company, String batchId) {
 		try {
 			utx.begin();

@@ -309,7 +309,7 @@ public interface EfsAutomationDataAccessService {
      * 
      * @param arg0
      * @return
-     *     returns com.imc.data.access.service.RequestTypes
+     *     returns com.imc.data.access.service.Requesttypes
      */
     @WebMethod
     @WebResult(targetNamespace = "")

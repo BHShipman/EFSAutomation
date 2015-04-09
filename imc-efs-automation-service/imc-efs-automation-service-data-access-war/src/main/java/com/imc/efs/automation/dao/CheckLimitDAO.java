@@ -4,5 +4,5 @@ import java.math.BigDecimal;
 
 public interface CheckLimitDAO {
 
-	BigDecimal getEfsCheckLimitByUser(String requester, int requestTypeId);
+	BigDecimal getEfsCheckLimitByUser(String requester, int requestTypeId) throws Exception;
 }
