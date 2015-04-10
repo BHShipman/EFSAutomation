@@ -1,11 +1,12 @@
 package com.imc.efs.automation.webservice.impl;
 
+import java.util.logging.Logger;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.apache.cxf.interceptor.InInterceptors;
 import org.apache.cxf.interceptor.OutInterceptors;
-import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.imc.business.logic.service.NotImplemented_Exception;
@@ -27,7 +28,8 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 	// @EJB(name = "Authenticator")
 	BasicUserAuthenticator auth;
 	AnnotationConfigApplicationContext ctx;
-	Logger log = Logger.getLogger(EfsAutoServiceImpl.class);
+
+	Logger log = Logger.getLogger("EfsAutoServiceImpl");
 
 	@WebMethod
 	public boolean validateCredentials(String username, String password) {
@@ -52,7 +54,6 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 			return moneyCode;
 		} else{
 			ctx.close();
-			log.error("Bad Request - Invalid Username and/or Password");
 			throw new Unexpected("Invalid Username and Password");
 		}
 		

@@ -2,13 +2,10 @@ package com.imc.efs.automation.facade.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-
-import org.apache.commons.logging.Log;
-import org.apache.log4j.Logger;
 
 import com.imc.business.logic.service.EfsBusinessLogicServiceBean;
 import com.imc.business.logic.service.NotImplemented_Exception;
@@ -28,8 +25,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 //	@EJB(beanName = "EfsBOService")
 	private EfsBusinessLogicServiceBean boService;
 	
-	private Logger log = Logger.getLogger(EfsAutomationFacadeImpl.class);
-	
+	private Logger log = Logger.getLogger("EfsAutomationFacadeImpl");
 	
 	public EfsAutomationFacadeImpl(EfsBusinessLogicServiceBean boService) {
 		this.boService = boService;
@@ -106,7 +102,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			} else {
 				log.info("Validating invoice is attached");
 				if (!boService.efsBOService.validateHasInvoice(request)) {
-					log.error("Not invoice attached or bad path");
 					throw new NotImplemented(
 							"Not Implemented - An invoice is required for this type of request");
 
@@ -144,7 +139,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 							.updateRequest(request));
 
 				} catch (Exception e) {
-					log.error("Error(s) during persist");
 					throw new Unexpected(e.getLocalizedMessage());
 				}
 				String recipient = null;
@@ -183,7 +177,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 								.updateRequest(request));
 
 					} catch (Exception e) {
-						log.error("Error(s) saving to database");
 						throw new Unexpected(e.getLocalizedMessage());
 					}
 					String recipient = null;
