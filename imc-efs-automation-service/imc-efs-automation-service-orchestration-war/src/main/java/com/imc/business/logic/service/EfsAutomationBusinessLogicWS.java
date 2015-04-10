@@ -18,7 +18,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "EfsAutomationBusinessLogicWS", targetNamespace = "http://impl.ws.logic.business.automation.efs.imc.com/", wsdlLocation = "file:/C:/Users/bshipman/AppData/Local/Temp/tempdir7163422351044513718.tmp/EfsAutomationBusinessLogicWS_1.wsdl")
+@WebServiceClient(name = "EfsAutomationBusinessLogicWS", targetNamespace = "http://impl.ws.logic.business.automation.efs.imc.com/", wsdlLocation = "file:/C:/Users/bshipman/AppData/Local/Temp/tempdir7956557040374776099.tmp/EfsAutomationBusinessLogicWS_1.wsdl")
 public class EfsAutomationBusinessLogicWS
     extends Service
 {
@@ -31,7 +31,7 @@ public class EfsAutomationBusinessLogicWS
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/Users/bshipman/AppData/Local/Temp/tempdir7163422351044513718.tmp/EfsAutomationBusinessLogicWS_1.wsdl");
+            url = new URL("file:/C:/Users/bshipman/AppData/Local/Temp/tempdir7956557040374776099.tmp/EfsAutomationBusinessLogicWS_1.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -7,6 +7,9 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
+
 import com.imc.business.logic.service.EfsBusinessLogicServiceBean;
 import com.imc.business.logic.service.NotImplemented_Exception;
 import com.imc.efs.automation.data.EfsCheckRequest;
@@ -24,7 +27,10 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
 //	@EJB(beanName = "EfsBOService")
 	private EfsBusinessLogicServiceBean boService;
-
+	
+	private Logger log = Logger.getLogger(EfsAutomationFacadeImpl.class);
+	
+	
 	public EfsAutomationFacadeImpl(EfsBusinessLogicServiceBean boService) {
 		this.boService = boService;
 
@@ -41,7 +47,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
 			throws NotImplemented, Unexpected, NotImplemented_Exception {
 		
-		boService = new EfsBusinessLogicServiceBean();
 		Requests request = boService.efsBOService.toRequest(newRequest);
 
 		request.setRequestDate(new Date());
@@ -58,7 +63,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
+		log.info("Validating request input against request config");
 		boService.efsBOService.validateRequestInputAgainstConfig(request);
 
 		if (!(request.getPoWoNumber().isEmpty())
@@ -66,37 +71,42 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			boService.efsBOService.validateIsNotDuplicateRequest(request
 					.getPoWoNumber());
 		}
-
+		log.info("Request is not duplicate");
 		boolean hasInvoice = false;
 		for (FileUpload file : newRequest.getFileUploads()) {
 			if (file.getFileType() == ("INV"))
 				hasInvoice = true;
 		}
+		if (hasInvoice){
+			log.info("invoice has been attached to this request");
+		}
 		if (request.getRequesttypes().isRequiresInvoice()) {
+			log.info("This request requires an invoice");
 			if (request.getRequesttypes().isIsOpsPortalType()) {
+				log.info("This request is Ops Portal Type");
 				if (newRequest.getFileUploads() == null || !hasInvoice) {
 					throw new NotImplemented(
 							"Not Implemented - An invoice is required for this type of request");
 				}
 
 				try {
+					log.info("Saving request to DB");
 					request.setRequestId(boService.efsBOService
 							.updateRequest(request));
 				} catch (Exception e) {
 					throw new Unexpected(e.getLocalizedMessage());
 				}
+				
+				log.info("Saving attached documents to Filebound");
+				
 				long efsDexProjId = 129;
 				boService.efsBOService.storeDocuments(
 						newRequest.getFileUploads(), request.getRequestId(),
 						request.getRequester());
 			} else {
-				// Pattern pattern = Pattern.compile("\\d+");
-				// Matcher matcher = pattern.matcher(request.getPoWoNumber());
-				// matcher.find();
-				// docBO.validateHasInvoice(request.getRequestTypes()
-				// .getDexProjectId(),
-				// matcher.group(0));
+				log.info("Validating invoice is attached");
 				if (!boService.efsBOService.validateHasInvoice(request)) {
+					log.error("Not invoice attached or bad path");
 					throw new NotImplemented(
 							"Not Implemented - An invoice is required for this type of request");
 
@@ -104,12 +114,14 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			}
 		}
 
+		log.info("moving to processRequest");
 		return processRequest(request, false);
 	}
 
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId)
 			throws Unexpected, NotImplemented, NotImplemented_Exception {
 		Requests request = boService.efsBOService.getRequest(requestId);
+		log.info("received request from id:" + requestId);
 		return processRequest(request, true);
 	}
 
@@ -119,64 +131,81 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			request.setStatus(boService.efsBOService.getStatus(request
 					.getStatusId()));
 		}
+		log.info("Checking Request Status");
 		if (request.getStatus().getStatusId() <= RequestStatuses.PendingApproval.index()) {
+			log.info("Status is New or Pending Approval");
 			if (request.getRequesttypes().isRequiresManagementApproval()) {
 				request.getStatus().setStatusId(
 						RequestStatuses.PendingApproval.index());
 				request.setStatusId(RequestStatuses.PendingApproval.index());
 				try {
+					log.info("Saving request to DB");
 					request.setRequestId(boService.efsBOService
 							.updateRequest(request));
 
 				} catch (Exception e) {
+					log.error("Error(s) during persist");
 					throw new Unexpected(e.getLocalizedMessage());
 				}
 				String recipient = null;
 				try {
+					log.info("Sending Approval Request Email");
 					recipient = boService.efsBOService
 							.sendApprovalRequestEmail(request);
 				} catch (Exception e) {
+					log.info("Error(s) invoking email service");
 					throw new Unexpected(e.getLocalizedMessage());
 				}
 
+				log.info("Creating response moneyCode");
 				EfsMoneyCode moneyCode = new EfsMoneyCode();
 				moneyCode.setIssued(false);
 				moneyCode.setMessage("A request for approval has been sent to "
 						+ recipient
 						+ ". You will be notified when he/she responds.");
+				log.info("MoneyCode returned");
 				return moneyCode;
 			} else {
+				log.info("Request may not need approval, checking requesters limit");
 				BigDecimal requestersLimit = null;
 				requestersLimit = boService.efsBOService.getUsersEfsCheckLimit(
 						request.getRequester(), request.getRequesttypes()
 								.getRequestTypeId());
 				if (request.getEfsAmount().subtract(requestersLimit)
 						.doubleValue() > 0) {
+					log.info("Request needs approval, above requesters limit");
 					request.setStatusId(1);
 					request.setStatus(boService.efsBOService.getStatus(request
 							.getStatusId()));
 					try {
+						log.info("saving request to DB");
 						request.setRequestId(boService.efsBOService
 								.updateRequest(request));
 
 					} catch (Exception e) {
+						log.error("Error(s) saving to database");
 						throw new Unexpected(e.getLocalizedMessage());
 					}
 					String recipient = null;
 					try {
+						log.info("Sending Approval Request Email");
 						recipient = boService.efsBOService
 								.sendApprovalRequestEmail(request);
 					} catch (Exception e) {
 						throw new Unexpected(e.getLocalizedMessage());
 					}
+					log.info("Creating response moneyCode");
 					EfsMoneyCode moneyCode = new EfsMoneyCode();
 					moneyCode.setIssued(false);
 					moneyCode
 							.setMessage("A request for approval has been sent to "
 									+ recipient
 									+ ". You will be notified when he/she responds.");
+					log.info("MoneyCode returned");
 					return moneyCode;
 				}
+				log.info("Request does not need approval, below requesters limit");
+
 			}
 		}
 
@@ -199,6 +228,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					.setMessage("Your request is now awaiting Driver Services Audit. You will be notified when your request is approved or rejected.");
 		}
 
+		log.info("issuing check");
 		return issueEfsCheck(request, resumed);
 	}
 
@@ -228,7 +258,6 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			throw new Unexpected(e.getLocalizedMessage());
 		}
 
-		System.out.println("creating issuance transaction");
 		boService.efsBOService.createIssuanceTransaction(request.getCompany(),
 				request.getRequestId(), moneyCode.getReferenceNumber(),
 				request.getEfsAmount(), request.getProNumber(),

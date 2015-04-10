@@ -5,9 +5,7 @@ import java.math.BigDecimal;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -24,12 +22,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
- *         &lt;element name="arg4" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="arg4" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg5" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg6" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg7" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg8" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="arg9" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -48,8 +45,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "arg5",
     "arg6",
     "arg7",
-    "arg8",
-    "arg9"
+    "arg8"
 })
 public class CreateIssuanceTransaction {
 
@@ -57,13 +53,11 @@ public class CreateIssuanceTransaction {
     protected int arg1;
     protected int arg2;
     protected BigDecimal arg3;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar arg4;
+    protected String arg4;
     protected String arg5;
     protected String arg6;
     protected String arg7;
     protected String arg8;
-    protected String arg9;
 
     /**
      * Gets the value of the arg0 property.
@@ -150,10 +144,10 @@ public class CreateIssuanceTransaction {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getArg4() {
+    public String getArg4() {
         return arg4;
     }
 
@@ -162,10 +156,10 @@ public class CreateIssuanceTransaction {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setArg4(XMLGregorianCalendar value) {
+    public void setArg4(String value) {
         this.arg4 = value;
     }
 
@@ -263,30 +257,6 @@ public class CreateIssuanceTransaction {
      */
     public void setArg8(String value) {
         this.arg8 = value;
-    }
-
-    /**
-     * Gets the value of the arg9 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getArg9() {
-        return arg9;
-    }
-
-    /**
-     * Sets the value of the arg9 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setArg9(String value) {
-        this.arg9 = value;
     }
 
 }

@@ -1,9 +1,11 @@
 package com.imc.efs.automation.webservice.impl;
 
-import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import org.apache.cxf.interceptor.InInterceptors;
+import org.apache.cxf.interceptor.OutInterceptors;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.imc.business.logic.service.NotImplemented_Exception;
@@ -15,6 +17,8 @@ import com.imc.efs.automation.facade.EfsAutomationFacade;
 import com.imc.efs.automation.webservice.EfsAutoService;
 import com.imc.efs.security.BasicUserAuthenticator;
 
+@InInterceptors(interceptors = "org.apache.cxf.interceptor.LoggingInInterceptor")
+@OutInterceptors(interceptors = "org.apache.cxf.interceptor.LoggingOutInterceptor")
 @WebService(serviceName = "EfsAutomationWS", portName = "EfsAutomationWS", endpointInterface = "com.imc.efs.automation.webservice.EfsAutoService")
 public class EfsAutoServiceImpl implements EfsAutoService {
 
@@ -22,8 +26,8 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 	EfsAutomationFacade efs;
 	// @EJB(name = "Authenticator")
 	BasicUserAuthenticator auth;
-	AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(
-			EfsConfiguration.class);
+	AnnotationConfigApplicationContext ctx;
+	Logger log = Logger.getLogger(EfsAutoServiceImpl.class);
 
 	@WebMethod
 	public boolean validateCredentials(String username, String password) {
@@ -34,21 +38,38 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 	@WebMethod
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest request)
 			throws NotImplemented, Unexpected, NotImplemented_Exception {
+		ctx = new AnnotationConfigApplicationContext(EfsConfiguration.class);
+		
 		auth = ctx.getBean(BasicUserAuthenticator.class);
 		efs = ctx.getBean(EfsAutomationFacade.class);
 
+		log.info("New Request - User: " + request.getUser() + " Amount: " + request.getEfsAmount());
+		
+		
 		if (auth.authenticateRequest(request.getUser(), request.getPass())) {
-			return efs.requestEfsCheck(request);
-		} else
+			EfsMoneyCode moneyCode = efs.requestEfsCheck(request);
+			ctx.close();
+			return moneyCode;
+		} else{
+			ctx.close();
+			log.error("Bad Request - Invalid Username and/or Password");
 			throw new Unexpected("Invalid Username and Password");
-
+		}
+		
 	}
 
 	@WebMethod
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId)
 			throws NotImplemented, Unexpected, NotImplemented_Exception {
+		
+		log.info("Resuming request for requestId: " + requestId);
+		
+		ctx = new AnnotationConfigApplicationContext(EfsConfiguration.class);
 		efs = ctx.getBean(EfsAutomationFacade.class);
-		return efs.resumeEfsCheckIssuance(requestId);
+		
+		EfsMoneyCode moneyCode = efs.resumeEfsCheckIssuance(requestId);
+		ctx.close();
+		return moneyCode;
 
 	}
 }

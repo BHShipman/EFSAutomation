@@ -19,7 +19,7 @@ import com.imc.efs.automation.entities.Requesttypes;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://ws.logic.business.automation.efs.imc.com/}requestTypes" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://ws.logic.business.automation.efs.imc.com/}requesttypes" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -42,7 +42,7 @@ public class GetRequestTypeResponse {
      * 
      * @return
      *     possible object is
-     *     {@link RequestTypes }
+     *     {@link Requesttypes }
      *     
      */
     public Requesttypes getReturn() {
@@ -54,7 +54,7 @@ public class GetRequestTypeResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link RequestTypes }
+     *     {@link Requesttypes }
      *     
      */
     public void setReturn(Requesttypes value) {

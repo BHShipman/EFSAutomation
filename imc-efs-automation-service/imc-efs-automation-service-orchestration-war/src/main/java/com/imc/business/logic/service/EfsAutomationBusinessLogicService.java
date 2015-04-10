@@ -15,6 +15,7 @@ import javax.xml.ws.ResponseWrapper;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
+import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
@@ -226,7 +227,7 @@ public interface EfsAutomationBusinessLogicService {
      * 
      * @param arg0
      * @return
-     *     returns com.imc.business.logic.service.RequestTypes
+     *     returns com.imc.business.logic.service.Requesttypes
      */
     @WebMethod
     @WebResult(targetNamespace = "")
@@ -340,7 +341,6 @@ public interface EfsAutomationBusinessLogicService {
      * @param arg6
      * @param arg7
      * @param arg8
-     * @param arg9
      */
     @WebMethod
     @RequestWrapper(localName = "createIssuanceTransaction", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.CreateIssuanceTransaction")
