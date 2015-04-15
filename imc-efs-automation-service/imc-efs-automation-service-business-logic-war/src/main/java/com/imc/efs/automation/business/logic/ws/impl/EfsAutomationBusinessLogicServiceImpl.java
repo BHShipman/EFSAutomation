@@ -21,7 +21,6 @@ import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
-import com.imc.efs.automation.exception.NotImplemented;
 import com.imc.efs.automation.helper.EfsCheckRequestExtensions;
 
 @WebService(serviceName = "EfsAutomationBusinessLogicWS", portName = "EfsAutomationBusinessLogicWS", endpointInterface = "com.imc.efs.automation.business.logic.ws.EfsAutomationBusinessLogicService")
@@ -98,8 +97,8 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 
 	@WebMethod
 	@Override
-	public int relaseAPHold(String company, String moneyCodeReferenceNumber) {
-		return gpBO.relaseAPHold(company, moneyCodeReferenceNumber);
+	public int releaseAPHold(String company, String moneyCodeReferenceNumber) {
+		return gpBO.releaseAPHold(company, moneyCodeReferenceNumber);
 	}
 
 	@WebMethod
@@ -131,7 +130,7 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 	@WebMethod
 	@Override
 	public void validateRequestInputAgainstConfig(Requests request)
-			throws NotImplemented {
+			throws Exception {
 		requestBO.validateRequestInputAgainstConfig(request);
 
 	}
@@ -139,7 +138,7 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 	@WebMethod
 	@Override
 	public void validateIsNotDuplicateRequest(String poWoNumber)
-			throws NotImplemented {
+			throws Exception {
 		requestBO.validateIsNotDuplicateRequest(poWoNumber);
 
 	}
@@ -159,7 +158,7 @@ public class EfsAutomationBusinessLogicServiceImpl implements
 	@WebMethod
 	@Override
 	public BigDecimal getUsersEfsCheckLimit(String p1, int p2)
-			throws NotImplemented {
+			throws Exception {
 		return requestBO.getUsersEfsCheckLimit(p1, p2);
 	}
 

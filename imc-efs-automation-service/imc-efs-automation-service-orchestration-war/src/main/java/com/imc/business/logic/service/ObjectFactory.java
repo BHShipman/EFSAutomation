@@ -38,7 +38,6 @@ public class ObjectFactory {
     private final static QName _SendIssuanceEmail_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "sendIssuanceEmail");
     private final static QName _ValidateIsNotDuplicateRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "validateIsNotDuplicateRequest");
     private final static QName _GetUsersEfsCheckLimit_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "getUsersEfsCheckLimit");
-    private final static QName _RelaseAPHoldResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "relaseAPHoldResponse");
     private final static QName _UpdateRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "updateRequest");
     private final static QName _GetMoneyCodeDetails_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "GetMoneyCodeDetails");
     private final static QName _CreateIssueDocResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "createIssueDocResponse");
@@ -59,7 +58,6 @@ public class ObjectFactory {
     private final static QName _FileUpload_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "FileUpload");
     private final static QName _ToRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "toRequest");
     private final static QName _ValidateIsNotDuplicateRequestResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "validateIsNotDuplicateRequestResponse");
-    private final static QName _RelaseAPHold_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "relaseAPHold");
     private final static QName _IssueMoneyCode_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "IssueMoneyCode");
     private final static QName _EfsCheckRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "EfsCheckRequest");
     private final static QName _CreateIssuanceTransactionResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "createIssuanceTransactionResponse");
@@ -70,12 +68,13 @@ public class ObjectFactory {
     private final static QName _UpdateRequestResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "updateRequestResponse");
     private final static QName _ToRequestResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "toRequestResponse");
     private final static QName _SaveRequest_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "saveRequest");
+    private final static QName _ReleaseAPHoldResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "releaseAPHoldResponse");
     private final static QName _GetStatusResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "getStatusResponse");
-    private final static QName _NotImplemented_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "NotImplemented");
     private final static QName _IssueMoneyCodeResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "IssueMoneyCodeResponse");
     private final static QName _GetStatus_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "getStatus");
     private final static QName _GetIssuedRequestsResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "getIssuedRequestsResponse");
     private final static QName _ValidateCredentials_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "validateCredentials");
+    private final static QName _ReleaseAPHold_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "releaseAPHold");
     private final static QName _StoreDocumentsResponse_QNAME = new QName("http://ws.logic.business.automation.efs.imc.com/", "storeDocumentsResponse");
 
     /**
@@ -190,14 +189,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RelaseAPHoldResponse }
-     * 
-     */
-    public RelaseAPHoldResponse createRelaseAPHoldResponse() {
-        return new RelaseAPHoldResponse();
-    }
-
-    /**
      * Create an instance of {@link ValidateIsNotDuplicateRequest }
      * 
      */
@@ -254,14 +245,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link NotImplemented }
-     * 
-     */
-    public NotImplemented createNotImplemented() {
-        return new NotImplemented();
-    }
-
-    /**
      * Create an instance of {@link IssueMoneyCodeResponse }
      * 
      */
@@ -294,6 +277,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ReleaseAPHoldResponse }
+     * 
+     */
+    public ReleaseAPHoldResponse createReleaseAPHoldResponse() {
+        return new ReleaseAPHoldResponse();
+    }
+
+    /**
      * Create an instance of {@link ValidateCredentials }
      * 
      */
@@ -307,6 +298,14 @@ public class ObjectFactory {
      */
     public StoreDocumentsResponse createStoreDocumentsResponse() {
         return new StoreDocumentsResponse();
+    }
+
+    /**
+     * Create an instance of {@link ReleaseAPHold }
+     * 
+     */
+    public ReleaseAPHold createReleaseAPHold() {
+        return new ReleaseAPHold();
     }
 
     /**
@@ -339,14 +338,6 @@ public class ObjectFactory {
      */
     public IssueMoneyCode createIssueMoneyCode() {
         return new IssueMoneyCode();
-    }
-
-    /**
-     * Create an instance of {@link RelaseAPHold }
-     * 
-     */
-    public RelaseAPHold createRelaseAPHold() {
-        return new RelaseAPHold();
     }
 
     /**
@@ -462,19 +453,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Status }
-     * 
-     */
-    public Status createStatus() {
-        return new Status();
-    }
-
-    /**
      * Create an instance of {@link Requesttypes }
      * 
      */
     public Requesttypes createRequesttypes() {
         return new Requesttypes();
+    }
+
+    /**
+     * Create an instance of {@link Status }
+     * 
+     */
+    public Status createStatus() {
+        return new Status();
     }
 
     /**
@@ -529,15 +520,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "getUsersEfsCheckLimit")
     public JAXBElement<GetUsersEfsCheckLimit> createGetUsersEfsCheckLimit(GetUsersEfsCheckLimit value) {
         return new JAXBElement<GetUsersEfsCheckLimit>(_GetUsersEfsCheckLimit_QNAME, GetUsersEfsCheckLimit.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RelaseAPHoldResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "relaseAPHoldResponse")
-    public JAXBElement<RelaseAPHoldResponse> createRelaseAPHoldResponse(RelaseAPHoldResponse value) {
-        return new JAXBElement<RelaseAPHoldResponse>(_RelaseAPHoldResponse_QNAME, RelaseAPHoldResponse.class, null, value);
     }
 
     /**
@@ -721,15 +703,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RelaseAPHold }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "relaseAPHold")
-    public JAXBElement<RelaseAPHold> createRelaseAPHold(RelaseAPHold value) {
-        return new JAXBElement<RelaseAPHold>(_RelaseAPHold_QNAME, RelaseAPHold.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IssueMoneyCode }{@code >}}
      * 
      */
@@ -820,21 +793,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReleaseAPHoldResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "releaseAPHoldResponse")
+    public JAXBElement<ReleaseAPHoldResponse> createReleaseAPHoldResponse(ReleaseAPHoldResponse value) {
+        return new JAXBElement<ReleaseAPHoldResponse>(_ReleaseAPHoldResponse_QNAME, ReleaseAPHoldResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetStatusResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "getStatusResponse")
     public JAXBElement<GetStatusResponse> createGetStatusResponse(GetStatusResponse value) {
         return new JAXBElement<GetStatusResponse>(_GetStatusResponse_QNAME, GetStatusResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link NotImplemented }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "NotImplemented")
-    public JAXBElement<NotImplemented> createNotImplemented(NotImplemented value) {
-        return new JAXBElement<NotImplemented>(_NotImplemented_QNAME, NotImplemented.class, null, value);
     }
 
     /**
@@ -871,6 +844,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "validateCredentials")
     public JAXBElement<ValidateCredentials> createValidateCredentials(ValidateCredentials value) {
         return new JAXBElement<ValidateCredentials>(_ValidateCredentials_QNAME, ValidateCredentials.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReleaseAPHold }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.logic.business.automation.efs.imc.com/", name = "releaseAPHold")
+    public JAXBElement<ReleaseAPHold> createReleaseAPHold(ReleaseAPHold value) {
+        return new JAXBElement<ReleaseAPHold>(_ReleaseAPHold_QNAME, ReleaseAPHold.class, null, value);
     }
 
     /**

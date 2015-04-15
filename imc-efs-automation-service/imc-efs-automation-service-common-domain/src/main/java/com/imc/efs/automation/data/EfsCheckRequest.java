@@ -1,6 +1,7 @@
 package com.imc.efs.automation.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -135,7 +136,10 @@ public class EfsCheckRequest implements Serializable {
 
 	@XmlElement(required = true)
 	public List<FileUpload> getFileUploads() {
-		return FileUploads;
+		if (FileUploads != null) {
+			return FileUploads;
+		} else
+			return new ArrayList<FileUpload>();
 	}
 
 	public void setFileUploads(List<FileUpload> fileUploads) {

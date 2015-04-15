@@ -3,17 +3,15 @@ package com.imc.efs.automation.webservice.impl;
 import java.util.logging.Logger;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.apache.cxf.interceptor.InInterceptors;
 import org.apache.cxf.interceptor.OutInterceptors;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.imc.business.logic.service.NotImplemented_Exception;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
-import com.imc.efs.automation.exception.NotImplemented;
-import com.imc.efs.automation.exception.Unexpected;
 import com.imc.efs.automation.facade.EfsAutomationFacade;
 import com.imc.efs.automation.webservice.EfsAutoService;
 import com.imc.efs.security.BasicUserAuthenticator;
@@ -38,8 +36,8 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 	}
 
 	@WebMethod
-	public EfsMoneyCode requestEfsCheck(EfsCheckRequest request)
-			throws NotImplemented, Unexpected, NotImplemented_Exception {
+	public EfsMoneyCode requestEfsCheck(@WebParam(name = "Request")EfsCheckRequest request)
+			throws Exception {
 		ctx = new AnnotationConfigApplicationContext(EfsConfiguration.class);
 		
 		auth = ctx.getBean(BasicUserAuthenticator.class);
@@ -47,21 +45,25 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 
 		log.info("New Request - User: " + request.getUser() + " Amount: " + request.getEfsAmount());
 		
-		
+		EfsMoneyCode moneyCode = null;
 		if (auth.authenticateRequest(request.getUser(), request.getPass())) {
-			EfsMoneyCode moneyCode = efs.requestEfsCheck(request);
+			try{
+			moneyCode = efs.requestEfsCheck(request);
+			} catch (Exception e){
+				throw new Exception(e);
+			}
 			ctx.close();
 			return moneyCode;
 		} else{
 			ctx.close();
-			throw new Unexpected("Invalid Username and Password");
+			throw new Exception("Invalid Username and Password");
 		}
 		
 	}
 
 	@WebMethod
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId)
-			throws NotImplemented, Unexpected, NotImplemented_Exception {
+			throws Exception {
 		
 		log.info("Resuming request for requestId: " + requestId);
 		

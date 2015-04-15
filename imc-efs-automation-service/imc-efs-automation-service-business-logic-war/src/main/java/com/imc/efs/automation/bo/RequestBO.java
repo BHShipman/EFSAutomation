@@ -6,7 +6,6 @@ import java.util.List;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
-import com.imc.efs.automation.exception.NotImplemented;
 
 public interface RequestBO {
 
@@ -15,17 +14,17 @@ public interface RequestBO {
 	public abstract Requesttypes getRequestType(int requestTypeId);
 
 	public abstract void validateRequestInputAgainstConfig(
-			Requests request) throws NotImplemented;
+			Requests request) throws Exception;
 
 	public abstract void validateIsNotDuplicateRequest(String poWoNumber)
-			throws NotImplemented;
+			throws Exception;
 
 	public abstract int saveRequest(Requests request) throws Exception;
 	
 	public abstract int updateRequest(Requests request);
 
 	public abstract BigDecimal getUsersEfsCheckLimit(String p1, int p2)
-			throws NotImplemented;
+			throws Exception;
 
 	public abstract List<Requests> getIssuedRequests();
 

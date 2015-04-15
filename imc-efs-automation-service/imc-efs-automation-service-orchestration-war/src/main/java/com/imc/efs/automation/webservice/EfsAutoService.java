@@ -3,11 +3,8 @@ package com.imc.efs.automation.webservice;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import com.imc.business.logic.service.NotImplemented_Exception;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
-import com.imc.efs.automation.exception.NotImplemented;
-import com.imc.efs.automation.exception.Unexpected;
 
 @WebService
 public interface EfsAutoService {
@@ -17,10 +14,9 @@ public interface EfsAutoService {
 
 	@WebMethod
 	EfsMoneyCode requestEfsCheck(EfsCheckRequest request)
-			throws NotImplemented, Unexpected, NotImplemented_Exception;
+			throws Exception;
 
 	@WebMethod
-	EfsMoneyCode resumeEfsCheckIssuance(int requestId) throws NotImplemented,
-			Unexpected, NotImplemented_Exception;
+	EfsMoneyCode resumeEfsCheckIssuance(int requestId) throws Exception;
 
 }

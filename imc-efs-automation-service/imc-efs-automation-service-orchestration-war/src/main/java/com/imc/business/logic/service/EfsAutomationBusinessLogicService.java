@@ -143,25 +143,8 @@ public interface EfsAutomationBusinessLogicService {
 
     /**
      * 
-     * @param arg1
      * @param arg0
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "relaseAPHold", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.RelaseAPHold")
-    @ResponseWrapper(localName = "relaseAPHoldResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.RelaseAPHoldResponse")
-    public int relaseAPHold(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @throws NotImplemented_Exception
+     * @throws Exception_Exception
      */
     @WebMethod
     @RequestWrapper(localName = "validateRequestInputAgainstConfig", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ValidateRequestInputAgainstConfig")
@@ -169,8 +152,25 @@ public interface EfsAutomationBusinessLogicService {
     public void validateRequestInputAgainstConfig(
         @WebParam(name = "arg0", targetNamespace = "")
         Requests arg0)
-        throws NotImplemented_Exception
+        throws Exception_Exception
     ;
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "releaseAPHold", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ReleaseAPHold")
+    @ResponseWrapper(localName = "releaseAPHoldResponse", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ReleaseAPHoldResponse")
+    public int releaseAPHold(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
 
     /**
      * 
@@ -254,7 +254,7 @@ public interface EfsAutomationBusinessLogicService {
     /**
      * 
      * @param arg0
-     * @throws NotImplemented_Exception
+     * @throws Exception_Exception
      */
     @WebMethod
     @RequestWrapper(localName = "validateIsNotDuplicateRequest", targetNamespace = "http://ws.logic.business.automation.efs.imc.com/", className = "com.imc.business.logic.service.ValidateIsNotDuplicateRequest")
@@ -262,7 +262,7 @@ public interface EfsAutomationBusinessLogicService {
     public void validateIsNotDuplicateRequest(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0)
-        throws NotImplemented_Exception
+        throws Exception_Exception
     ;
 
     /**
@@ -299,7 +299,7 @@ public interface EfsAutomationBusinessLogicService {
      * @param arg0
      * @return
      *     returns java.math.BigDecimal
-     * @throws NotImplemented_Exception
+     * @throws Exception_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
@@ -310,7 +310,7 @@ public interface EfsAutomationBusinessLogicService {
         String arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         int arg1)
-        throws NotImplemented_Exception
+        throws Exception_Exception
     ;
 
     /**

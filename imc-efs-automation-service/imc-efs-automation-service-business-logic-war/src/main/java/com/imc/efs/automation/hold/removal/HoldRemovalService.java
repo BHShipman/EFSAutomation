@@ -73,7 +73,7 @@ public class HoldRemovalService implements ServletContextListener {
 					} else if (moneyCode.getFirstUse() != "" && moneyCode.getAmountUsed() == moneyCode.getAmount()){
 						request.setStatusId(RequestStatuses.Activated.index());
 						requestBO.updateRequest(request);
-						gpBO.relaseAPHold(company, String.valueOf(request.getMoneyCodeReferenceNumber()));
+						gpBO.releaseAPHold(company, String.valueOf(request.getMoneyCodeReferenceNumber()));
 					}
 					
 					

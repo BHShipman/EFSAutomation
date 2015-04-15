@@ -118,7 +118,7 @@ public class GpBOImpl implements GpBO {
 			
 	}
 	
-	public int relaseAPHold(String company, String moneyCodeReferenceNumber){
+	public int releaseAPHold(String company, String moneyCodeReferenceNumber){
 		return efsDAOService.efsDAOService.releaseAPHold(company, moneyCodeReferenceNumber);
 	}
 

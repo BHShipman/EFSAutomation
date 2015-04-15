@@ -14,7 +14,6 @@ import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
 import com.imc.efs.automation.enums.RequirementTypes;
-import com.imc.efs.automation.exception.NotImplemented;
 
 @Remote(RequestBO.class)
 @Stateless(name="RequestBO")
@@ -52,7 +51,7 @@ public class RequestBOImpl implements RequestBO {
 	 * @see com.imc.efs.automation.bo.impl.RequestBO#validateRequestInputAgainstConfig(com.imc.efs.automation.entities.RequestTypeConfigs, com.imc.efs.automation.entities.Requests)
 	 */
 	@Override
-	public void validateRequestInputAgainstConfig(Requests request) throws NotImplemented{
+	public void validateRequestInputAgainstConfig(Requests request) throws Exception{
 		List<String> invalidParams = new ArrayList<String>();
 		
 		
@@ -98,8 +97,7 @@ public class RequestBOImpl implements RequestBO {
 
          if (invalidParams.size() > 0)
          {
-        	 throw new NotImplemented("Not Implemented");
-             //throw new FaultException<ClientFault>(new ClientFault("Invalid input: [" + string.Join(",", invalidParams) + "]"));
+        	 throw new Exception();
          }
 	}
 	
@@ -107,10 +105,10 @@ public class RequestBOImpl implements RequestBO {
 	 * @see com.imc.efs.automation.bo.impl.RequestBO#validateIsNotDuplicateRequest(java.lang.String)
 	 */
 	@Override
-	public void validateIsNotDuplicateRequest(String poWoNumber) throws NotImplemented{
+	public void validateIsNotDuplicateRequest(String poWoNumber) throws Exception{
 		boolean isDuplicate = efsDAOService.efsDAOService.checkIfDuplicateRequest(poWoNumber);
 		if(isDuplicate)
-			throw new NotImplemented("Not Implemented - A Request with this PoWoNumber has already been made");
+			throw new Exception("A Request with this PoWoNumber has already been made");
 	}
 	
 	/* (non-Javadoc)
@@ -130,7 +128,7 @@ public class RequestBOImpl implements RequestBO {
 	 * @see com.imc.efs.automation.bo.impl.RequestBO#getUsersEfsCheckLimit(java.lang.String, int)
 	 */
 	@Override
-	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId) throws NotImplemented{
+	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId) throws Exception{
 		BigDecimal limit = null;
 		try{
 		limit = efsDAOService.efsDAOService.getUsersEfsCheckLimit(requester, requestTypeId);
@@ -141,7 +139,7 @@ public class RequestBOImpl implements RequestBO {
 		return limit;
 		}
 		else
-			throw new NotImplemented("A Limit has not been made for requester " + requester + ". Please contact your manager");
+			throw new Exception();
 		
 	}
 	

@@ -13,7 +13,6 @@ import com.imc.efs.automation.dto.MoneyCodeDetailsDTO;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.entities.Requesttypes;
 import com.imc.efs.automation.entities.Status;
-import com.imc.efs.automation.exception.NotImplemented;
 
 @WebService
 public interface EfsAutomationBusinessLogicService {
@@ -46,7 +45,7 @@ public interface EfsAutomationBusinessLogicService {
 			String driverId, String poWoNumber);
 
 	@WebMethod
-	int relaseAPHold(String company, String moneyCodeReferenceNumber);
+	int releaseAPHold(String company, String moneyCodeReferenceNumber);
 
 	@WebMethod
 	void sendIssuanceEmail(Requests request, String moneyCode) throws Exception;
@@ -62,10 +61,10 @@ public interface EfsAutomationBusinessLogicService {
 
 	@WebMethod
 	void validateRequestInputAgainstConfig(Requests request)
-			throws NotImplemented;
+			throws Exception;
 
 	@WebMethod
-	void validateIsNotDuplicateRequest(String poWoNumber) throws NotImplemented;
+	void validateIsNotDuplicateRequest(String poWoNumber) throws Exception;
 
 	@WebMethod
 	int saveRequest(Requests request) throws Exception;
@@ -74,7 +73,7 @@ public interface EfsAutomationBusinessLogicService {
 	int updateRequest(Requests request);
 
 	@WebMethod
-	BigDecimal getUsersEfsCheckLimit(String p1, int p2) throws NotImplemented;
+	BigDecimal getUsersEfsCheckLimit(String p1, int p2) throws Exception;
 
 	@WebMethod
 	List<Requests> getIssuedRequests();

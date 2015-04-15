@@ -9,6 +9,6 @@ public interface GpBO {
 			String proNumber, String containerNumber, String chassisNumber,
 			String driverId, String poWoNumber);
 	
-	int relaseAPHold(String company, String moneyCodeReferenceNumber);
+	int releaseAPHold(String company, String moneyCodeReferenceNumber);
 
 }

@@ -89,6 +89,7 @@ public class RequestDAOImpl implements RequestDAO {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean checkIfDuplicateRequest(String poWoNumber) {
 		List<Requests> result = emEFS
 				.createQuery(

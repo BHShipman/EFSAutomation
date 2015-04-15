@@ -8,14 +8,11 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.imc.business.logic.service.EfsBusinessLogicServiceBean;
-import com.imc.business.logic.service.NotImplemented_Exception;
 import com.imc.efs.automation.data.EfsCheckRequest;
 import com.imc.efs.automation.data.EfsMoneyCode;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.enums.RequestStatuses;
-import com.imc.efs.automation.exception.NotImplemented;
-import com.imc.efs.automation.exception.Unexpected;
 import com.imc.efs.automation.facade.EfsAutomationFacade;
 
 @Stateless(name = "EfsAutomationFacadeImpl")
@@ -41,7 +38,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	}
 
 	public EfsMoneyCode requestEfsCheck(EfsCheckRequest newRequest)
-			throws NotImplemented, Unexpected, NotImplemented_Exception {
+			throws Exception{
 		
 		Requests request = boService.efsBOService.toRequest(newRequest);
 
@@ -69,6 +66,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 		}
 		log.info("Request is not duplicate");
 		boolean hasInvoice = false;
+		if (newRequest.getFileUploads() != null)
 		for (FileUpload file : newRequest.getFileUploads()) {
 			if (file.getFileType() == ("INV"))
 				hasInvoice = true;
@@ -81,7 +79,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			if (request.getRequesttypes().isIsOpsPortalType()) {
 				log.info("This request is Ops Portal Type");
 				if (newRequest.getFileUploads() == null || !hasInvoice) {
-					throw new NotImplemented(
+					throw new Exception(
 							"Not Implemented - An invoice is required for this type of request");
 				}
 
@@ -90,7 +88,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					request.setRequestId(boService.efsBOService
 							.updateRequest(request));
 				} catch (Exception e) {
-					throw new Unexpected(e.getLocalizedMessage());
+					throw new Exception(e.getLocalizedMessage());
 				}
 				
 				log.info("Saving attached documents to Filebound");
@@ -102,7 +100,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			} else {
 				log.info("Validating invoice is attached");
 				if (!boService.efsBOService.validateHasInvoice(request)) {
-					throw new NotImplemented(
+					throw new Exception(
 							"Not Implemented - An invoice is required for this type of request");
 
 				}
@@ -114,14 +112,14 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	}
 
 	public EfsMoneyCode resumeEfsCheckIssuance(int requestId)
-			throws Unexpected, NotImplemented, NotImplemented_Exception {
+			throws Exception {
 		Requests request = boService.efsBOService.getRequest(requestId);
 		log.info("received request from id:" + requestId);
 		return processRequest(request, true);
 	}
 
 	private EfsMoneyCode processRequest(Requests request, boolean resumed)
-			throws NotImplemented, Unexpected, NotImplemented_Exception {
+			throws Exception{
 		if (request.getStatus() == null) {
 			request.setStatus(boService.efsBOService.getStatus(request
 					.getStatusId()));
@@ -139,7 +137,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 							.updateRequest(request));
 
 				} catch (Exception e) {
-					throw new Unexpected(e.getLocalizedMessage());
+					throw new Exception(e.getLocalizedMessage());
 				}
 				String recipient = null;
 				try {
@@ -148,7 +146,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 							.sendApprovalRequestEmail(request);
 				} catch (Exception e) {
 					log.info("Error(s) invoking email service");
-					throw new Unexpected(e.getLocalizedMessage());
+					throw new Exception(e.getLocalizedMessage());
 				}
 
 				log.info("Creating response moneyCode");
@@ -177,7 +175,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 								.updateRequest(request));
 
 					} catch (Exception e) {
-						throw new Unexpected(e.getLocalizedMessage());
+						throw new Exception(e.getLocalizedMessage());
 					}
 					String recipient = null;
 					try {
@@ -185,7 +183,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 						recipient = boService.efsBOService
 								.sendApprovalRequestEmail(request);
 					} catch (Exception e) {
-						throw new Unexpected(e.getLocalizedMessage());
+						throw new Exception(e.getLocalizedMessage());
 					}
 					log.info("Creating response moneyCode");
 					EfsMoneyCode moneyCode = new EfsMoneyCode();
@@ -213,7 +211,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 						.updateRequest(request));
 
 			} catch (Exception e) {
-				throw new Unexpected(e.getLocalizedMessage());
+				throw new Exception(e.getLocalizedMessage());
 			}
 			EfsMoneyCode moneyCode = new EfsMoneyCode();
 			moneyCode.setIssued(false);
@@ -226,7 +224,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 	}
 
 	private EfsMoneyCode issueEfsCheck(Requests request, boolean resumed)
-			throws Unexpected {
+			throws Exception {
 		// If requestType is driver pay, use the driver for "Issue to." Else,
 		// use vendor name
 		String issueTo = request.getRequesttypes().isIsDriverPay() ? request
@@ -248,7 +246,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 			request.setRequestId(boService.efsBOService.updateRequest(request));
 
 		} catch (Exception e) {
-			throw new Unexpected(e.getLocalizedMessage());
+			throw new Exception(e.getLocalizedMessage());
 		}
 
 		boService.efsBOService.createIssuanceTransaction(request.getCompany(),
@@ -264,7 +262,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 				boService.efsBOService.sendIssuanceEmail(request,
 						moneyCode.getMoneyCode());
 			} catch (Exception e) {
-				throw new Unexpected(e.getLocalizedMessage());
+				throw new Exception(e.getLocalizedMessage());
 			}
 		} else {
 			boService.efsBOService.createIssueDoc(request);
@@ -273,7 +271,7 @@ public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 					boService.efsBOService.sendIssuanceEmail(request,
 							moneyCode.getMoneyCode());
 				} catch (Exception e) {
-					throw new Unexpected(e.getLocalizedMessage());
+					throw new Exception(e.getLocalizedMessage());
 				}
 		}
 
