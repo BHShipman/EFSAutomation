@@ -5,6 +5,11 @@
 
 	<persistence-unit name="EFS">
 		<jta-data-source>java:jboss/EfsAutomation</jta-data-source>
+		<class>com.imc.efs.automation.entities.Requests</class>
+		<class>com.imc.efs.automation.entities.Requesttypes</class>
+		<class>com.imc.efs.automation.entities.Requesttypecomments</class>
+		<class>com.imc.efs.automation.entities.Requesters</class>
+		<class>com.imc.efs.automation.entities.Status</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="false" />
