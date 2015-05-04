@@ -24,8 +24,12 @@ public class CheckLimitDAOImpl implements CheckLimitDAO {
 				.createQuery("Select r FROM Requesters r WHERE r.name = :name AND r.requesttypes.requestTypeId = :requestTypeId");
 		query.setParameter("name", requester.toUpperCase());
 		query.setParameter("requestTypeId", requestTypeId);
-		Requesters requesters = (Requesters) query.getSingleResult();
-
+		Requesters requesters = null;
+		try{
+		requesters = (Requesters) query.getSingleResult();
+		} catch (NoResultException noResult){
+			return null;
+		}
 		return requesters.getLimit();
 	}
 

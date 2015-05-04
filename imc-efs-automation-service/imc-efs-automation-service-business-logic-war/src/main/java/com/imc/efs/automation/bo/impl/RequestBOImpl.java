@@ -130,16 +130,12 @@ public class RequestBOImpl implements RequestBO {
 	@Override
 	public BigDecimal getUsersEfsCheckLimit(String requester, int requestTypeId) throws Exception{
 		BigDecimal limit = null;
-		try{
-		limit = efsDAOService.efsDAOService.getUsersEfsCheckLimit(requester, requestTypeId);
-		} catch (Exception e){
-			
+		limit = efsDAOService.efsDAOService.getEfsCheckLimitByUser(requester, requestTypeId);
+		if (limit == null){
+			throw new Exception("A limit has not been made for this user. Please contact your immediate manager.");
 		}
-		if (limit!= null){
 		return limit;
-		}
-		else
-			throw new Exception();
+		
 		
 	}
 	
