@@ -35,7 +35,7 @@ public class HoldRemovalService implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		
-		List<String> companies = new ArrayList<String>();
+		final List<String> companies = new ArrayList<String>();
 		
 		companies.add("AIS");
 		companies.add("DNJ");
@@ -44,15 +44,16 @@ public class HoldRemovalService implements ServletContextListener {
 		companies.add("NDS");		
 		
 		
-		ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
-		ScheduledFuture scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+		ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+		scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 			
 			@Override
 			public void run() {
-				System.out.println("removing holds");
+//				removeHolds(companies);
+				System.out.println("would be removing holds, but we are in test environment");
 				
 			}
-		} , (long)0, (long)15, TimeUnit.MINUTES);
+		} , (long)0, (long)10, TimeUnit.SECONDS);
 		
 	}
 

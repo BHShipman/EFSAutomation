@@ -118,7 +118,7 @@ public class NotificationBOImpl implements NotificationBO {
 					+ request.getDriverName() + ". Request #"
 					+ request.getRequestId();
 		} else if (request.getVendorName() != null) {
-			subject = "Requesting approval fo "
+			subject = "Requesting approval for "
 					+ request.getRequesttypes().getName()
 					+ " EFS Check for Vendor " + request.getVendorName()
 					+ ". Request #" + request.getRequestId();

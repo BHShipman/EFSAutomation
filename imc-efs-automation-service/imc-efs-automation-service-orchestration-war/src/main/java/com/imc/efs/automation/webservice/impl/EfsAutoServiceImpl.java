@@ -21,9 +21,7 @@ import com.imc.efs.security.BasicUserAuthenticator;
 @WebService(serviceName = "EfsAutomationWS", portName = "EfsAutomationWS", endpointInterface = "com.imc.efs.automation.webservice.EfsAutoService")
 public class EfsAutoServiceImpl implements EfsAutoService {
 
-	// @EJB(name = "EfsAutomationFacade")
 	EfsAutomationFacade efs;
-	// @EJB(name = "Authenticator")
 	BasicUserAuthenticator auth;
 	AnnotationConfigApplicationContext ctx;
 

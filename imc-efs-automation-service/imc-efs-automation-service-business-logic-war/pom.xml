@@ -9,7 +9,7 @@
 	<artifactId>imc-efs-automation-service-business-logic-war</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
-	<dependency>
+		<dependency>
 			<groupId>com.efs.automation.web.service</groupId>
 			<artifactId>imc-efs-automation-service-common-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -18,6 +18,16 @@
 			<groupId>com.efs.automation.web.service</groupId>
 			<artifactId>imc-efs-automation-service-invokers</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.2</version>
 		</dependency>
 	</dependencies>
 </project>

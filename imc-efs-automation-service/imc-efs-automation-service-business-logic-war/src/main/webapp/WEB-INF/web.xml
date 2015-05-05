@@ -19,4 +19,9 @@
 	com.imc.efs.automation.hold.removal.HoldRemovalService
 	</listener-class>
   </listener>
+  <listener>
+    <listener-class>
+	com.imc.efs.automation.email.monitor.EmailMonitorService
+	</listener-class>
+  </listener>
 </web-app>

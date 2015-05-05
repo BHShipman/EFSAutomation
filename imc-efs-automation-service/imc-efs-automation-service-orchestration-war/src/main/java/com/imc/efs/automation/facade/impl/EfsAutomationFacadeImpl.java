@@ -15,11 +15,9 @@ import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.enums.RequestStatuses;
 import com.imc.efs.automation.facade.EfsAutomationFacade;
 
-@Stateless(name = "EfsAutomationFacadeImpl")
-@Remote(EfsAutomationFacade.class)
 public class EfsAutomationFacadeImpl implements EfsAutomationFacade {
 
-//	@EJB(beanName = "EfsBOService")
+	
 	private EfsBusinessLogicServiceBean boService;
 	
 	private Logger log = Logger.getLogger("EfsAutomationFacadeImpl");
