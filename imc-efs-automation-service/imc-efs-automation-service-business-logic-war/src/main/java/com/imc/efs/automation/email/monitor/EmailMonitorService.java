@@ -85,13 +85,6 @@ public class EmailMonitorService implements ServletContextListener {
 			for (Message message : unreadMessages) {
 				if (!message.getFlags().contains(Flags.Flag.SEEN)) {
 					Address[] fromAddresses = message.getFrom();
-					System.out.println(fromAddresses[0].toString());
-
-					if (message.isMimeType("text/plain")) {
-						System.out.println("text");
-					} else if (message.isMimeType("multipart/*")) {
-						System.out.println("multipart");
-					}
 					String body = getText(message);
 					Document doc = Jsoup.parse(body);
 					Pattern requestPattern = Pattern.compile("#..");
@@ -108,6 +101,8 @@ public class EmailMonitorService implements ServletContextListener {
 						System.out.println("found approved");
 						Requests request = requestBO.getRequest(Integer.valueOf(requestNumber).intValue());
 						request.getStatus().setStatusId(RequestStatuses.Issued.index());
+						request.setApprover(fromAddresses[0].toString());
+						request.setIssuer(fromAddresses[0].toString());
 						requestBO.updateRequest(request);
 						efsService.efsService.resumeEfsCheckIssuance(request.getRequestId());
 					}
