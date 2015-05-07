@@ -59,7 +59,7 @@ public class EmailMonitorService implements ServletContextListener {
 			@Override
 			public void run() {
 				System.out.println("Checking Email");
-				checkEmail();
+//				checkEmail();
 				
 
 			}
