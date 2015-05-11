@@ -22,7 +22,6 @@ import com.imc.efs.automation.bo.DocBO;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
 import com.imc.efs.automation.helper.PdfGenerator;
-import com.lowagie.text.pdf.ArabicLigaturizer;
 
 @Remote(DocBO.class)
 @Stateless(name="DocBO")
