@@ -14,8 +14,8 @@ import javax.ejb.Stateless;
 
 import com.imc.data.access.service.EfsDataAccessServiceBean;
 import com.imc.efs.automation.bo.NotificationBO;
-import com.imc.efs.automation.email.service.EmailServiceInvoker;
 import com.imc.efs.automation.entities.Requests;
+import com.imc.email.service.EmailServiceInvoker;
 
 @Remote(NotificationBO.class)
 @Stateless(name = "NotificationBO")
@@ -46,9 +46,8 @@ public class NotificationBOImpl implements NotificationBO {
 	public void sendIssuanceEmail(Requests request, String moneyCode)
 			throws Exception {
 		List<String> to = new ArrayList<String>();
-		// to.add("mcoolican@iils.com");
-		// to.add("RBrower@iilogistics.com");
-		to.add("bshipman@imccompanies.com");
+//		to.add("bshipman@imccompanies.com");
+		to.add(request.getRequester().trim()+"@imccompanies.com");
 
 		List<String> cc = null;
 		// cc.add("driver_Services@IMCG.COM");

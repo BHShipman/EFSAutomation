@@ -2,6 +2,7 @@ package com.imc.efs.automation.dao.impl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -13,7 +14,6 @@ import com.imc.efs.automation.dao.DexDAO;
 @Remote(DexDAO.class)
 @TransactionManagement(TransactionManagementType.BEAN)
 public class DexDAOImpl implements DexDAO {
-
 
 
 	@Override
