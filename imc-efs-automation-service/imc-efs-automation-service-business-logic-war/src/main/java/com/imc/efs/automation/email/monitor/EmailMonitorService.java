@@ -74,7 +74,6 @@ public class EmailMonitorService implements ServletContextListener {
 		try {
 			Store store = session.getStore(PROTOCOL);
 			store.connect(USER_NAME, PASSWORD);
-			System.out.println("connected");
 
 			Folder inbox = store.getFolder("INBOX");
 			inbox.open(Folder.READ_WRITE);
