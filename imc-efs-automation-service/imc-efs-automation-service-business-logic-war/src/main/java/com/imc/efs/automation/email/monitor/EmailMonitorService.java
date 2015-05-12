@@ -37,7 +37,7 @@ public class EmailMonitorService implements ServletContextListener {
 	@EJB(name = "RequestBO")
 	RequestBO requestBO;
 	EfsWebServiceBean efsService = new EfsWebServiceBean();
-
+	//TODO utilize EFS JAVA INBOX instead of personal. 
 	private static final String PROTOCOL = "imap";
 	private static final String HOST = "webmail01.iilogistics.com";
 	private final static String PORT = "993";

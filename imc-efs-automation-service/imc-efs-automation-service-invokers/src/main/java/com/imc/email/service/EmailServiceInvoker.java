@@ -15,6 +15,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 public class EmailServiceInvoker {
 
 	private final String serviceUrl = "http://ils3.iilogistics.com:8080/imc-email-service/EmailService";
+	//TODO utilize EFS JAVA INBOX not EFSAutomation@imccompanies.com
 	private final String defaultFrom = "EFSAutomation@imccompanies.com";
 
 	public void sendEmail(List<String> to, String subject, String body,
