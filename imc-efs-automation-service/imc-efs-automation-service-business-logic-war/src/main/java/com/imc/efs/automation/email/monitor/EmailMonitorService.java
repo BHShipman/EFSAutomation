@@ -86,7 +86,7 @@ public class EmailMonitorService implements ServletContextListener {
 					Address[] fromAddresses = message.getFrom();
 					String body = getText(message);
 					Document doc = Jsoup.parse(body);
-					Pattern requestPattern = Pattern.compile("#..");
+					Pattern requestPattern = Pattern.compile("#\\d+");
 					Matcher match = requestPattern.matcher(message.getSubject());
 					match.find();
 					String requestNumber = match.group(0);

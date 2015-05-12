@@ -112,18 +112,18 @@ public class NotificationBOImpl implements NotificationBO {
 					+ request.getRequestId();
 		} else if (request.getDriverId() != null) {
 			subject = "Requesting approval for "
-					+ request.getRequesttypes().getName()
+					+ request.getRequesttypes().getName().trim()
 					+ " EFS Check for Driver " + request.getDriverId() + " "
 					+ request.getDriverName() + ". Request #"
 					+ request.getRequestId();
 		} else if (request.getVendorName() != null) {
 			subject = "Requesting approval for "
-					+ request.getRequesttypes().getName()
+					+ request.getRequesttypes().getName().trim()
 					+ " EFS Check for Vendor " + request.getVendorName()
 					+ ". Request #" + request.getRequestId();
 		} else {
 			subject = "Requesting approval for "
-					+ request.getRequesttypes().getName()
+					+ request.getRequesttypes().getName().trim()
 					+ " EFS Check. Request #" + request.getRequestId();
 		}
 		boolean hasAttachments = false;
@@ -148,7 +148,7 @@ public class NotificationBOImpl implements NotificationBO {
 		StringBuilder message = new StringBuilder();
 
 		message.append("<h3>EFS Check Request For "
-				+ request.getRequesttypes().getName()
+				+ request.getRequesttypes().getName().trim()
 				+ "</h3>Please reply to this email with \"APPROVED\" or \"REJECTED\" included in the body.");
 
 		NumberFormat amountFormat = NumberFormat.getCurrencyInstance(Locale.US);
