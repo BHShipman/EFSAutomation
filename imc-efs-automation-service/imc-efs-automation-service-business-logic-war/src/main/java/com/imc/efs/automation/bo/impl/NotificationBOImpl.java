@@ -55,15 +55,15 @@ public class NotificationBOImpl implements NotificationBO {
 		String subject;
 		if (!(request.getPoWoNumber().isEmpty()) || request
 				.getPoWoNumber() != null) {
-			subject = request.getRequesttypes().getName()
+			subject = request.getRequesttypes().getName().trim()
 					+ "EFS Check Issuance Notice for "
 					+ request.getPoWoNumber();
 		} else if (request.getDriverId() != null) {
-			subject = request.getRequesttypes().getName()
+			subject = request.getRequesttypes().getName().trim()
 					+ "EFS Check Issuance Notice for Driver "
 					+ request.getDriverId() + " " + request.getDriverName();
 		} else {
-			subject = request.getRequesttypes().getName()
+			subject = request.getRequesttypes().getName().trim()
 					+ "EFS Check Issuance Notice";
 		}
 

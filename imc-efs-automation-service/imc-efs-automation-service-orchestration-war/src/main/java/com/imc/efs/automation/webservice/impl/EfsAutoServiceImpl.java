@@ -41,7 +41,7 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 		auth = ctx.getBean(BasicUserAuthenticator.class);
 		efs = ctx.getBean(EfsAutomationFacade.class);
 
-		log.info("New Request - User: " + request.getUser() + " Amount: " + request.getEfsAmount());
+		log.info("New Request - User: " + request.getUser() + " Amount: " + request.getEfsAmount() + "Requester: " + request.getRequester());
 		
 		EfsMoneyCode moneyCode = null;
 		if (auth.authenticateRequest(request.getUser(), request.getPass())) {
