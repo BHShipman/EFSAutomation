@@ -53,52 +53,53 @@ public class DocBOImpl implements DocBO {
 	@Override
 	public void createIssueDoc(Requests request) {
 		String issDocFilePath =  pdfGenerator.generateIssuanceDoc(request);
+		//TODO test case, need a DEX project to store issue documents under. 
 		File file = new File(issDocFilePath);
-		String field1 = null;
-		if(request.getRequesttypes().isIsOpsPortalType()){
-			field1 = String.valueOf(request.getRequestId());
-		} else
-		{
-			Pattern pattern = Pattern.compile("\\d+");
-			Matcher matcher = pattern.matcher(request.getPoWoNumber());
-			matcher.find();
-			field1 = matcher.group(0);
-		}
-		if (field1 != null){
-			IndexedFile iFile = new IndexedFile();
-			try {
-				iFile.setFileBytes(FileUtils.readFileToByteArray(file));
-				iFile.setFileExtField(".pdf");
-				IndexField field11 = new IndexField();
-				IndexField field2 = new IndexField();
-				IndexField field3 = new IndexField();
-				IndexField field4 = new IndexField();
-				List<IndexField> fields = new ArrayList<IndexField>();
-				
-				field11.setValueField("118");
-				field11.setIdField(IndexIds.ProjectId);
-				fields.add(field11);
-				
-				field2.setValueField("10");
-				field2.setIdField(IndexIds.Idx1);
-				fields.add(field2);
-				
-				field3.setValueField("ISSU");
-				field3.setIdField(IndexIds.Idx2);
-				fields.add(field3);
-				
-				field4.setValueField(file.getName());
-				field4.setIdField(IndexIds.Name);
-				fields.add(field4);
-				
-				iFile.setIndexFields(fields);
-								
-				} catch (IOException e) {
-				e.printStackTrace();
-			}
+//		String field1 = null;
+//		if(request.getRequesttypes().isIsOpsPortalType()){
+//			field1 = String.valueOf(request.getRequestId());
+//		} else
+//		{
+//			Pattern pattern = Pattern.compile("\\d+");
+//			Matcher matcher = pattern.matcher(request.getPoWoNumber());
+//			matcher.find();
+//			field1 = matcher.group(0);
+//		}
+//		if (field1 != null){
+//			IndexedFile iFile = new IndexedFile();
+//			try {
+//				iFile.setFileBytes(FileUtils.readFileToByteArray(file));
+//				iFile.setFileExtField(".pdf");
+//				IndexField field2 = new IndexField();
+//				IndexField field3 = new IndexField();
+//				IndexField field4 = new IndexField();
+//				IndexField field5 = new IndexField();
+//				List<IndexField> fields = new ArrayList<IndexField>();
+//				
+//				field2.setValueField("118");
+//				field2.setIdField(IndexIds.ProjectId);
+//				fields.add(field2);
+//				
+//				field3.setValueField("10");
+//				field3.setIdField(IndexIds.Idx1);
+//				fields.add(field3);
+//				
+//				field4.setValueField("ISSU");
+//				field4.setIdField(IndexIds.Idx2);
+//				fields.add(field4);
+//				
+//				field5.setValueField(file.getName());
+//				field5.setIdField(IndexIds.Name);
+//				fields.add(field5);
+//				
+//				iFile.setIndexFields(fields);
+//								
+//				} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 			
-			dexService.upload(iFile);
-		}
+//			dexService.upload(iFile);
+//		}
 			
 			
 			
@@ -125,12 +126,14 @@ public class DocBOImpl implements DocBO {
 	
 	@Override
 	public boolean validateHasInvoice(Requests request){
-		File invoice = new File(request.getPathToInvoice());
-		
-		if(invoice.exists() && !invoice.isDirectory()){
-			return true;
-		}else
-			return false;
+		return true;
+		//TODO test case, need some way of receiving invoice from client
+//		File invoice = new File(request.getPathToInvoice());
+//		
+//		if(invoice.exists() && !invoice.isDirectory()){
+//			return true;
+//		}else
+//			return false;
 	}
 
 }

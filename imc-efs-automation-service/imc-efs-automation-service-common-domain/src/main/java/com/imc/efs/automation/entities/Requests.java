@@ -60,7 +60,7 @@ public class Requests implements java.io.Serializable {
 	private String rejectionReason;
 	private Short isChargedToCustomer;
 	private String driverName;
-	private String pathToInvoice;
+//	private String pathToInvoice;
 	private int requestTypeId;
 	private int statusId;
 
@@ -477,13 +477,13 @@ public class Requests implements java.io.Serializable {
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
 	}
-	@Transient
-	public String getPathToInvoice() {
-		return pathToInvoice;
-	}
-
-	public void setPathToInvoice(String pathToInvoice) {
-		this.pathToInvoice = pathToInvoice;
-	}
+//	@Transient
+//	public String getPathToInvoice() {
+//		return pathToInvoice;
+//	}
+//
+//	public void setPathToInvoice(String pathToInvoice) {
+//		this.pathToInvoice = pathToInvoice;
+//	}
 
 }

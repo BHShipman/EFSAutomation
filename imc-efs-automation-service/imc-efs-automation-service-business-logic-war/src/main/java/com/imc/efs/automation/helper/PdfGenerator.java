@@ -111,5 +111,4 @@ public class PdfGenerator {
 		
 	}
 	
-	//TODO use IMC Imaging Service, once implemented
 }

@@ -19,7 +19,6 @@ public class DexDAOImpl implements DexDAO {
 	@Override
 	public void saveDocument(String username,
 			String password, String requestId, String docType, String filePath) {
-		// TODO Imaging Service
 
 	}
 

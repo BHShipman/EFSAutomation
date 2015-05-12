@@ -82,7 +82,6 @@ public class RequestDAOImpl implements RequestDAO {
 
 		// boolean isFirstTimeVendor;
 		try {
-			// TODO isFirstTimeVendor
 		} catch (RuntimeException re) {
 			throw re;
 		}

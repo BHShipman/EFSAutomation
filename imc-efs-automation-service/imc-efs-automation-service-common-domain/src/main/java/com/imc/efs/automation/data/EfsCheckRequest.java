@@ -29,7 +29,7 @@ public class EfsCheckRequest implements Serializable {
 	private String driverName;
 	private String poWoNumber;
 	private String truckId;
-	private String pathToInvoice;
+//	private String pathToInvoice;
 	private String user;
 	private String pass;
 
@@ -146,14 +146,14 @@ public class EfsCheckRequest implements Serializable {
 		FileUploads = fileUploads;
 	}
 
-	@XmlElement(required = true)
-	public String getPathToInvoice() {
-		return pathToInvoice;
-	}
-
-	public void setPathToInvoice(String pathToInvoice) {
-		this.pathToInvoice = pathToInvoice;
-	}
+//	@XmlElement(required = true)
+//	public String getPathToInvoice() {
+//		return pathToInvoice;
+//	}
+//
+//	public void setPathToInvoice(String pathToInvoice) {
+//		this.pathToInvoice = pathToInvoice;
+//	}
 
 	@XmlElement(required = true)
 	public String getUser() {

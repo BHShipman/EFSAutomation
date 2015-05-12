@@ -26,7 +26,7 @@ public class EfsCheckRequestExtensions {
 		request.setPoWoNumber(efsCheckRequest.getPoWoNumber());
 		request.setTruckId(efsCheckRequest.getTruckId());
 		request.setStatusId(0);
-		request.setPathToInvoice(efsCheckRequest.getPathToInvoice());
+//		request.setPathToInvoice(efsCheckRequest.getPathToInvoice());
 		return request;
 	}
 }
