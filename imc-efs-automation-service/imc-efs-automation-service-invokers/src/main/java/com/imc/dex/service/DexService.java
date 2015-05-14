@@ -11,8 +11,6 @@ import org.apache.cxf.interceptor.InInterceptors;
 import org.apache.cxf.interceptor.OutInterceptors;
 
 @WebService(name = "", targetNamespace = "http://tempuri.org/")
-@InInterceptors(interceptors = "org.apache.cxf.interceptor.LoggingInInterceptor")
-@OutInterceptors(interceptors = "org.apache.cxf.interceptor.LoggingOutInterceptor")
 public interface DexService {
 
 //	@WebMethod(action="http://tempuri.org/IIndexedFileService/Download")

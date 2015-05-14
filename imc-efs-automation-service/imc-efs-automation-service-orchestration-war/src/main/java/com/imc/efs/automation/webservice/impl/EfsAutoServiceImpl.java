@@ -1,13 +1,12 @@
 package com.imc.efs.automation.webservice.impl;
 
-import java.util.logging.Logger;
-
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.apache.cxf.interceptor.InInterceptors;
 import org.apache.cxf.interceptor.OutInterceptors;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.imc.efs.automation.data.EfsCheckRequest;
@@ -25,7 +24,7 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 	BasicUserAuthenticator auth;
 	AnnotationConfigApplicationContext ctx;
 
-	Logger log = Logger.getLogger("EfsAutoServiceImpl");
+	final static Logger log = Logger.getLogger("EfsAutoServiceImpl");
 
 	@WebMethod
 	public boolean validateCredentials(String username, String password) {
@@ -41,7 +40,7 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 		auth = ctx.getBean(BasicUserAuthenticator.class);
 		efs = ctx.getBean(EfsAutomationFacade.class);
 
-		log.info("New Request - User: " + request.getUser() + " - Amount: " + request.getEfsAmount() + " - Requester: " + request.getRequester());
+		log.info("New Request - User: " + request.getUser() + " - Requester: " + request.getRequester());
 		
 		EfsMoneyCode moneyCode = null;
 		if (auth.authenticateRequest(request.getUser(), request.getPass())) {
@@ -53,6 +52,7 @@ public class EfsAutoServiceImpl implements EfsAutoService {
 			ctx.close();
 			return moneyCode;
 		} else{
+			log.error("Invalid Username and Password");
 			ctx.close();
 			throw new Exception("Invalid Username and Password");
 		}

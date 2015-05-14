@@ -16,7 +16,7 @@ public class EmailServiceInvoker {
 
 	private final String serviceUrl = "http://ils3.iilogistics.com:8080/imc-email-service/EmailService";
 	//TODO utilize EFS JAVA INBOX not EFSAutomation@imccompanies.com
-	private final String defaultFrom = "EFSAutomation@imccompanies.com";
+	private final String defaultFrom = "EFSJavamation@imccompanies.com";
 
 	public void sendEmail(List<String> to, String subject, String body,
 			List<String> cc, List<String> filePaths) throws IOException {
