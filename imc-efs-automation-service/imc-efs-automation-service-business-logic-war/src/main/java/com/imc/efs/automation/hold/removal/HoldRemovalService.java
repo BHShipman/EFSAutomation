@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
 
 import com.imc.efs.automation.bo.EfsBO;
 import com.imc.efs.automation.bo.GpBO;
@@ -28,8 +27,6 @@ public class HoldRemovalService implements ServletContextListener {
 	GpBO gpBO;
 	@EJB(name="EfsBO")
 	EfsBO efsBO;
-	
-	private static Logger log = Logger.getLogger(HoldRemovalService.class);
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -54,7 +51,7 @@ public class HoldRemovalService implements ServletContextListener {
 			@Override
 			public void run() {
 //				removeHolds(companies);
-				log.info("would be removing holds, but we are in test environment");
+				System.out.println("would be removing holds, but we are in test environment");
 				
 			}
 		} , (long)0, (long)10, TimeUnit.SECONDS);
@@ -78,7 +75,6 @@ public class HoldRemovalService implements ServletContextListener {
 					} else if (moneyCode.getFirstUse() != "" && moneyCode.getAmountUsed() == moneyCode.getAmount()){
 						request.setStatusId(RequestStatuses.Activated.index());
 						requestBO.updateRequest(request);
-						log.info("removing hold on request: " + request.getRequestId());
 						gpBO.releaseAPHold(company, String.valueOf(request.getMoneyCodeReferenceNumber()));
 					}
 					
