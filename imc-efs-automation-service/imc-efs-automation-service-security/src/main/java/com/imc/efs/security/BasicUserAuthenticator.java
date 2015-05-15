@@ -12,6 +12,8 @@ public class BasicUserAuthenticator {
 			return true;
 		} else if (user.compareTo("FRS") == 0 && pass.compareTo("FRS123") == 0) {
 			return true;
+		} else if (user.compareTo("RR") == 0 && pass.compareTo("RR123") == 0) {
+			return true;
 		}
 		return false;
 	}

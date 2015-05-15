@@ -18,12 +18,24 @@
 <body style="text-align: left;">
 	<h3>Request EFS Check</h3>
 	<div style="text-align: left">
-		<form:form action="CheckRequested" method="POST" commandName="request">
+		<form:form name="userForm" action="CheckRequested" method="POST" commandName="request">
 			<table style="border: outset">
+
+				<tr>
+					<td><form:label path="requestTypeId">RequestType:</form:label></td>
+					<td><form:select path="requestTypeId">
+							<form:option value="0" label="Select RequestType" />
+							<form:option value="1" label="Roadside Repair" disabled="true" />
+							<form:option value="2" label="MyTruck Repair" />
+							<form:option value="3" label="FRS Repair" disabled="true" />
+						</form:select></td>
+					<td style="color: red; font-style: italic;"><form:errors
+							path="requestTypeId" /></td>
+				</tr>
 				<tr>
 					<td><form:label path="company">Company:</form:label></td>
 					<td><form:select path="company">
-							<form:option value="noSelection" label="Select..." />
+							<form:option value="noSelection" label="Select Company" />
 							<form:option value="ATEST" label="ATEST" />
 							<form:option value="AIS" label="AIS" disabled="true" />
 							<form:option value="IMC" label="NDS" disabled="true" />
@@ -88,9 +100,9 @@
 					<td style="color: red; font-style: italic;"><form:errors
 							path="requester" /></td>
 				</tr>
-<!-- 				<tr> -->
-<!-- 					<td><input type="file" name="file"></td> -->
-<!-- 				</tr> -->
+				<!-- 				<tr> -->
+				<!-- 					<td><input type="file" name="file"></td> -->
+				<!-- 				</tr> -->
 				<tr>
 					<td><input id="requestButton" type="submit"
 						value="Request Check" onclick="changeButtonText()"></td>

@@ -52,6 +52,9 @@ public class CheckRequestValidation implements Validator {
 		if(request.getCompany().compareTo("noSelection")==0){
 			errors.rejectValue("company", "company.incorrect", "Choose a company");
 		}
+		if(request.getRequestTypeId()==0){
+			errors.rejectValue("requestTypeId", "requestTypeId.incorrect", "Select a Repair Type");
+		}
 		
 		
 	}

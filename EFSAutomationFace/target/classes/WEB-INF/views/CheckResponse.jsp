@@ -8,16 +8,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Request Efs Check</title>
 </head>
-<body style="text-align:left;">
+<body style="text-align: left;">
 	<h3>Request EFS Check</h3>
-	<div style="text-align:left ">
+	<div style="text-align: left">
 		<form:form action="CheckRequested" method="POST" commandName="request">
 			<table style="border: outset">
+
+				<tr>
+					<td><form:label path="requestTypeId">RequestType:</form:label></td>
+					<td><form:select path="requestTypeId" disabled="true">
+							<form:option value="0" label="Select..." />
+							<form:option value="1" label="Roadside Repair" />
+							<form:option value="2" label="MyTruck Repair" />
+							<form:option value="3" label="FRS Repair" />
+						</form:select></td>
+					<td style="color: red; font-style: italic;"><form:errors
+							path="requestTypeId" /></td>
+				</tr>
 				<tr>
 					<td><form:label path="company">Company:</form:label></td>
 					<td><form:select path="company" disabled="true">
+							<form:option value="noSelection" label="Select..." />
 							<form:option value="ATEST" label="ATEST" />
+							<form:option value="AIS" label="AIS" />
+							<form:option value="IMC" label="NDS" />
+							<form:option value="GIS" label="GIS" />
+							<form:option value="DNJ" label="DNJ" />
+							<form:option value="NDS" label="NDS" />
 						</form:select></td>
+					<td style="color: red; font-style: italic;"><form:errors
+							path="company" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="description">Description/Reason for request:</form:label></td>
@@ -59,7 +79,7 @@
 			</table>
 		</form:form>
 	</div>
-	<div style="text-align:left ">
+	<div style="text-align: left">
 		<h2>Money Code</h2>
 		<table style="border: outset">
 			<tr>
