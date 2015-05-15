@@ -14,11 +14,11 @@
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Request Efs Check</title>
-</head>
-<body style="text-align: left;">
+<body>
 	<h3>Request EFS Check</h3>
-	<div style="text-align: left">
-		<form:form name="userForm" action="CheckRequested" method="POST" commandName="request">
+	<div>
+		<form:form action="CheckRequested" method="POST"
+			commandName="request">
 			<table style="border: outset">
 
 				<tr>
@@ -100,9 +100,6 @@
 					<td style="color: red; font-style: italic;"><form:errors
 							path="requester" /></td>
 				</tr>
-				<!-- 				<tr> -->
-				<!-- 					<td><input type="file" name="file"></td> -->
-				<!-- 				</tr> -->
 				<tr>
 					<td><input id="requestButton" type="submit"
 						value="Request Check" onclick="changeButtonText()"></td>
@@ -110,5 +107,6 @@
 			</table>
 		</form:form>
 	</div>
+
 </body>
 </html>

@@ -75,7 +75,7 @@ public class EmailMonitorService implements ServletContextListener {
 			Store store = session.getStore(PROTOCOL);
 			store.connect(USER_NAME, PASSWORD);
 
-			Folder inbox = store.getFolder("INBOX");
+			Folder inbox = store.getFolder("EFSJava");
 			inbox.open(Folder.READ_WRITE);
 
 			Message[] unreadMessages = inbox.search(
