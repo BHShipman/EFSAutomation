@@ -1,0 +1,101 @@
+<?xml version='1.0'?>
+<!-- DTD can be pulled from the Jar or over the web-->
+<!DOCTYPE PZMAP SYSTEM	"flatpack.dtd" >
+<!--<!DOCTYPE PZMAP SYSTEM	"http://flatpack.sourceforge.net/flatpack.dtd" >-->
+
+<PZMAP>
+    <RECORD id="header" startPosition="1" endPosition="1" indicator="H">
+        <COLUMN name="REC_TYPE" length="1" /> <!-- H -->
+	    <COLUMN name="REC_INDICATOR" length="1" /><!-- P -->
+	    <COLUMN name="PATRON_NBR" length="10" /><!-- 0849164    -->
+	    <COLUMN name="INVOICE_NBR" length="16" /><!-- 201428110ALL     -->
+	    <COLUMN name="PO_NBR" length="15" /><!--                -->
+	    <COLUMN name="WO_NBR" length="10" /><!-- 03V2IT8157 -->
+	    <COLUMN name="COMPLETE_DT" length="10" /><!-- 2014-07-14 -->
+	    <COLUMN name="MECHANIC" length="30" /><!--                                  -->
+	    <COLUMN name="VENDOR_NAME" length="60" /><!-- Frederick Intermodal - Alliance                             -->
+	    <COLUMN name="PAYABLE_AMT" length="7" /><!-- 0002036 -->
+	    <COLUMN name="EQP_INIT" length="4" /><!-- LSFZ -->
+	    <COLUMN name="EQP_NUMB" length="10" /><!--     532213 -->
+	    <COLUMN name="ATCH_INIT" length="4" /><!-- SNLU -->
+	    <COLUMN name="ATCH_NUMB" length="10" /><!--     977858 -->
+	    <COLUMN name="MAINT_RESP" length="4" /><!--      -->
+	    <COLUMN name="OWNER_ABBR" length="4" /><!-- TRAC -->
+	    <COLUMN name="DRIVER_NAME" length="30" /><!-- NONE                             -->
+	    <COLUMN name="DRIVER_LICENSE" length="30" /><!-- NONE                          -->
+	    <COLUMN name="LOAD_EMPTY" length="1" /><!-- E -->
+	    <COLUMN name="CAR_KND_ABBR" length="1" /><!-- U -->
+	    <COLUMN name="LENGTH" length="3" /><!--  53 -->
+	    <COLUMN name="STN_333" length="9" /><!-- ALLIANCE  -->
+	    <COLUMN name="STN_ST" length="2" /><!-- TX -->
+	    <COLUMN name="REPAIR_LOC_CITY" length="19" /><!--                        -->
+	    <COLUMN name="REPAIR_LOC_ST" length="2" /><!--       -->
+	    <COLUMN name="COMPOSITION" length="1" /><!--         -->
+	    <COLUMN name="YEAR_BUILT" length="4" /><!-- 2005 -->
+	    <COLUMN name="MANUFACTURER" length="18" /><!-- HYUNDAI       -->
+	    <COLUMN name="NBR_DETAILS" length="4" /><!-- 0015 -->
+	    <COLUMN name="INSPECT" length="1" /><!-- N -->
+	    <COLUMN name="TOTAL_LABOR_HOURS" length="6" /><!-- 005000 -->
+    </RECORD>
+    <RECORD id="jobCode" startPosition="1" endPosition="1" indicator="D">
+	<COLUMN name="JOB_CODE_FILLER" length="1" />
+	<COLUMN name="JOB_CODE" length="4" />
+	<COLUMN name="WHY_MADE" length="2" />
+	<COLUMN name="COND_CODE" length="2" />
+	<COLUMN name="LOCATION" length="3" />
+	<COLUMN name="QUANTITY" length="4" />
+	<COLUMN name="REPAIR_SIZE" length="10" />
+	<COLUMN name="DEFECT_SIZE" length="10" />
+	<COLUMN name="DOT_ON" length="17" />
+	<COLUMN name="DOT_OFF" length="17" />
+	<COLUMN name="DOTR_ON" length="17" />
+	<COLUMN name="DOTR_OFF" length="17" />
+	<COLUMN name="BRAND_ON" length="17" />
+	<COLUMN name="BRAND_OFF_NEW" length="16" />
+	<COLUMN name="BRAND_OFF_JOB_CODE_EXT" length="1" />
+	<COLUMN name="TAX" length="7" />
+	<COLUMN name="LABOR_CHARGE" length="7" />
+	<COLUMN name="MATERIAL_CHARGE" length="7" />
+	<COLUMN name="PRICE" length="7" />
+	<COLUMN name="RAIL_MATL" length="1" />
+	<COLUMN name="NBR_MECHANICS" length="4" />
+	<COLUMN name="LABOR_HRS" length="6" />
+	<COLUMN name="BLANKSPACE" length="150"/>
+	</RECORD>
+	<RECORD id="mechanicCode" startPosition="1" endPosition="1" indicator="M">
+	<COLUMN name="MECHANIC_FILLER" length="1" />
+	<COLUMN name="USER_ID" length="10" />
+	<COLUMN name="FIRST_NAME" length="20" />
+	<COLUMN name="LAST_NAME" length="20" />
+	<COLUMN name="BLANKSPACE" length="276"/>
+	</RECORD>
+	<RECORD id="fhwaHeader" startPosition="1" endPosition="1" indicator="F">
+	<COLUMN name="FHWA_Filler" length="1"/>
+	<COLUMN name="FMCSA_INDICATOR" length="1"/>
+	<COLUMN name="BIT_INDICATOR" length="1"/>
+	<COLUMN name="INSPECT_DATE" length="10"/>
+	<COLUMN name="INSPECT_NAME" length="30"/>
+	<COLUMN name="LICENSE_PLATE" length="20"/>
+	<COLUMN name="LICENSE_ST" length="2"/>
+	<COLUMN name="VIN" length="17"/>
+	<COLUMN name="PRESS_ROR" length="2"/>
+	<COLUMN name="PRESS_RIR" length="2"/>
+	<COLUMN name="PRESS_ROF" length="2"/>
+	<COLUMN name="PRESS_RIF" length="2"/>
+	<COLUMN name="PRESS_LOR" length="2"/>
+	<COLUMN name="PRESS_LIR" length="2"/>
+	<COLUMN name="PRESS_LOF" length="2"/>
+	<COLUMN name="PRESS_LIF" length="2"/>
+	<COLUMN name="INSPECTOR_NBR" length="4"/>
+	<COLUMN name="BLANKSPACE" length="281"/>
+	</RECORD>
+	<RECORD id="inspectCode" startPosition="1" endPosition="1" indicator="I">
+	<COLUMN name="INSPECT_FILLER" length="1"/>
+	<COLUMN name="INSPECT_CODE" length="2"/>
+	<COLUMN name="REPAIR_NEEDED" length="2"/>
+	<COLUMN name="INSPECT_COMMENT" length="40"/>
+	<COLUMN name="REPAIR_DONE" length="1"/>
+	<COLUMN name="BLANKSPACE" length="281"/>
+	</RECORD>
+	<COLUMN name="NULL" length="5" />
+</PZMAP> 

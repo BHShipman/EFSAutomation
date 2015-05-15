@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<persistence-unit name="local_sql">
+		<provider>org.hibernate.ejb.HibernatePersistence
+		</provider>
+		<properties>
+			<property name="hibernate.connection.driver_class"
+				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:sqlserver://localhost:1434;databaseName=BNSF_to_MIDAS" />
+			<property name="hibernate.connection.username" value="admin" />
+			<property name="hibernate.connection.password" value="memphis2015" />
+			<property name="show_sql" value="true" />
+			<property name="hibernate.default_schema" value="dbo" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+		</properties>
+	</persistence-unit>
+	
+	<persistence-unit name="lensasql001" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence
+		</provider>
+		<properties>
+			<property name="hibernate.connection.driver_class"
+				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:sqlserver://lensasql001:1433;databaseName=GPCustom" />
+			<property name="hibernate.connection.username" value="GPCustom" />
+			<property name="hibernate.connection.password" value="memphis2007" />
+			<property name="show_sql" value="true" />
+			<property name="hibernate.default_schema" value="dbo" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+		</properties>
+	</persistence-unit>
+
+</persistence>
