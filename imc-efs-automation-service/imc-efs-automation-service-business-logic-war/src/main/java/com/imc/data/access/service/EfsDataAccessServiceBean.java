@@ -8,7 +8,8 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 public class EfsDataAccessServiceBean {
 
 	private final String serviceUrl = "http://localhost:8180/imc-efs-automation-service-data-access-war/EfsAutomationDataAccessWS"; 
-	
+	//TODO Change to development server address
+
 	public EfsAutomationDataAccessService efsDAOService;
 	
 	public EfsDataAccessServiceBean(){

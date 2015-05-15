@@ -8,7 +8,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 public class EfsBusinessLogicServiceBean {
 	
 	private final String serviceUrl = "http://localhost:8180/imc-efs-automation-service-business-logic-war/EfsAutomationBusinessLogicWS";
-	
+	//TODO Change to development server address
 	public EfsAutomationBusinessLogicService efsBOService;
 	
 	public EfsBusinessLogicServiceBean(){
