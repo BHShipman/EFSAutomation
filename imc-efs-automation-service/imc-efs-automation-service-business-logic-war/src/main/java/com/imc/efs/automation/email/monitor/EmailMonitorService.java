@@ -14,7 +14,6 @@ import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Part;
 import javax.mail.Session;
@@ -75,7 +74,7 @@ public class EmailMonitorService implements ServletContextListener {
 			Store store = session.getStore(PROTOCOL);
 			store.connect(USER_NAME, PASSWORD);
 
-			Folder inbox = store.getFolder("EFSJava");
+			Folder inbox = store.getFolder("INBOX");
 			inbox.open(Folder.READ_WRITE);
 
 			Message[] unreadMessages = inbox.search(

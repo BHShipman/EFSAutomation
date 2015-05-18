@@ -60,7 +60,7 @@ public class NotificationBOImpl implements NotificationBO {
 					+ request.getPoWoNumber();
 		} else if (request.getDriverId() != null) {
 			subject = request.getRequesttypes().getName().trim()
-					+ "EFS Check Issuance Notice for Driver "
+					+ " EFS Check Issuance Notice for Driver "
 					+ request.getDriverId() + " " + request.getDriverName();
 		} else {
 			subject = request.getRequesttypes().getName().trim()
@@ -107,19 +107,19 @@ public class NotificationBOImpl implements NotificationBO {
 		if (!(request.getPoWoNumber().isEmpty())
 				|| request.getPoWoNumber() != null) {
 			subject = "Requesting approval for "
-					+ request.getRequesttypes().getName() + " EFS Check for "
-					+ request.getPoWoNumber() + ". Request #"
+					+ request.getRequesttypes().getName().trim() + " EFS Check for "
+					+ request.getPoWoNumber().trim() + ". Request #"
 					+ request.getRequestId();
 		} else if (request.getDriverId() != null) {
 			subject = "Requesting approval for "
 					+ request.getRequesttypes().getName().trim()
 					+ " EFS Check for Driver " + request.getDriverId() + " "
-					+ request.getDriverName() + ". Request #"
+					+ request.getDriverName().trim() + ". Request #"
 					+ request.getRequestId();
 		} else if (request.getVendorName() != null) {
 			subject = "Requesting approval for "
 					+ request.getRequesttypes().getName().trim()
-					+ " EFS Check for Vendor " + request.getVendorName()
+					+ " EFS Check for Vendor " + request.getVendorName().trim()
 					+ ". Request #" + request.getRequestId();
 		} else {
 			subject = "Requesting approval for "

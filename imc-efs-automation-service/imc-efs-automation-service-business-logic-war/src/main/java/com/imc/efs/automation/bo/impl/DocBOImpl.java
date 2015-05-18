@@ -15,9 +15,9 @@ import org.apache.commons.io.FileUtils;
 
 import com.imc.data.access.service.EfsDataAccessServiceBean;
 import com.imc.dex.service.DexServiceInvoker;
+import com.imc.dex.service.IndexField;
 import com.imc.dex.service.IndexIds;
 import com.imc.dex.service.IndexedFile;
-import com.imc.dex.service.IndexField;
 import com.imc.efs.automation.bo.DocBO;
 import com.imc.efs.automation.data.FileUpload;
 import com.imc.efs.automation.entities.Requests;
