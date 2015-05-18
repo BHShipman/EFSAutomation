@@ -45,7 +45,6 @@ public class HomeController {
 		request.setPass("myTruck123");
 		request.setUser("myTruck");
 //		request.setPathToInvoice("C://temp//testpdf.pdf");
-		request.setFile(null);
 
 		EFSAutomationServiceBean service = new EFSAutomationServiceBean();
 		EfsMoneyCode moneyCodeResponse = null;
