@@ -152,7 +152,7 @@ public class NotificationBOImpl implements NotificationBO {
 				+ "</h3>Please reply to this email with \"APPROVED\" or \"REJECTED\" included in the body.");
 
 		NumberFormat amountFormat = NumberFormat.getCurrencyInstance(Locale.US);
-		amountFormat.setMinimumFractionDigits(1);
+		amountFormat.setMinimumFractionDigits(2);
 		amountFormat.setMaximumFractionDigits(2);
 		
 		message.append("<br/><b>Request Date:</b> " + request.getRequestDate())
