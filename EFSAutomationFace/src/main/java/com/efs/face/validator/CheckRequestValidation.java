@@ -53,7 +53,7 @@ public class CheckRequestValidation implements Validator {
 			errors.rejectValue("company", "company.incorrect", "Choose a company");
 		}
 		if(request.getRequestTypeId()==0){
-			errors.rejectValue("requestTypeId", "requestTypeId.incorrect", "Select a Repair Type");
+			errors.rejectValue("requestTypeId", "requestTypeId.incorrect", "Choose a Repair Type");
 		}
 		
 		

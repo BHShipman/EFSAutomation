@@ -13,12 +13,11 @@ import com.imc.efs.automation.bo.GpBO;
 import com.imc.efs.automation.dto.GpIntegrationDTO;
 
 @Remote(GpBO.class)
-@Stateless(name="GpBO")
+@Stateless(name = "GpBO")
 public class GpBOImpl implements GpBO {
 
-	@EJB(beanName="EfsDAOService")
+	@EJB(beanName = "EfsDAOService")
 	private EfsDataAccessServiceBean efsDAOService;
-
 
 	public GpBOImpl() {
 	}
@@ -27,8 +26,14 @@ public class GpBOImpl implements GpBO {
 		this.efsDAOService = efsDAOService;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.imc.efs.automation.bo.impl.GpBO#createIssuanceTransaction(java.lang.String, java.lang.String, java.lang.String, int, int, double, java.util.Date, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.imc.efs.automation.bo.impl.GpBO#createIssuanceTransaction(java.lang
+	 * .String, java.lang.String, java.lang.String, int, int, double,
+	 * java.util.Date, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String)
 	 */
 	@Override
 	public void createIssuanceTransaction(String company, int requestId,
@@ -38,7 +43,8 @@ public class GpBOImpl implements GpBO {
 
 		String vendorId = null;
 		try {
-			vendorId = efsDAOService.efsDAOService.getEfsGpVendorIdByCompany(company);
+			vendorId = efsDAOService.efsDAOService
+					.getEfsGpVendorIdByCompany(company);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,7 +57,8 @@ public class GpBOImpl implements GpBO {
 		String division = null;
 		if (driverId != null) {
 			if (driverId.isEmpty()) {
-				division = efsDAOService.efsDAOService.getDivisionByDriverId(driverId);
+				division = efsDAOService.efsDAOService
+						.getDivisionByDriverId(driverId);
 			}
 		}
 
@@ -90,36 +97,46 @@ public class GpBOImpl implements GpBO {
 		gpDto.setDivision(division);
 		gpDto.setApHold(true);
 
-		if(driverId.isEmpty()){
-			driverId="NoDriverId";
+		if (driverId.isEmpty()) {
+			driverId = "NoDriverId";
 		}
 		// Debit EFS Amount + EFS Fee to flow-through
 		String description = driverId + "|Flow Through";
 		gpDto.setTRXDSCRN(description);
 		gpDto.setDISTREF(moneyCodeReferenceNumberString + "|" + poWoNumber);
-		gpDto.setActNumSt("0-00-2109");
-		gpDto.setDistType((short)6);
+		if (gpDto.getCompany().compareTo("NDS") == 0) {
+			gpDto.setActNumSt("00-00-2109");
+		} else {
+			gpDto.setActNumSt("0-00-2109");
+		}
+		gpDto.setDistType((short) 6);
 		gpDto.setDebitAmount(amount);
 		gpDto.setCreditAmount(new BigDecimal(0));
 		efsDAOService.efsDAOService.integrateIssuance(gpDto);
-		
+
 		// Credit to EFS Payables
 		description = driverId + "|EFS Payables";
 		gpDto.setTRXDSCRN(description);
 		gpDto.setDISTREF(description);
-		gpDto.setActNumSt("0-00-2070");
-		gpDto.setDistType((short)2);
+		if(gpDto.getCompany().compareTo("NDS") == 0){
+			gpDto.setActNumSt("00-00-2070");
+		}else{
+			gpDto.setActNumSt("0-00-2070");
+		}
+		gpDto.setDistType((short) 2);
 		gpDto.setDebitAmount(new BigDecimal(0));
 		gpDto.setCreditAmount(amount);
 		efsDAOService.efsDAOService.integrateIssuance(gpDto);
-		
-		//call to execute recievedIntegrations
-		efsDAOService.efsDAOService.executeRecievedIntegrations(company, dailyBatchId);
-			
+
+		// call to execute recievedIntegrations
+		efsDAOService.efsDAOService.executeRecievedIntegrations(company,
+				dailyBatchId);
+
 	}
-	
-	public int releaseAPHold(String company, String moneyCodeReferenceNumber){
-		return efsDAOService.efsDAOService.releaseAPHold(company, moneyCodeReferenceNumber);
+
+	public int releaseAPHold(String company, String moneyCodeReferenceNumber) {
+		return efsDAOService.efsDAOService.releaseAPHold(company,
+				moneyCodeReferenceNumber);
 	}
 
 }

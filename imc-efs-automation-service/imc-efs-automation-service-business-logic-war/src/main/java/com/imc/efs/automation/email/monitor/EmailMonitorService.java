@@ -90,12 +90,14 @@ public class EmailMonitorService implements ServletContextListener {
 					match.find();
 					String requestNumber = match.group(0);
 					requestNumber = requestNumber.substring(1, requestNumber.length());
-					if (doc.body().child(0).child(0).child(0).text().matches("(?i:.*REJECTED.*)")){
+					if (doc.body().child(0).text().substring(0,8)
+							.matches("(?i:.*REJECTED.*)")) {
 						Requests request = requestBO.getRequest(Integer.valueOf(requestNumber).intValue());
 						request.getStatus().setStatusId(RequestStatuses.Voided.index());
 						requestBO.updateRequest(request);
 					}
-					if (doc.body().child(0).child(0).child(0).text().matches("(?i:.*APPROVED.*)")){
+					if (doc.body().child(0).text().substring(0,8)
+							.matches("(?i:.*APPROVED.*)")) {
 						System.out.println("found approved");
 						Requests request = requestBO.getRequest(Integer.valueOf(requestNumber).intValue());
 						request.getStatus().setStatusId(RequestStatuses.Issued.index());
