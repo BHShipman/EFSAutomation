@@ -48,55 +48,55 @@
 				</tr>
 				<tr>
 					<td><form:label path="description">Description/Reason for request:</form:label></td>
-					<td><form:input path="description" /></td>
+					<td><form:input path="description" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="description" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="driverId">Driver Id:</form:label></td>
-					<td><form:input path="driverId" /></td>
+					<td><form:input path="driverId" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="driverId" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="driverName">Driver Name:</form:label></td>
-					<td><form:input path="driverName" /></td>
+					<td><form:input path="driverName"  size="10px"/></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="driverName" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="efsAmount">EFS Amount:</form:label></td>
-					<td><form:input path="efsAmount" /></td>
+					<td><form:input path="efsAmount"  size="10px"/></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="efsAmount" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="poWoNumber">PoWoNumber:</form:label></td>
-					<td><form:input path="poWoNumber" /></td>
+					<td><form:input path="poWoNumber" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="poWoNumber" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="truckId">Truck ID:</form:label></td>
-					<td><form:input path="truckId" /></td>
+					<td><form:input path="truckId" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="truckId" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="vendorId">Vendor ID:</form:label></td>
-					<td><form:input path="vendorId" /></td>
+					<td><form:input path="vendorId" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="vendorId" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="vendorName">Vendor Name:</form:label></td>
-					<td><form:input path="vendorName" /></td>
+					<td><form:input path="vendorName" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="vendorName" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="requester">Requester:</form:label></td>
-					<td><form:input path="requester" /></td>
+					<td><form:input path="requester" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="requester" /></td>
 				</tr>
