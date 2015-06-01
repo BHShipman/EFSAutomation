@@ -36,12 +36,11 @@ public class EmailMonitorService implements ServletContextListener {
 	@EJB(name = "RequestBO")
 	RequestBO requestBO;
 	EfsWebServiceBean efsService = new EfsWebServiceBean();
-	//TODO utilize EFS JAVA INBOX instead of personal. 
 	private static final String PROTOCOL = "imap";
 	private static final String HOST = "webmail01.iilogistics.com";
 	private final static String PORT = "993";
-	private final static String USER_NAME = "bshipman";
-	private final static String PASSWORD = "Dmmsbr27";
+	private final static String USER_NAME = "applicationcontainer";
+	private final static String PASSWORD = "@361ugsedq/h1243tdASDJASGd7812";
 	
 	
 	@Override
@@ -74,7 +73,7 @@ public class EmailMonitorService implements ServletContextListener {
 			Store store = session.getStore(PROTOCOL);
 			store.connect(USER_NAME, PASSWORD);
 
-			Folder inbox = store.getFolder("INBOX");
+			Folder inbox = store.getFolder("EFSAutomationWS");
 			inbox.open(Folder.READ_WRITE);
 
 			Message[] unreadMessages = inbox.search(
@@ -110,6 +109,7 @@ public class EmailMonitorService implements ServletContextListener {
 					
 					
 				}
+				
 			}
 
 			inbox.close(false);
