@@ -7,9 +7,6 @@ import javax.jws.WebService;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
-import org.apache.cxf.interceptor.InInterceptors;
-import org.apache.cxf.interceptor.OutInterceptors;
-
 @WebService(name = "", targetNamespace = "http://tempuri.org/")
 public interface DexService {
 

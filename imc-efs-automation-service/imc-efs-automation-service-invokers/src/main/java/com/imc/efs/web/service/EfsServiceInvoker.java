@@ -53,8 +53,7 @@ public class EfsServiceInvoker {
 		}
 		CardManagementEP efsService = createEfsService_TEST();
 
-		String userId = efsService.login(System.getProperty("efs.test.ws.user"),
-				System.getProperty("efs.test.ws.password"));
+		String userId = efsService.login("InterCart_150624","dqyMgZr725");
 		WSMoneyCode wsMoneyCode = efsService.issueMoneyCode(userId,
 				efsClient.contractId, 0, efsAmount.doubleValue(), false,
 				issueTo, description, "USD2");

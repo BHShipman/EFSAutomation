@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.efs.automation.web.service</groupId>
 		<artifactId>imc-efs-automation-service</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>imc-efs-automation-service-security</artifactId>
 	<packaging>jar</packaging>

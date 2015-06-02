@@ -88,7 +88,7 @@ public class PdfGenerator {
 		
 		Document document = new Document();
 		
-		String tempDocDirectory = "C://temp//EfsIssuance"+sdf.format(new Date()) + ".pdf";
+		String tempDocDirectory = "/var/tmp/EFSIssuance"+sdf.format(new Date()) + ".pdf";
 		try{
 			PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(tempDocDirectory));
 		} catch (FileNotFoundException | DocumentException e){

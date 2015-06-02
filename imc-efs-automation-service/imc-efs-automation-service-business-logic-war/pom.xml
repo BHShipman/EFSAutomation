@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.efs.automation.web.service</groupId>
 		<artifactId>imc-efs-automation-service</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>imc-efs-automation-service-business-logic-war</artifactId>
 	<packaging>war</packaging>
@@ -12,12 +12,12 @@
 		<dependency>
 			<groupId>com.efs.automation.web.service</groupId>
 			<artifactId>imc-efs-automation-service-common-domain</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.efs.automation.web.service</groupId>
 			<artifactId>imc-efs-automation-service-invokers</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -35,4 +35,7 @@
 			<version>2.4</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<finalName>imc-efs-automation-business-logic-service</finalName>
+	</build>
 </project>

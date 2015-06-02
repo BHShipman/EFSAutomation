@@ -14,16 +14,28 @@
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Request Efs Check</title>
-</head>
-<body style="text-align: left;">
+<body>
 	<h3>Request EFS Check</h3>
-	<div style="text-align: left">
-		<form:form action="CheckRequested" method="POST" commandName="request">
+	<div>
+		<form:form action="CheckRequested" method="POST"
+			commandName="request">
 			<table style="border: outset">
+
+				<tr>
+					<td><form:label path="requestTypeId">RequestType:</form:label></td>
+					<td><form:select path="requestTypeId">
+							<form:option value="0" label="Select RequestType" />
+							<form:option value="1" label="Roadside Repair" disabled="true" />
+							<form:option value="2" label="MyTruck Repair" />
+							<form:option value="3" label="FRS Repair" disabled="true" />
+						</form:select></td>
+					<td style="color: red; font-style: italic;"><form:errors
+							path="requestTypeId" /></td>
+				</tr>
 				<tr>
 					<td><form:label path="company">Company:</form:label></td>
 					<td><form:select path="company">
-							<form:option value="noSelection" label="Select..." />
+							<form:option value="noSelection" label="Select Company" />
 							<form:option value="ATEST" label="ATEST" />
 							<form:option value="AIS" label="AIS" disabled="true" />
 							<form:option value="IMC" label="NDS" disabled="true" />
@@ -36,61 +48,58 @@
 				</tr>
 				<tr>
 					<td><form:label path="description">Description/Reason for request:</form:label></td>
-					<td><form:input path="description" /></td>
+					<td><form:input path="description" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="description" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="driverId">Driver Id:</form:label></td>
-					<td><form:input path="driverId" /></td>
+					<td><form:input path="driverId" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="driverId" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="driverName">Driver Name:</form:label></td>
-					<td><form:input path="driverName" /></td>
+					<td><form:input path="driverName"  size="10px"/></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="driverName" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="efsAmount">EFS Amount:</form:label></td>
-					<td><form:input path="efsAmount" /></td>
+					<td><form:input path="efsAmount"  size="10px"/></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="efsAmount" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="poWoNumber">PoWoNumber:</form:label></td>
-					<td><form:input path="poWoNumber" /></td>
+					<td><form:input path="poWoNumber" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="poWoNumber" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="truckId">Truck ID:</form:label></td>
-					<td><form:input path="truckId" /></td>
+					<td><form:input path="truckId" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="truckId" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="vendorId">Vendor ID:</form:label></td>
-					<td><form:input path="vendorId" /></td>
+					<td><form:input path="vendorId" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="vendorId" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="vendorName">Vendor Name:</form:label></td>
-					<td><form:input path="vendorName" /></td>
+					<td><form:input path="vendorName" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="vendorName" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="requester">Requester:</form:label></td>
-					<td><form:input path="requester" /></td>
+					<td><form:input path="requester" size="10px" /></td>
 					<td style="color: red; font-style: italic;"><form:errors
 							path="requester" /></td>
 				</tr>
-<!-- 				<tr> -->
-<!-- 					<td><input type="file" name="file"></td> -->
-<!-- 				</tr> -->
 				<tr>
 					<td><input id="requestButton" type="submit"
 						value="Request Check" onclick="changeButtonText()"></td>
@@ -98,5 +107,6 @@
 			</table>
 		</form:form>
 	</div>
+
 </body>
 </html>

@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
 	<persistence-unit name="EFS">
-		<jta-data-source>java:jboss/EfsAutomation</jta-data-source>
+		<jta-data-source>java:jboss/efsAutomationDataSource</jta-data-source>
 		<class>com.imc.efs.automation.entities.Requests</class>
 		<class>com.imc.efs.automation.entities.Requesttypes</class>
 		<class>com.imc.efs.automation.entities.Requesttypecomments</class>
@@ -17,7 +17,7 @@
 	</persistence-unit>
 
 	<persistence-unit name="GP">
-		<jta-data-source>java:jboss/GPCustom</jta-data-source>
+		<jta-data-source>java:jboss/greatPlainsCustomDataSource</jta-data-source>
 		<properties>
 
 			<property name="hibernate.show_sql" value="false" />
@@ -25,7 +25,7 @@
 	</persistence-unit>
 
 	<persistence-unit name="Integrations">
-		<jta-data-source>java:jboss/Integrations</jta-data-source>
+		<jta-data-source>java:jboss/adgIntegrationsDataSource</jta-data-source>
 		<properties>
 
 			<property name="hibernate.show_sql" value="false" />

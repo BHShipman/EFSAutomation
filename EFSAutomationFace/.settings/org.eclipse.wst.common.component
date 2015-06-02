@@ -5,6 +5,12 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
+        <dependent-module archiveName="imc-efs-automation-service-invokers-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/imc-efs-automation-service-invokers/imc-efs-automation-service-invokers">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="imc-efs-automation-service-common-domain-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/imc-efs-automation-service-common-domain/imc-efs-automation-service-common-domain">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="EFSAutomationFace"/>
         <property name="java-output-path" value="/EFSAutomationFace/target/classes"/>
     </wb-module>

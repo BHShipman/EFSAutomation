@@ -2,7 +2,6 @@ package com.imc.efs.automation.dao.impl;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
