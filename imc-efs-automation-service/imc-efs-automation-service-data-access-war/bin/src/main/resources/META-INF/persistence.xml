@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="EFS">
+		<jta-data-source>java:jboss/efsAutomationDataSource</jta-data-source>
+		<class>com.imc.efs.automation.entities.Requests</class>
+		<class>com.imc.efs.automation.entities.Requesttypes</class>
+		<class>com.imc.efs.automation.entities.Requesttypecomments</class>
+		<class>com.imc.efs.automation.entities.Requesters</class>
+		<class>com.imc.efs.automation.entities.Status</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="false" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="GP">
+		<jta-data-source>java:jboss/greatPlainsCustomDataSource</jta-data-source>
+		<properties>
+
+			<property name="hibernate.show_sql" value="false" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="Integrations">
+		<jta-data-source>java:jboss/adgIntegrationsDataSource</jta-data-source>
+		<properties>
+
+			<property name="hibernate.show_sql" value="false" />
+		</properties>
+	</persistence-unit>
+</persistence>

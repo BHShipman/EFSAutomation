@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.efs.automation.web.service</groupId>
+		<artifactId>imc-efs-automation-service</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>imc-efs-automation-service-orchestration-war</artifactId>
+	<packaging>war</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>com.efs.automation.web.service</groupId>
+			<artifactId>imc-efs-automation-service-security</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.efs.automation.web.service</groupId>
+			<artifactId>imc-efs-automation-service-common-domain</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.efs.automation.web.service</groupId>
+			<artifactId>imc-efs-automation-service-invokers</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+	<finalName>imc-efs-automation-orchestration-service</finalName>
+	</build>
+</project>
