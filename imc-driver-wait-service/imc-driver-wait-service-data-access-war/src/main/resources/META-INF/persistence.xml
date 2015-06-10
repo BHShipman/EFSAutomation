@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="SWS">
+		<!-- <jta-data-source>java:jboss/swsDataSource</jta-data-source> -->
+		<class>com.imc.driver.wait.service.entities.Drwait</class>
+    	<class>com.imc.driver.wait.service.entities.Order</class>
+    	<class>com.imc.driver.wait.service.entities.Move</class>
+    	<class>com.imc.driver.wait.service.entities.Orchrg</class>
+    	<class>com.imc.driver.wait.service.entities.Driver</class>
+    	<class>com.imc.driver.wait.service.entities.Division</class>
+    	<class>com.imc.driver.wait.service.entities.Locprof</class>
+    	<class>com.imc.driver.wait.service.entities.Mcgps</class>
+    	<class>com.imc.driver.wait.service.entities.DrwaitEventQueue</class>
+     	<properties>
+     		<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+        	<property name="hibernate.connection.url" value="jdbc:postgresql://swsdevdb.iilogistics.com:5432/dta"/>
+        	<property name="hibernate.default_schema" value="trk" />
+        	<property name="hibernate.connection.username" value="driverwait_app"/>
+        	<property name="hibernate.connection.password" value="DWApp&amp;2015!"/>
+        	<property name="hibernate.show_sql" value="true" />
+	     </properties>
+   </persistence-unit>
+   
+</persistence>
